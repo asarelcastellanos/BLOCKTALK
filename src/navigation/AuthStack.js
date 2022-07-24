@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
-import AuthHomeScreen from "../screens/AuthHomeScreen";
+import HomeScreen from "../screens/HomeScreen";
 import LogInScreen from "../screens/LogInScreen";
 import SignUpScreen from "../screens/SignUpScreen"
 
@@ -13,7 +13,7 @@ export default function AuthStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="AuthHome" component={AuthHomeScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="AuthHome" component={HomeScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="Login" component={LogInScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }}/>
       </Stack.Navigator>

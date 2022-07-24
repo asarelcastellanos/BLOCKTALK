@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 export default function HomeScreen({ navigation }) {
-
   return (
     <View style={styles.homeScreen}>
       <Image

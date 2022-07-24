@@ -1,43 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 export default function ChatScreen({ navigation }) {
-  const [state, setState] = useState();
-
   const auth = getAuth();
   const user = auth.currentUser;
 
   console.log(user, "<--- user in the home screen");
 
-  if (user !== null) {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.logoutBtn}
-          onPress={() => {
-            signOut(auth)
-              .then(() => {
-                // Sign-out successful.
-                user = null;
-              })
-              .catch((error) => {
-                // An error happened.
-                // should we do something with that error??
-              });
-          }}
-        >
-          <Text style={styles.loginText}>sign out</Text>
-        </TouchableOpacity>
-
-        <Text>Hello, {user.email}! </Text>
-
-        <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
-          <Text style={styles.item}>Chat</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.navigate("Conversation")}>
+        <Text style={styles.item}>Chat</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
