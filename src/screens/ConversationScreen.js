@@ -7,7 +7,8 @@ import { View } from "react-native";
 
 export default function ConversationScreen({ navigation, route }) {
   const [messages, setMessages] = useState([]);
-  const chatRef = doc(db, "Chats", "myfirstchat");
+  const { userId } = route.params;
+  const chatRef = doc(db, "Chats", userId);
 
   const { user, userData } = useAuthentication();
 

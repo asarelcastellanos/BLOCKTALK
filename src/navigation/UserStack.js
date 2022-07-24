@@ -76,7 +76,7 @@ export default function UserStack() {
         })}
       >
         <Tab.Screen name="Map" component={MapScreen} options={screenOptions} />
-        <Tab.Screen name="Chat" component={ChatStack} options={{ headerShown: false }} />
+        <Tab.Screen name="Chat" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
         <Tab.Screen
           name="Camera"
           component={CameraScreen}

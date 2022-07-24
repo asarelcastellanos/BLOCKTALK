@@ -28,6 +28,16 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Chatsnap needs access to your Camera.",
+          "enableMicrophonePermission": true,
+          "microphonePermissionText": "Chatsnap needs access to your Microphone."
+        }
+      ]
+    ]
   }
 }
