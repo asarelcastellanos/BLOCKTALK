@@ -1,15 +1,10 @@
-import React from 'react'
-
-// Import User 
-import { User } from "../utils/hooks/useAuthentication";
-
-// Import Auth and User stacks
-import AuthStack from "./AuthStack";
+import React from "react";
+import { useAuthentication } from "../utils/hooks/useAuthentication";
 import UserStack from "./UserStack";
+import AuthStack from "./AuthStack";
 
 export default function RootNavigation() {
-  return (
-    // If User exists than go to UserStack otherwise go to AuthStack
-    User ? <UserStack /> : <AuthStack />
-  )
+  const { user } = useAuthentication();
+
+  return user ? <UserStack /> : <AuthStack />;
 }

@@ -46,7 +46,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.signUpScreen}>
-      <ReturnButton navigation={navigation} returnName={"Home"} />
+      <ReturnButton navigation={navigation} returnName={"AuthHome"} />
       <Text style={styles.signUpTitle}>Sign Up</Text>
       <View style={styles.signUpFields}>
         <Text style={styles.inputText}>USERNAME OR EMAIL</Text>
@@ -64,7 +64,9 @@ export default function LoginScreen({ navigation }) {
           onChangeText={(password) => setPassword(password)}
         />
         <Text style={styles.disclaimerText}>
-          By tapping Sign Up & Accept, you acknowledge that you have read the <Text style={styles.blueText}>Privacy Policy</Text> and agree to the <Text style={styles.blueText}>Terms of Service</Text>.
+          By tapping Sign Up & Accept, you acknowledge that you have read the{" "}
+          <Text style={styles.blueText}>Privacy Policy</Text> and agree to the{" "}
+          <Text style={styles.blueText}>Terms of Service</Text>.
         </Text>
       </View>
       <TouchableOpacity
@@ -118,7 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   blueText: {
-    color: "#2b83b3"
+    color: "#2b83b3",
   },
   signUpButton: {
     padding: 15,

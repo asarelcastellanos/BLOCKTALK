@@ -1,66 +1,66 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { getAuth, signOut } from "firebase/auth";
 
 export default function HomeScreen({ navigation }) {
+  const [state, setState] = useState();
 
-  return (
-    <View style={styles.homeScreen}>
-      <Image
-        style={styles.ghostLogo}
-        source={require("../../assets/snapchat/ghostlogo.png")}
-      />
-      <TouchableOpacity
-        style={[styles.button, styles.logIn]}
-        onPress={() => {
-          navigation.navigate("Login");
-        }}
-      >
-        <Text style={styles.buttonText}>LOG IN</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.button, styles.signUp]}
-        onPress={() => {
-          navigation.navigate("SignUp");
-        }}
-      >
-        <Text style={styles.buttonText}>SIGN UP</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  console.log(user, "<--- user in the home screen");
+
+  if (user !== null) {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.logoutBtn}
+          onPress={() => {
+            signOut(auth)
+              .then(() => {
+                // Sign-out successful.
+                user = null;
+              })
+              .catch((error) => {
+                // An error happened.
+                // should we do something with that error??
+              });
+          }}
+        >
+          <Text style={styles.loginText}>sign out</Text>
+        </TouchableOpacity>
+
+        <Text>Hello, {user.email}! </Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
+          <Text style={styles.item}>Chat</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  homeScreen: {
-    backgroundColor: "#fdfc02",
-    height: "100%",
-    width: "100%",
+  logoutBtn: {
+    width: "50%",
+    borderRadius: 25,
+    margin: 25,
+    height: 50,
     alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "grey",
+    color: "white",
   },
-  ghostLogo: {
-    width: 80,
-    height: 80,
-    position: "absolute",
-    top: 250,
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
   },
-  button: {
-    alignItems: "center",
-    padding: 25,
-    width: "100%",
-  },
-  buttonText: {
-    color: "#FFF",
-    fontSize: 28,
-    fontWeight: "600",
-    letterSpacing: 4,
-  },
-  logIn: {
-    backgroundColor: "#f13a56",
-    position: "absolute",
-    bottom: 83,
-  },
-  signUp: {
-    backgroundColor: "#11aeff",
-    position: "absolute",
-    bottom: 0,
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+    backgroundColor: "yellow",
+    borderRadius: 25,
+    margin: 20,
   },
 });

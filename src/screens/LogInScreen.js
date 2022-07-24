@@ -32,7 +32,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.logInScreen}>
-      <ReturnButton navigation={navigation} returnName="Home" />
+      <ReturnButton navigation={navigation} returnName="AuthHome" />
       <Text style={styles.logInTitle}>Log In</Text>
       <View style={styles.logInFields}>
         <Text style={styles.inputText}>USERNAME OR EMAIL</Text>
