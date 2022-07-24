@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   logIn: {
     backgroundColor: "#f13a56",
     position: "absolute",
-    bottom: 77,
+    bottom: 83,
   },
   signUp: {
     backgroundColor: "#11aeff",
