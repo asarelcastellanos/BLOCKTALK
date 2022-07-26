@@ -7,9 +7,16 @@ import { Button } from "react-native";
 import ChatScreen from "../screens/ChatScreen";
 import ConversationScreen from "../screens/ConversationScreen";
 
+import { getAuth, signOut } from "firebase/auth";
+
+
 const Stack = createStackNavigator();
 
 export default function ChatStack({ navigation }) {
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+
   let screenOptions = {
     tabBarShowLabel: false,
     headerLeft: () => (
