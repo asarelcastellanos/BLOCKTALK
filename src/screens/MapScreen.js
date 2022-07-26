@@ -55,9 +55,25 @@ export default function MapScreen({ navigation }) {
         showsMyLocationButton={true}
       />
       <View style={styles.locationContainer}>
-        <TouchableOpacity style={styles.userLocation}>
+        <TouchableOpacity
+          style={styles.userLocation}
+          onPress={() => {
+            console.log("Go to user location!");
+          }}
+        >
           <Ionicons name="ios-navigate" size={15} color="black" />
         </TouchableOpacity>
+      </View>
+      <View style={styles.bitmojiContainer}>
+        <View style={styles.myBitmoji}>
+          <Image
+            style={styles.bitmojiImage}
+            source={require("../../assets/snapchat/personalBitmoji.png")}
+          />
+          <View style={styles.bitmojiTextContainer}>
+            <Text style={styles.bitmojiText}>My Bitmoji</Text>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -76,7 +92,7 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     position: "absolute",
-    bottom: 60,
+    bottom: 80,
     width: "100%",
     height: 30,
     alignItems: "center",
@@ -89,5 +105,31 @@ const styles = StyleSheet.create({
     width: 30,
     alignItems: "center",
     justifyContent: "center",
+  },
+  bitmojiContainer: {
+    width: "100%",
+    height: 70,
+    position: "absolute",
+    bottom: 10,
+  },
+  myBitmoji: {
+    width: 70,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 5
+  },
+  bitmojiImage: {
+    width: 50,
+    height: 50,
+  },
+  bitmojiTextContainer: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 4
+  },
+  bitmojiText: {
+    fontSize: 10,
+    fontWeight: "700"
   },
 });
