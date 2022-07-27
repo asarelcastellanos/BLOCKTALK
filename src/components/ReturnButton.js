@@ -19,8 +19,8 @@ export default function ReturnButton({ navigation, returnName }) {
 const styles = StyleSheet.create({
   returnBar: {
     width: "100%",
-    position: 'absolute',
-    top: 50
+    position: "absolute",
+    top: 50,
   },
   button: {
     alignItems: "left",
@@ -32,4 +32,3 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
 });
-

@@ -23,6 +23,7 @@ export default function UserStack() {
   const user = auth.currentUser;
 
   let screenOptions = {
+    // headerShown: false,
     tabBarShowLabel: false,
     headerLeft: () => (
       <Button
