@@ -1,16 +1,16 @@
-import React, { useState, useEffect} from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { Camera, CameraType } from 'expo-camera';
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Camera, CameraType } from "expo-camera";
 
-export default function CameraScreen() {
-
+export default function CameraScreen({ navigation, focused }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(CameraType.back);
 
   useEffect(() => {
+    // const unsubscribe;
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === "granted");
     })();
   }, []);
 
@@ -22,17 +22,9 @@ export default function CameraScreen() {
   }
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setType(type === CameraType.back ? CameraType.front : CameraType.back);
-            }}>
-            <Text style={styles.text}> Flip </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
+      <Camera style={styles.camera} type={type}></Camera>
+      <View style={styles.cameraOptions}></View>
+      <View style={styles.cameraActions}></View>
     </View>
   );
 }
@@ -44,19 +36,24 @@ const styles = StyleSheet.create({
   camera: {
     flex: 1,
   },
-  buttonContainer: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    margin: 20,
+  cameraOptions: {
+    backgroundColor: "red",
+    position: "absolute",
+    right: 0,
+    height: 300,
+    width: 50,
   },
-  button: {
-    flex: 0.1,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
+  cameraActions: {
+    backgroundColor: "red",
+    position: "absolute",
+    bottom: 0,
+    height: 100,
+    width: "100%",
   },
+  buttonFlip: {},
+  buttonFlash: {},
   text: {
     fontSize: 18,
-    color: 'white',
+    color: "white",
   },
 });
