@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function CameraOptions({ flipCamera }) {
+export default function CameraOptions({ flipCamera, switchFlash }) {
   const [flashState, setFlashState] = useState("ios-flash-off-outline");
 
   function switchFlash() {
@@ -63,8 +63,9 @@ export default function CameraOptions({ flipCamera }) {
 const styles = StyleSheet.create({
   cameraOptions: {
     position: "absolute",
-    right: 0,
-    height: 220,
+    right: 5,
+    paddingTop: 40,
+    height: 250,
     width: 40,
     padding: 5,
   },

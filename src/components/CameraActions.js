@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function CameraActions() {
+export default function CameraActions({ checkGallery, takePhoto }) {
   return (
     <View style={styles.cameraActions}>
       <View style={styles.cameraButtons}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={checkGallery}>
           <Ionicons
             style={styles.photosIcon}
             name="ios-copy-outline"
@@ -15,7 +15,7 @@ export default function CameraActions() {
             color="white"
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={takePhoto}>
           <Ionicons
             style={styles.pictureIcon}
             name="ellipse-outline"

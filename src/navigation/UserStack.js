@@ -23,7 +23,6 @@ export default function UserStack() {
   const user = auth.currentUser;
 
   let screenOptions = {
-    // headerShown: false,
     tabBarShowLabel: false,
     headerLeft: () => (
       <Button
@@ -76,12 +75,12 @@ export default function UserStack() {
           tabBarStyle: { backgroundColor: "#000" },
         })}
       >
-        <Tab.Screen name="Map" component={MapScreen} options={screenOptions} />
+        <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} />
         <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
         <Tab.Screen
           name="Camera"
           component={CameraScreen}
-          options={screenOptions}
+          options={{...screenOptions, headerShown: false}} 
         />
         <Tab.Screen
           name="Stories"
