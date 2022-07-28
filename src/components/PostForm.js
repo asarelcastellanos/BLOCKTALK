@@ -9,6 +9,9 @@ import {
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+// Components
+import PinnedPrompt from "./PinnedPrompt";
+
 import db from "../../firebase";
 import { doc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
 import { useAuthentication } from "../utils/hooks/useAuthentication";
@@ -46,6 +49,7 @@ export default function PostForm() {
 
   return (
     <View style={styles.container}>
+      <PinnedPrompt />
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
