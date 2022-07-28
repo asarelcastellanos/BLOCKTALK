@@ -58,7 +58,7 @@ export default function UserStack() {
             if (route.name == "Map") {
               iconName = "ios-location-outline";
               iconColor = focused ? "green" : "grey";
-            } else if (route.name === "Chat") {
+            } else if (route.name === "ChatStack") {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
             } else if (route.name === "Camera") {
@@ -77,7 +77,7 @@ export default function UserStack() {
         })}
       >
         <Tab.Screen name="Map" component={MapScreen} options={screenOptions} />
-        <Tab.Screen name="Chat" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
+        <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
         <Tab.Screen
           name="Camera"
           component={CameraScreen}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Camera, CameraType } from "expo-camera";
+import { Camera, CameraType, FlashMode } from "expo-camera";
 
 import CameraActions from "../components/CameraActions";
 import CameraOptions from "../components/CameraOptions";
@@ -19,6 +19,10 @@ export default function CameraScreen({ navigation, focused }) {
 
   function flipCamera() {
     setType(type === CameraType.back ? CameraType.front : CameraType.back);
+  }
+
+  function switchFlash() {
+    setType(type === FlashMode.off ? FlashMode.on : FlashMode.off );
   }
 
   if (hasPermission === null) {
