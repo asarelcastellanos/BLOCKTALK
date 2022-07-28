@@ -62,7 +62,7 @@ export default function UserStack() {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
             } else if (route.name === "Camera") {
-              iconName = focused ? "ios-scan-outline" : "ios-camera-outline";
+              iconName = focused ? "ios-scan-circle-outline" : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
             } else if (route.name === "Stories") {
               iconName = "ios-people-outline";
@@ -73,7 +73,7 @@ export default function UserStack() {
             }
             return <Ionicons name={iconName} size={size} color={iconColor} />;
           },
-          tabBarStyle: { backgroundColor: "#000" }
+          tabBarStyle: { backgroundColor: "#000" },
         })}
       >
         <Tab.Screen name="Map" component={MapScreen} options={screenOptions} />
