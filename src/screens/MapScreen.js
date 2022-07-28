@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     height: 70,
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 5
+    marginLeft: 5,
   },
   bitmojiImage: {
     width: 50,
@@ -128,10 +128,10 @@ const styles = StyleSheet.create({
   bitmojiTextContainer: {
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 4
+    padding: 4,
   },
   bitmojiText: {
     fontSize: 10,
-    fontWeight: "700"
+    fontWeight: "700",
   },
 });
