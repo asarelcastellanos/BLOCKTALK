@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { shareAsync } from 'expo-sharing';
+import * as ImagePicker from 'expo-image-picker';
 
 import CameraActions from "../components/CameraActions";
 import CameraOptions from "../components/CameraOptions";
@@ -20,6 +21,8 @@ export default function CameraScreen({ navigation, focused }) {
   const [type, setType] = useState(CameraType.back);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
+
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     (async () => {
