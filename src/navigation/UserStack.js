@@ -23,7 +23,6 @@ export default function UserStack() {
   const user = auth.currentUser;
 
   let screenOptions = {
-    // headerShown: false,
     tabBarShowLabel: false,
     headerLeft: () => (
       <Button
@@ -58,11 +57,11 @@ export default function UserStack() {
             if (route.name == "Map") {
               iconName = "ios-location-outline";
               iconColor = focused ? "green" : "grey";
-            } else if (route.name === "Chat") {
+            } else if (route.name === "ChatStack") {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
             } else if (route.name === "Camera") {
-              iconName = focused ? "ios-scan-outline" : "ios-camera-outline";
+              iconName = focused ? "ios-scan-circle-outline" : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
             } else if (route.name === "Stories") {
               iconName = "ios-people-outline";
@@ -73,15 +72,15 @@ export default function UserStack() {
             }
             return <Ionicons name={iconName} size={size} color={iconColor} />;
           },
-          tabBarStyle: { backgroundColor: "#000" }
+          tabBarStyle: { backgroundColor: "#000" },
         })}
       >
-        <Tab.Screen name="Map" component={MapScreen} options={screenOptions} />
-        <Tab.Screen name="Chat" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
+        <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} />
+        <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
         <Tab.Screen
           name="Camera"
           component={CameraScreen}
-          options={screenOptions}
+          options={{...screenOptions, headerShown: false}} 
         />
         <Tab.Screen
           name="Stories"

@@ -60,8 +60,6 @@ export default function MapScreen({ navigation }) {
           onPress={() => {
             console.log("Go to user location!");
             const { latitude, longitude } = location.coords;
-            console.log(location.coords);
-
             setCurrentRegion({ ...currentRegion, latitude, longitude });
           }}
         >
