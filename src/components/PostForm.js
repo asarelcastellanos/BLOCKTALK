@@ -5,7 +5,9 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-} from "react-native";
+  Image
+} from "react-native"
+import * as ImagePicker from 'expo-image-picker';
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -20,6 +22,9 @@ export default function PostForm() {
   const [text, onChangeText] = useState("Useless Text");
   const [posts, setPosts] = useState([]);
 
+  const [image, setImage] = useState(null);
+
+
   const { userData } = useAuthentication();
 
   let messageTemplate = {
@@ -27,7 +32,26 @@ export default function PostForm() {
     user: userData,
   };
 
+  let imageTemplate = {
+    message: "base64",
+    user: userData,
+  };
+
   const postRef = doc(db, "Posts", "Global");
+
+  async function checkGallery() {
+    let permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    console.log(pickerResult);
+    setImage(pickerResult.uri);
+  }
 
   useEffect(() => {
     let unsubscribeFromNewSnapshots = onSnapshot(postRef, (doc) => {
@@ -47,6 +71,14 @@ export default function PostForm() {
     });
   }
 
+  async function handleImageSubmit() {
+    imageTemplate.message = image;
+    console.log(imageTemplate);
+    await updateDoc(postRef, {
+      posts: arrayUnion(imageTemplate),
+    });
+  }
+
   return (
     <View style={styles.container}>
       <PinnedPrompt />
@@ -57,9 +89,18 @@ export default function PostForm() {
         multiline={true}
         editable
       />
+      <Image style={styles.image} source={{uri: image}} />
       <TouchableOpacity style={styles.upload} onPress={handleSubmit}>
         <Ionicons name="ios-cloud-upload" size={25} color="black" />
         <Text style={styles.text}>Upload</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.upload} onPress={handleImageSubmit}>
+        <Ionicons name="ios-cloud-upload" size={25} color="black" />
+        <Text style={styles.text}>Image Upload</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.upload} onPress={checkGallery}>
+        <Ionicons name="ios-image" size={25} color="black" />
+        <Text style={styles.text}>Check Gallery</Text>
       </TouchableOpacity>
     </View>
   );
@@ -69,6 +110,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF",
   },
+  image: {
+    backgroundColor: "white",
+    height: 200,
+    width: "100%",
+    borderColor: "black",
+    borderWidth: 2
+   },
   input: {
     height: 100,
     margin: 12,
