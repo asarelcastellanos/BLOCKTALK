@@ -1,16 +1,11 @@
-import React from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
+import Post from '../components/Post'
 
 export default function StoriesScreen() {
-  const array = [1, 2, 3, 4, 5]
-  const renderItem = ({item, index}) => {
-    <View></View>
-  }
-
+  
   return (
     <View style={styles.container}>
-        <FlatList/>
-        
+        <Post/>
     </View>
   )
 }
@@ -19,5 +14,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-  }
+    height: Dimensions.get('window').height,
+  },
+  
 })
