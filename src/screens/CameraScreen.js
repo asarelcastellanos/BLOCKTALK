@@ -99,6 +99,7 @@ export default function CameraScreen({ navigation, focused }) {
   function savePhoto() {
     MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
       setPhoto(undefined);
+      console.log(photo.uri)
     });
   };
 
