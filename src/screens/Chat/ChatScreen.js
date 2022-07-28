@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 
 import { collection, getDocs } from "firebase/firestore";
-import db from "../../firebase";
+import db from "../../../firebase";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
