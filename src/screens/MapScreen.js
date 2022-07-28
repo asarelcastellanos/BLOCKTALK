@@ -59,6 +59,8 @@ export default function MapScreen({ navigation }) {
           style={styles.userLocation}
           onPress={() => {
             console.log("Go to user location!");
+            const { latitude, longitude } = location.coords;
+            setCurrentRegion({ ...currentRegion, latitude, longitude });
           }}
         >
           <Ionicons name="ios-navigate" size={15} color="black" />
