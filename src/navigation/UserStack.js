@@ -3,7 +3,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, Button } from 'react-native';
+import {
+  HeaderButtons,
+  HeaderButton,
+  Item,
+  HiddenItem,
+  OverflowMenu,
+} from 'react-navigation-header-buttons';
+import CustomHeaderButton from "../components/CustomHeaderButton";
 
 import { getAuth, signOut } from "firebase/auth";
 
@@ -12,6 +20,7 @@ import MapScreen from "../screens/MapScreen";
 import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
+import AddFriendIcon from "../../assets/top_nav_bar/add_friend.png";
 
 // Stacks
 import ChatStack from "./ChatStack";
@@ -25,21 +34,39 @@ export default function UserStack() {
   let screenOptions = {
     tabBarShowLabel: false,
     headerLeft: () => (
-      <Button
-        onPress={() => {
-          signOut(auth)
-            .then(() => {
-              // Sign-out successful.
-              user = null;
-            })
-            .catch((error) => {
-              // An error happened.
-              // should we do something with that error??
-            });
-        }}
-        title="Log Out"
-      />
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <TouchableOpacity style={styles.nav_icon} 
+          onPress={() => {
+            signOut(auth)
+              .then(() => {
+                // Sign-out successful.
+                user = null;
+              })
+              .catch((error) => {
+                // An error happened.
+                // should we do something with that error??
+              });
+          }}>
+          <Image source={require("../../assets/top_nav_bar/avatar.png")}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.nav_icon} onPress={()=>{alert("Search!")}}>
+          <Image source={require("../../assets/top_nav_bar/search.png")}/>
+        </TouchableOpacity>
+      </HeaderButtons>
     ),
+    
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <TouchableOpacity style={styles.nav_icon} onPress={()=>{alert("Add friend")}}>
+          <Image source={require("../../assets/top_nav_bar/add_friend.png")}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.nav_icon} onPress={()=>{alert("More!")}}>
+          <Image source={require("../../assets/top_nav_bar/more.png")}/>
+        </TouchableOpacity>
+      </HeaderButtons>
+      
+    ),
+
   };
 
   return (
@@ -96,3 +123,17 @@ export default function UserStack() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  nav_icon: {
+    borderRadius: 10,
+    padding: 5,
+    marginBottom: 10,
+  },
+});
