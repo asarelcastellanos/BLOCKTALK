@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -21,15 +21,14 @@ export default function PostForm() {
 
   let messageTemplate = {
     message: "text",
-    user: userData
-  }
+    user: userData,
+  };
 
   const postRef = doc(db, "Posts", "Global");
 
   useEffect(() => {
     let unsubscribeFromNewSnapshots = onSnapshot(postRef, (doc) => {
-      console.log("New Snapshot!");
-      setPosts(doc.data().posts)
+      setPosts(doc.data().posts);
     });
 
     return function cleanupBeforeUnmounting() {
@@ -38,12 +37,11 @@ export default function PostForm() {
   }, []);
 
   async function handleSubmit() {
-    console.log("submitted!");
     messageTemplate.message = text;
     console.log(messageTemplate);
     await updateDoc(postRef, {
-      posts: arrayUnion(messageTemplate)
-  });
+      posts: arrayUnion(messageTemplate),
+    });
   }
 
   return (
@@ -55,12 +53,9 @@ export default function PostForm() {
         multiline={true}
         editable
       />
-      <TouchableOpacity onPress={handleSubmit}>
-        <Ionicons
-          name="ios-cloud-upload"
-          size={25}
-          color="black"
-        />
+      <TouchableOpacity style={styles.upload} onPress={handleSubmit}>
+        <Ionicons name="ios-cloud-upload" size={25} color="black" />
+        <Text style={styles.text}>Upload</Text>
       </TouchableOpacity>
     </View>
   );
@@ -75,5 +70,13 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  upload: {
+    marginLeft: 10,
+    flexDirection: "row",
+  },
+  text: {
+    marginLeft: 10,
+    alignSelf: "center",
   },
 });
