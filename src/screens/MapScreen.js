@@ -54,6 +54,7 @@ export default function MapScreen({ navigation }) {
         showsUserLocation={true}
         showsMyLocationButton={true}
       />
+
       <View style={styles.locationContainer}>
         <TouchableOpacity
           style={styles.userLocation}

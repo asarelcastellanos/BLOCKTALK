@@ -9,7 +9,6 @@ import ConversationScreen from "../screens/ConversationScreen";
 
 import { getAuth, signOut } from "firebase/auth";
 
-
 const Stack = createStackNavigator();
 
 export default function ChatStack({ navigation }) {
