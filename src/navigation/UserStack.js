@@ -8,9 +8,9 @@ import { Button } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 
 // Screens
-import MapScreen from "../screens/MapScreen";
 import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
+import MapScreen from "../screens/MapScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
 
 // Stacks
@@ -75,7 +75,7 @@ export default function UserStack() {
           tabBarStyle: { backgroundColor: "#000" },
         })}
       >
-        <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} />
+        {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
         <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
         <Tab.Screen
           name="Camera"
@@ -87,11 +87,11 @@ export default function UserStack() {
           component={StoriesScreen}
           options={screenOptions}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Spotlight"
           component={SpotlightScreen}
           options={screenOptions}
-        />
+        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
