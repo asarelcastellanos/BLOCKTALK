@@ -1,126 +1,148 @@
-import React, { useState, useEffect} from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { Camera, CameraType } from 'expo-camera';
-import { useIsFocused } from '@react-navigation/native';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, TouchableOpacity } from "react-native";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { Camera, CameraType } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import { shareAsync } from 'expo-sharing';
+import * as ImagePicker from 'expo-image-picker';
+// import { initializeApp } from 'firebase/app';
+// import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import db from "../../firebase";
+import firebase from "firebase/app";
+import { doc, onSnapshot, arrayUnion, updateDoc } from "firebase/firestore";
+// import {storage} from "../../firebase";
 
-const recordVideo = async () => {
-  if(cameraRef) {
-      try{
-          const options = {maxDuration: 60, quality: Camera.Constants.VideoQuality['480']}
-          const videoRecordPromise = cameraRef.recordAsync(options)
-          if(videoRecordPromise) {
-              const data = await videoRecordPromise;
-              const source = data.uri
-          }
-      } catch(error) {
-          console.warn(error)
-      }
-  }
-}
+import CameraActions from "../components/CameraActions";
+import CameraOptions from "../components/CameraOptions";
 
-const stopVideo = async () => {
-  if(cameraRef) {
-      cameraRef.stopRecording()
-  }
-}
+// initializeApp(firebaseConfig);
 
-export default function CameraScreen() {
-
-  const [hasPermission, setHasPermission] = useState(null);
+export default function CameraScreen({ navigation, focused }) {
+  let cameraRef = useRef();
+  const [hasCameraPermission, setHasCameraPermission] = useState();
   const [type, setType] = useState(CameraType.back);
-  const [CameraRef, setCameraRef] = useState(null)
-  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
-  const [cameraFlash, setCameraFlash] = useState(Camera.Constants.FlashMode.off);
-  const [isCameraReady, setIsCameraReady] = useState(false)
-
-  const isFocused = useIsFocused()
+  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
+  const [photo, setPhoto] = useState();
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
+      const cameraPermission = await Camera.requestCameraPermissionsAsync();
+      const mediaLibraryPermission =
+        await MediaLibrary.requestPermissionsAsync();
+      setHasCameraPermission(cameraPermission.status === "granted");
+      setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
 
 
-  if (hasPermission === null) {
-    return <View />;
+
+  useEffect(() => {
+    let unsubscribeFromNewSnapshots = onSnapshot(doc(db, "feed", "stories"), (snapshot) => {
+      // console.log("New Snapshot! ", snapshot.data().photo);
+      console.log("New Snapshot! ", snapshot.data().setPhoto);
+      setPhoto(snapshot.data().photo);
+    });
+  
+    return function cleanupBeforeUnmounting() {
+      unsubscribeFromNewSnapshots();
+    };
+  }, []);
+
+  const onPress = useCallback(async (photo = []) => {
+    await updateDoc(doc(db, "feed", "stories"), {
+      photo: arrayUnion(photo[0])
+    });
+  }, []);
+
+
+
+
+  if (hasCameraPermission === undefined) {
+    return <Text>Requesting permissions...</Text>
+  } else if (!hasCameraPermission) {
+    return <Text>Permission for camera not granted. Please change this in settings.</Text>
   }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+
+  function flipCamera() {
+    setType(type === CameraType.back ? CameraType.front : CameraType.back);
   }
+
+  function switchFlash() {
+    setType(type === FlashMode.off ? FlashMode.on : FlashMode.off);
+  }
+
+  async function checkGallery() {
+    let permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    console.log(pickerResult);
+  }
+
+  async function takePhoto() {
+    console.log("Just took photo!");
+    let options = {
+      quality: 1,
+      base64: true,
+      exif: false,
+    };
+
+    let newPhoto = await cameraRef.current.takePictureAsync(options);
+    setPhoto(newPhoto.base64);
+    console.log(newPhoto.base64)
+  }
+
+  function savePhoto() {
+    MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+      setPhoto(undefined);
+    });
+  };
+
+
+
+  if (photo) {
+    let sharePic = () => {
+      shareAsync(photo.uri).then(() => {
+        setPhoto(undefined);
+      });
+    };
+
+    return (
+      <>
+        <Image
+          style={styles.preview}
+          source={{ uri: "data:image/jpg;base64," + photo.base64 }}
+        />
+        {hasMediaLibraryPermission ? (
+          <Button title="Save" onPress={savePhoto} />
+        ) : undefined}
+        <Button title="Discard" onPress={() => setPhoto(undefined)} />
+      </>
+
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setType(type === CameraType.back ? CameraType.front : CameraType.back);
-            }}>
-            <Text style={styles.text}> Flip </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-
-      {isFocused ?
-          <Camera 
-            style={styles.camera} 
-            type={type}
-            ref={ref => setCameraRef(ref)}
-            style={styles.camera}
-            ratio={'16:9'}
-            type={cameraType}
-            flashMode={cameraFlash}
-            onCameraReady = {() => setIsCameraReady(true)}
-            />
-            : null}
-
-            <View styles={styles.recordButtonContainer}>
-                <TouchableOpacity 
-                    disabled={!isCameraReady}
-                    onLongPress={() => recordVideo()}
-                    onPressOut={() => stopVideo}
-                    style={styles.recordButton}
-                />
-            </View>
-
-    </View>
+    <>
+      <Camera style={styles.camera} type={type} ref={cameraRef} />
+      <CameraOptions flipCamera={flipCamera} />
+      <CameraActions checkGallery={checkGallery} takePhoto={takePhoto} />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   camera: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  buttonContainer: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    margin: 20,
+  preview: {
+    height: "80%",
+    width: "100%",
   },
-  button: {
-    flex: 0.1,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 18,
-    color: 'white',
-  },
-  recordButtonContainer: {
-    flex: 1,
-    marginHorizontal: 30
-  }, 
-  recordButton: {
-    borderWidth: 8,
-    borderColor: '#fff',
-    borderRadius: 100,
-    height: 80,
-    width: 80,
-    alignSelf: 'center'
-  }
 });

@@ -59,6 +59,8 @@ export default function MapScreen({ navigation }) {
           style={styles.userLocation}
           onPress={() => {
             console.log("Go to user location!");
+            const { latitude, longitude } = location.coords;
+            setCurrentRegion({ ...currentRegion, latitude, longitude });
           }}
         >
           <Ionicons name="ios-navigate" size={15} color="black" />
@@ -72,6 +74,24 @@ export default function MapScreen({ navigation }) {
           />
           <View style={styles.bitmojiTextContainer}>
             <Text style={styles.bitmojiText}>My Bitmoji</Text>
+          </View>
+        </View>
+        <View style={styles.places}>
+          <Image
+            style={styles.bitmojiImage}
+            source={require("../../assets/snapchat/personalBitmoji.png")}
+          />
+          <View style={styles.bitmojiTextContainer}>
+            <Text style={styles.bitmojiText}>Places</Text>
+          </View>
+        </View>
+        <View style={styles.myFriends}>
+          <Image
+            style={styles.bitmojiImage}
+            source={require("../../assets/snapchat/personalBitmoji.png")}
+          />
+          <View style={styles.bitmojiTextContainer}>
+            <Text style={styles.bitmojiText}>Friends</Text>
           </View>
         </View>
       </View>
@@ -92,11 +112,10 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     position: "absolute",
-    bottom: 80,
+    bottom: 100,
     width: "100%",
     height: 30,
     alignItems: "center",
-    justifyContent: "center",
   },
   userLocation: {
     backgroundColor: "white",
@@ -105,19 +124,22 @@ const styles = StyleSheet.create({
     width: 30,
     alignItems: "center",
     justifyContent: "center",
+    marginLeft: 8,
   },
   bitmojiContainer: {
     width: "100%",
     height: 70,
     position: "absolute",
     bottom: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   myBitmoji: {
     width: 70,
     height: 70,
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 5
+    marginLeft: 5,
   },
   bitmojiImage: {
     width: 50,
@@ -126,10 +148,22 @@ const styles = StyleSheet.create({
   bitmojiTextContainer: {
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 4
+    padding: 4,
   },
   bitmojiText: {
     fontSize: 10,
-    fontWeight: "700"
+    fontWeight: "700",
+  },
+  places: {
+    width: 70,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  myFriends: {
+    width: 70,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
