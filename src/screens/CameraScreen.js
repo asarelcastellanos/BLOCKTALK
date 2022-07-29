@@ -57,8 +57,14 @@ export default function CameraScreen({ navigation, focused }) {
       return;
     }
 
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(pickerResult);
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      aspect: [16, 9],
+      quality: 1
+    });
+
+    if (!pickerResult.cancelled) {
+      navigation.navigate('SavePost', { source: pickerResult.uri });
+    }
   }
 
   async function takePhoto() {

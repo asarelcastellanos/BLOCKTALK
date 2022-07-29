@@ -9,9 +9,10 @@ import { getAuth, signOut } from "firebase/auth";
 
 // Screens
 import CameraScreen from "../screens/CameraScreen";
+import CameraStack from "../navigation/CameraStack";
 import StoriesScreen from "../screens/StoriesScreen";
-import MapScreen from "../screens/MapScreen";
-import SpotlightScreen from "../screens/SpotlightScreen";
+// import MapScreen from "../screens/MapScreen";
+// import SpotlightScreen from "../screens/SpotlightScreen";
 
 // Stacks
 import ChatStack from "./ChatStack";
@@ -48,7 +49,7 @@ export default function UserStack() {
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: '#694fad' }}
-        initialRouteName="Camera"
+        initialRouteName="CameraStack"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
@@ -60,15 +61,12 @@ export default function UserStack() {
             } else if (route.name === "ChatStack") {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
-            } else if (route.name === "Camera") {
+            } else if (route.name === "CameraStack") {
               iconName = focused ? "ios-scan-circle-outline" : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
             } else if (route.name === "Stories") {
               iconName = "ios-people-outline";
               iconColor = focused ? "purple" : "grey";
-            } else if (route.name === "Spotlight") {
-              iconName = "ios-play-outline";
-              iconColor = focused ? "red" : "grey";
             }
             return <Ionicons name={iconName} size={size} color={iconColor} />;
           },
@@ -78,9 +76,9 @@ export default function UserStack() {
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
         <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
         <Tab.Screen
-          name="Camera"
-          component={CameraScreen}
-          options={{...screenOptions, headerShown: false}} 
+          name="CameraStack"
+          component={CameraStack}
+          options={{ headerShown: false, tabBarShowLabel: false }} 
         />
         <Tab.Screen
           name="Stories"
