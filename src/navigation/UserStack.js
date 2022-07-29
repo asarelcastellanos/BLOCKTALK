@@ -12,6 +12,7 @@ import MapScreen from "../screens/MapScreen";
 import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
+import Test from "../screens/Test";
 
 // Stacks
 import ChatStack from "./ChatStack";
@@ -47,8 +48,9 @@ export default function UserStack() {
       <Tab.Navigator
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
-        barStyle={{ backgroundColor: '#694fad' }}
-        initialRouteName="Camera"
+        barStyle={{ backgroundColor: "#694fad" }}
+        initialRouteName="Test"
+        // initialRouteName="Camera"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
@@ -61,7 +63,9 @@ export default function UserStack() {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
             } else if (route.name === "Camera") {
-              iconName = focused ? "ios-scan-circle-outline" : "ios-camera-outline";
+              iconName = focused
+                ? "ios-scan-circle-outline"
+                : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
             } else if (route.name === "Stories") {
               iconName = "ios-people-outline";
@@ -75,12 +79,26 @@ export default function UserStack() {
           tabBarStyle: { backgroundColor: "#000" },
         })}
       >
-        <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} />
-        <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
+        {/* <Tab.Screen
+          name="Test"
+          component={Test}
+          options={{ ...screenOptions, headerShown: false }}
+        /> */}
+
+        <Tab.Screen
+          name="Map"
+          component={MapScreen}
+          options={{ ...screenOptions, headerShown: false }}
+        />
+        <Tab.Screen
+          name="ChatStack"
+          component={ChatStack}
+          options={{ headerShown: false, tabBarShowLabel: false }}
+        />
         <Tab.Screen
           name="Camera"
           component={CameraScreen}
-          options={{...screenOptions, headerShown: false}} 
+          options={{ ...screenOptions, headerShown: false }}
         />
         <Tab.Screen
           name="Stories"
