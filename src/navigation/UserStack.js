@@ -1,20 +1,18 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { Button } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { getAuth, signOut } from "firebase/auth";
 
 // Screens
-import CameraScreen from "../screens/CameraScreen";
-import CameraStack from "../navigation/CameraStack";
-import StoriesScreen from "../screens/StoriesScreen";
 // import MapScreen from "../screens/MapScreen";
 // import SpotlightScreen from "../screens/SpotlightScreen";
 
 // Stacks
+import CameraStack from "../navigation/CameraStack";
+import StoriesStack from "../navigation/StoriesStack";
 import ChatStack from "./ChatStack";
 
 const Tab = createBottomTabNavigator();
@@ -64,7 +62,7 @@ export default function UserStack() {
             } else if (route.name === "CameraStack") {
               iconName = focused ? "ios-scan-circle-outline" : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
-            } else if (route.name === "Stories") {
+            } else if (route.name === "StoriesStack") {
               iconName = "ios-people-outline";
               iconColor = focused ? "purple" : "grey";
             }
@@ -81,9 +79,9 @@ export default function UserStack() {
           options={{ headerShown: false, tabBarShowLabel: false }} 
         />
         <Tab.Screen
-          name="Stories"
-          component={StoriesScreen}
-          options={screenOptions}
+          name="StoriesStack"
+          component={StoriesStack}
+          options={{ headerShown: false, tabBarShowLabel: false }}
         />
         {/* <Tab.Screen
           name="Spotlight"

@@ -11,6 +11,7 @@ import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { shareAsync } from 'expo-sharing';
 import * as ImagePicker from 'expo-image-picker';
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CameraActions from "../components/CameraActions";
 import CameraOptions from "../components/CameraOptions";
@@ -18,7 +19,7 @@ import CameraOptions from "../components/CameraOptions";
 export default function CameraScreen({ navigation, focused }) {
   let cameraRef = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [type, setType] = useState(CameraType.back);
+  const [cameraType, setCameraType] = useState(CameraType.back);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
 
@@ -41,11 +42,7 @@ export default function CameraScreen({ navigation, focused }) {
   }
 
   function flipCamera() {
-    setType(type === CameraType.back ? CameraType.front : CameraType.back);
-  }
-
-  function switchFlash() {
-    setType(type === FlashMode.off ? FlashMode.on : FlashMode.off);
+    setCameraType(cameraType === CameraType.back ? CameraType.front : CameraType.back);
   }
 
   async function checkGallery() {
@@ -93,25 +90,13 @@ export default function CameraScreen({ navigation, focused }) {
         setPhoto(undefined);
       });
     };
-
-    return (
-      <>
-        <Image
-          style={styles.preview}
-          source={{ uri: "data:image/jpg;base64," + photo.base64 }}
-        />
-        {hasMediaLibraryPermission ? (
-          <Button title="Save" onPress={savePhoto} />
-        ) : undefined}
-        <Button title="Discard" onPress={() => setPhoto(undefined)} />
-      </>
-    );
+    navigation.navigate('SavePost', { source: photo.uri });
   }
 
   return (
     <>
-      <Camera style={styles.camera} type={type} ref={cameraRef} />
-      <CameraOptions flipCamera={flipCamera} />
+      <Camera style={styles.camera} type={cameraType} ref={cameraRef} />
+      <CameraOptions flipCamera={flipCamera}/>
       <CameraActions checkGallery={checkGallery} takePhoto={takePhoto} />
     </>
   );

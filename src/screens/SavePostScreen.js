@@ -9,11 +9,9 @@ export default function SavePostScreen({ navigation, route }) {
   const media = route.params.source;
   
   const saveMediaToStorage = () => new Promise((resolve, reject) => {
-    // const fileRef = ref(storage, 'posts');
-
     fetch(media)
       .then(response => response.blob())
-      .then(blob => ref(getStorage(app), 'posts').put(blob))
+      .then(blob => ref(getStorage(app), 'posts/').put(blob))
       .then(task => task.ref.getDownloadURL())
       .then(downloadUrl => resolve(downloadUrl))
       .catch(() => reject())
