@@ -27,7 +27,9 @@ export default function ConversationScreen({ navigation, params }) {
               color="grey"
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {
+            navigation.navigate("SnapMini")
+          }}>
             <Ionicons name="ios-rocket-outline" size={30} color="grey" />
           </TouchableOpacity>
         </View>

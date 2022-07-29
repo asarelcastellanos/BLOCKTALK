@@ -3,18 +3,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { Button } from "react-native";
 
-// Screens
-import ChatScreen from "../screens/Chat/ChatScreen";
-import ConversationScreen from "../screens/Chat/ConversationScreen";
-
 // Snap Mini
-import MiniStack from "../navigation/MiniStack";
+import MiniScreen from "../screens/Chat/SnapMini/MiniScreen";
+import FeedScreen from "../screens/Chat/SnapMini/FeedScreen";
+import PostScreen from "../screens/Chat/SnapMini/PostScreen";
+import ResourceScreen from "../screens/Chat/SnapMini/ResourceScreen";
 
 import { getAuth, signOut } from "firebase/auth";
 
 const Stack = createStackNavigator();
 
-export default function ChatStack({ navigation }) {
+export default function MiniStack({ navigation }) {
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -41,19 +40,12 @@ export default function ChatStack({ navigation }) {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={screenOptions}
-        
+        name="Home"
+        component={MiniScreen}
       />
-      <Stack.Screen name="Conversation" component={ConversationScreen} />
-      <Stack.Screen
-        name="SnapMini"
-        component={MiniStack}
-        options={{
-          headerShown: false
-        }}
-      />
+      <Stack.Screen name="Feed" component={FeedScreen} />
+      <Stack.Screen name="Post" component={PostScreen} />
+      <Stack.Screen name="Resource" component={ResourceScreen} />
     </Stack.Navigator>
   );
 }
