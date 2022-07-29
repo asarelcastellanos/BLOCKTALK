@@ -34,22 +34,24 @@ export default function CameraScreen({ navigation, focused }) {
   }, []);
 
 
-
-  useEffect(() => {
     let unsubscribeFromNewSnapshots = onSnapshot(doc(db, "feed", "stories"), (snapshot) => {
-      // console.log("New Snapshot! ", snapshot.data().photo);
-      console.log("New Snapshot! ", snapshot.data().setPhoto);
-      setPhoto(snapshot.data().photo);
-    });
+      console.log("New Snapshot! ", snapshot.data().photo);
+      // console.log("new photo", newPhoto);
+      // setPhoto(snapshot.data()._id, newPhoto);
+
   
     return function cleanupBeforeUnmounting() {
       unsubscribeFromNewSnapshots();
     };
-  }, []);
+    }, []);
 
-  const onPress = useCallback(async (photo = []) => {
-    await updateDoc(doc(db, "feed", "stories"), {
-      photo: arrayUnion(photo[0])
+  
+
+  const onPress = useCallback(async (photo) => {
+    await setDoc(doc(db, "feed", "stories", "stories"), {
+      photo: photo.base64
+      // user: user
+
     });
   }, []);
 
@@ -94,6 +96,7 @@ export default function CameraScreen({ navigation, focused }) {
     let newPhoto = await cameraRef.current.takePictureAsync(options);
     setPhoto(newPhoto.base64);
     console.log(newPhoto.base64)
+    unsubscribeFromNewSnapshots();
   }
 
   function savePhoto() {
