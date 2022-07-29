@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
-import { SafeAreaView, TouchableOpacity, Text, StyleSheet, View } from 'react-native'
+import React, { useRef } from "react";
+import { SafeAreaView, TouchableOpacity, Text, StyleSheet } from "react-native";
 import BottomSheet from "react-native-gesture-bottom-sheet";
 
-export default function StoriesScreen() {
+const Example = () => {
   // Needed in order to use .show()
   const bottomSheet = useRef();
 
@@ -16,8 +16,8 @@ export default function StoriesScreen() {
         <Text style={styles.text}>Open modal</Text>
       </TouchableOpacity>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -46,3 +46,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export default Example;
