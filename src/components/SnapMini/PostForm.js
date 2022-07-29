@@ -5,27 +5,31 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Image
-} from "react-native"
-import * as ImagePicker from 'expo-image-picker';
+  Image,
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Components
 import PinnedPrompt from "./PinnedPrompt";
 
-import db from "../../firebase";
+import db from "../../../firebase";
 import { doc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
-import { useAuthentication } from "../utils/hooks/useAuthentication";
+import { getStorage, ref } from "firebase/storage";
+import { useAuthentication } from "../../utils/hooks/useAuthentication";
 
 export default function PostForm() {
+
   const [text, onChangeText] = useState("Useless Text");
   const [posts, setPosts] = useState([]);
 
   const [image, setImage] = useState(null);
 
-
   const { userData } = useAuthentication();
+
+  // const storage = getStorage();
+  // let mountainsRef = ref(storage, 'mountains.jpg');
 
   let messageTemplate = {
     message: "text",
@@ -34,7 +38,7 @@ export default function PostForm() {
 
   let imageTemplate = {
     message: "base64",
-    user: userData,
+    // user: userData,
   };
 
   const postRef = doc(db, "Posts", "Global");
@@ -50,7 +54,8 @@ export default function PostForm() {
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
     console.log(pickerResult);
-    setImage(pickerResult.uri);
+    setImage(pickerResult);
+    // mountainsRef = ref(storage, pickerResult.uri);
   }
 
   useEffect(() => {
@@ -72,11 +77,13 @@ export default function PostForm() {
   }
 
   async function handleImageSubmit() {
-    imageTemplate.message = image;
-    console.log(imageTemplate);
-    await updateDoc(postRef, {
-      posts: arrayUnion(imageTemplate),
-    });
+    // imageTemplate.message = `${image}`;
+    // console.log(imageTemplate);
+    // await updateDoc(postRef, {
+    //   posts: arrayUnion(imageTemplate),
+    // });
+    console.log("just uploaded!")
+    // await reference.putFile(pathToFile);
   }
 
   return (
@@ -89,7 +96,7 @@ export default function PostForm() {
         multiline={true}
         editable
       />
-      <Image style={styles.image} source={{uri: image}} />
+      {/* <Image style={styles.image} source={{ uri: image.uri }} /> */}
       <TouchableOpacity style={styles.upload} onPress={handleSubmit}>
         <Ionicons name="ios-cloud-upload" size={25} color="black" />
         <Text style={styles.text}>Upload</Text>
@@ -115,8 +122,8 @@ const styles = StyleSheet.create({
     height: 200,
     width: "100%",
     borderColor: "black",
-    borderWidth: 2
-   },
+    borderWidth: 2,
+  },
   input: {
     height: 100,
     margin: 12,

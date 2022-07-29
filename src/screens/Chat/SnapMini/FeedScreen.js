@@ -12,8 +12,8 @@ import { collection, getDocs } from "firebase/firestore";
 import db from "../../../../firebase";
 
 // Component
-import Post from "../../../components/Post";
-import PinnedPrompt from "../../../components/PinnedPrompt";
+import Post from "../../../components/SnapMini/Post";
+import PinnedPrompt from "../../../components/SnapMini/PinnedPrompt";
 
 export default function FeedScreen() {
   const [posts, setPosts] = useState([]);

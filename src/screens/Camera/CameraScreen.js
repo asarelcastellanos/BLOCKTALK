@@ -12,8 +12,8 @@ import * as MediaLibrary from "expo-media-library";
 import { shareAsync } from 'expo-sharing';
 import * as ImagePicker from 'expo-image-picker';
 
-import CameraActions from "../components/CameraActions";
-import CameraOptions from "../components/CameraOptions";
+import CameraActions from "../../components/Camera/CameraActions"
+import CameraOptions from "../../components/Camera/CameraOptions";
 
 export default function CameraScreen({ navigation, focused }) {
   let cameraRef = useRef();

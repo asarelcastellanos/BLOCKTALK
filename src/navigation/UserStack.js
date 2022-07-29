@@ -8,10 +8,10 @@ import { Button } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 
 // Screens
-import MapScreen from "../screens/MapScreen";
-import CameraScreen from "../screens/CameraScreen";
-import StoriesScreen from "../screens/StoriesScreen";
-import SpotlightScreen from "../screens/SpotlightScreen";
+import MapScreen from "../screens/Map/MapScreen";
+import CameraScreen from "../screens/Camera/CameraScreen";
+import StoriesScreen from "../screens/Stories/StoriesScreen";
+import SpotlightScreen from "../screens/Spotlight/SpotlightScreen";
 
 // Stacks
 import ChatStack from "./ChatStack";

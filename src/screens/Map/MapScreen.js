@@ -71,7 +71,7 @@ export default function MapScreen({ navigation }) {
         <View style={styles.myBitmoji}>
           <Image
             style={styles.bitmojiImage}
-            source={require("../../assets/snapchat/personalBitmoji.png")}
+            source={require("../../../assets/snapchat/personalBitmoji.png")}
           />
           <View style={styles.bitmojiTextContainer}>
             <Text style={styles.bitmojiText}>My Bitmoji</Text>
@@ -80,7 +80,7 @@ export default function MapScreen({ navigation }) {
         <View style={styles.places}>
           <Image
             style={styles.bitmojiImage}
-            source={require("../../assets/snapchat/personalBitmoji.png")}
+            source={require("../../../assets/snapchat/personalBitmoji.png")}
           />
           <View style={styles.bitmojiTextContainer}>
             <Text style={styles.bitmojiText}>Places</Text>
@@ -89,7 +89,7 @@ export default function MapScreen({ navigation }) {
         <View style={styles.myFriends}>
           <Image
             style={styles.bitmojiImage}
-            source={require("../../assets/snapchat/personalBitmoji.png")}
+            source={require("../../../assets/snapchat/personalBitmoji.png")}
           />
           <View style={styles.bitmojiTextContainer}>
             <Text style={styles.bitmojiText}>Friends</Text>
