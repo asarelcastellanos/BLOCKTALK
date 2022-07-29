@@ -1,10 +1,15 @@
 import React, { useRef } from 'react'
-import { SafeAreaView, TouchableOpacity, Text, StyleSheet, View } from 'react-native'
+import { SafeAreaView, TouchableOpacity, Text, StyleSheet, View, useEffect} from 'react-native'
 import BottomSheet from "react-native-gesture-bottom-sheet";
+import SpotlightScreen from "../screens/SpotlightScreen";
 
 export default function StoriesScreen() {
   // Needed in order to use .show()
   const bottomSheet = useRef();
+
+  useEffect(() => {
+    bottomSheet.current = "Hello World";
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
