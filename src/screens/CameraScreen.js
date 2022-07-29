@@ -1,123 +1,243 @@
+import React, { useState, useEffect } from "react";
+import MapView, { Callout, Marker } from "react-native-maps";
 import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Button,
-  Image,
+    StyleSheet,
+    View,
+    Dimensions,
+    Image,
+    Text,
+    TouchableOpacity,
 } from "react-native";
-import { useEffect, useRef, useState } from "react";
-import { Camera, CameraType } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
-import { shareAsync } from 'expo-sharing';
-import * as ImagePicker from 'expo-image-picker';
 
-import CameraActions from "../components/CameraActions";
-import CameraOptions from "../components/CameraOptions";
+import * as Location from "expo-location";
 
-export default function CameraScreen({ navigation, focused }) {
-  let cameraRef = useRef();
-  const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [type, setType] = useState(CameraType.back);
-  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
-  const [photo, setPhoto] = useState();
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-  const [image, setImage] = useState(null);
+export default function MapScreen({ navigation }) {
+    const parks = [
+        {
+            name: "Echo Park",
+            latitude: 34.075493,
+            longitude: -118.260597,
+        },
+        {
+            name: "Reynier Park",
+            latitude: 34.0355665,
+            longitude: -118.3864665,
+        },
+        {
+            name: "Palisades Park",
+            latitude: 34.0231,
+            longitude: -118.5095,
+        },
+        {
+            name: "Tongva Park",
+            latitude: 34.011111,
+            longitude: -118.493056,
+        },
+        {
+            name: "Virginia Avenue Park",
+            latitude: 34.021389,
+            longitude: -118.467778,
+        },
+    ];
+    const [parkName, setParkName] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      const mediaLibraryPermission =
-        await MediaLibrary.requestPermissionsAsync();
-      setHasCameraPermission(cameraPermission.status === "granted");
-      setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
-    })();
-  }, []);
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
 
-  if (hasCameraPermission === undefined) {
-    return <Text>Requesting permissions...</Text>
-  } else if (!hasCameraPermission) {
-    return <Text>Permission for camera not granted. Please change this in settings.</Text>
-  }
-
-  function flipCamera() {
-    setType(type === CameraType.back ? CameraType.front : CameraType.back);
-  }
-
-  function switchFlash() {
-    setType(type === FlashMode.off ? FlashMode.on : FlashMode.off);
-  }
-
-  async function checkGallery() {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
-      return;
-    }
-
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(pickerResult);
-  }
-
-  async function takePhoto() {
-    console.log("Just took photo!");
-    let options = {
-      quality: 1,
-      base64: true,
-      exif: false,
-    };
-
-    let newPhoto = await cameraRef.current.takePictureAsync(options);
-    setPhoto(newPhoto);
-  }
-
-  function savePhoto() {
-    MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
-      setPhoto(undefined);
+    const [currentRegion, setCurrentRegion] = useState({
+        latitude: 34.021216555498675,
+        longitude: -118.45007599325494,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
     });
-  };
 
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== "granted") {
+                setErrorMsg("Permission to access location was denied");
+                return;
+            }
 
-  if (photo) {
-    let sharePic = () => {
-      shareAsync(photo.uri).then(() => {
-        setPhoto(undefined);
-      });
-    };
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+            setCurrentRegion({
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            });
+        })();
+    }, []);
+
+    let text = "Waiting...";
+    text = JSON.stringify(location);
 
     return (
-      <>
-        <Image
-          style={styles.preview}
-          source={{ uri: "data:image/jpg;base64," + photo.base64 }}
-        />
-        {hasMediaLibraryPermission ? (
-          <Button title="Save" onPress={savePhoto} />
-        ) : undefined}
-        <Button title="Discard" onPress={() => setPhoto(undefined)} />
-      </>
-    );
-  }
+        <View style={styles.container}>
+            <MapView
+                style={styles.map}
+                region={currentRegion}
+                showsUserLocation={true}
+                showsMyLocationButton={true}
+            >
+                <Marker
+                    coordinate={currentRegion}
+                    title="user"
+                    image={{
+                        uri: "https://sdk.bitmoji.com/render/panel/2724bb6e-5671-47a3-8877-6103526e83d9-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
+                    }}
+                />
+                {parks.map((item, index) => (
+                    <Marker
+                        style={styles.pinPoint}
+                        coordinate={{
+                            latitude: item.latitude,
+                            longitude: item.longitude,
+                        }}
+                        image={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/parkIcon.png")}
+                        onPress={() => setParkName(item.name)}
+                        key={item.name}
+                    >
+                        <Callout>
+                            <View>
+                                <Text style={styles.titleText}>{parkName}</Text>
+                                <TouchableOpacity
+                                    style={styles.appButtonContainer}
+                                >
+                                    <Text style={styles.appButtonText}>
+                                        Events Schedule
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.appButtonContainer}
+                                >
+                                    <Text style={styles.appButtonText}>
+                                        Community Chat
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </Callout>
+                    </Marker>
+                ))}
+            </MapView>
 
-  return (
-    <>
-      <Camera style={styles.camera} type={type} ref={cameraRef} />
-      <CameraOptions flipCamera={flipCamera} />
-      <CameraActions checkGallery={checkGallery} takePhoto={takePhoto} />
-    </>
-  );
+            <View style={styles.locationContainer}>
+                <TouchableOpacity
+                    style={styles.userLocation}
+                    onPress={() => {
+                        console.log("Go to user location!");
+                        const { latitude, longitude } = location.coords;
+                        setCurrentRegion({
+                            ...currentRegion,
+                            latitude,
+                            longitude,
+                        });
+                    }}
+                >
+                    <Ionicons name="ios-navigate" size={15} color="black" />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.bitmojiContainer}>
+                <View style={styles.myBitmoji}>
+                    <Image
+                        style={styles.bitmojiImage}
+                        source={require("../../assets/snapchat/personalBitmoji.png")}
+                    />
+                    <View style={styles.bitmojiTextContainer}>
+                        <Text style={styles.bitmojiText}>My Bitmoji</Text>
+                    </View>
+                </View>
+                <View style={styles.places}>
+                    <Image
+                        style={styles.bitmojiImage}
+                        source={require("../../assets/snapchat/personalBitmoji.png")}
+                    />
+                    <View style={styles.bitmojiTextContainer}>
+                        <Text style={styles.bitmojiText}>Places</Text>
+                    </View>
+                </View>
+                <View style={styles.myFriends}>
+                    <Image
+                        style={styles.bitmojiImage}
+                        source={require("../../assets/snapchat/personalBitmoji.png")}
+                    />
+                    <View style={styles.bitmojiTextContainer}>
+                        <Text style={styles.bitmojiText}>Friends</Text>
+                    </View>
+                </View>
+            </View>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  camera: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  preview: {
-    height: "80%",
-    width: "100%",
-  },
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    map: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+    },
+    locationContainer: {
+        position: "absolute",
+        bottom: 100,
+        width: "100%",
+        height: 30,
+        alignItems: "center",
+    },
+    userLocation: {
+        backgroundColor: "white",
+        borderRadius: 15,
+        height: 30,
+        width: 30,
+        alignItems: "center",
+        justifyContent: "center",
+        marginLeft: 8,
+    },
+    bitmojiContainer: {
+        width: "100%",
+        height: 70,
+        position: "absolute",
+        bottom: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    myBitmoji: {
+        width: 70,
+        height: 70,
+        alignItems: "center",
+        justifyContent: "center",
+        marginLeft: 5,
+    },
+    bitmojiImage: {
+        width: 50,
+        height: 50,
+    },
+    bitmojiTextContainer: {
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 4,
+    },
+    bitmojiText: {
+        fontSize: 10,
+        fontWeight: "700",
+    },
+    places: {
+        width: 70,
+        height: 70,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    myFriends: {
+        width: 70,
+        height: 70,
+        alignItems: "center",
+        justifyContent: "center",
+    },
 });
