@@ -7,16 +7,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { getAuth, signOut } from "firebase/auth";
 
 // Screens
-<<<<<<< HEAD
 import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import MapScreen from "../screens/MapScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
 import OptionsScreen from "../screens/OptionsScreen";
-=======
-// import MapScreen from "../screens/MapScreen";
-// import SpotlightScreen from "../screens/SpotlightScreen";
->>>>>>> bd45dce7a0f5e959c89287acbcc298beb04b5a09
 
 // Stacks
 import CameraStack from "../navigation/CameraStack";
@@ -82,20 +77,8 @@ export default function UserStack() {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
-<<<<<<< HEAD
-        
-        {/* <Tab.Screen name="Map" component={OptionsScreen} options={{...screenOptions, headerShown: false}} /> */}
-
-        <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
-        {/* <Tab.Screen
-          name="options"
-          component={OptionsScreen}
-          options={screenOptions} 
-        /> */}
-=======
         {/* <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
         <Tab.Screen name="ResourceStack" component={ResourceStack} options={{ headerShown: false, tabBarShowLabel: false }} />
->>>>>>> bd45dce7a0f5e959c89287acbcc298beb04b5a09
         <Tab.Screen
           name="CameraStack"
           component={CameraStack}

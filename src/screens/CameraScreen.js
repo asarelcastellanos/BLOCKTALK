@@ -28,38 +28,7 @@ export default function CameraScreen({ navigation, focused }) {
     })();
   }, []);
 
-<<<<<<< HEAD
-
-    let unsubscribeFromNewSnapshots = onSnapshot(doc(db, "feed", "stories"), (snapshot) => {
-      console.log("New Snapshot! ", snapshot.data().photo);
-      // console.log("new photo", newPhoto);
-      // setPhoto(snapshot.data()._id, newPhoto);
-
-  
-    return function cleanupBeforeUnmounting() {
-      unsubscribeFromNewSnapshots();
-    };
-    }, []);
-
-  
-
-  const onPress = useCallback(async (photo) => {
-    await setDoc(doc(db, "feed", "stories", "stories"), {
-      photo: photo.base64
-      // user: user
-
-    });
-  }, []);
-
-
-
-
-  if (hasCameraPermission === undefined) {
-    return <Text>Requesting permissions...</Text>
-  } else if (!hasCameraPermission) {
-=======
   if (!hasCameraPermission || !hasMediaLibraryPermission) {
->>>>>>> bd45dce7a0f5e959c89287acbcc298beb04b5a09
     return <Text>Permission for camera not granted. Please change this in settings.</Text>
   }
 
@@ -87,43 +56,6 @@ export default function CameraScreen({ navigation, focused }) {
     };
 
     let newPhoto = await cameraRef.current.takePictureAsync(options);
-<<<<<<< HEAD
-    setPhoto(newPhoto.base64);
-    console.log(newPhoto.base64)
-    unsubscribeFromNewSnapshots();
-  }
-
-  function savePhoto() {
-    MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
-      setPhoto(undefined);
-      console.log(photo.uri)
-    });
-  };
-
-
-
-  if (photo) {
-    let sharePic = () => {
-      shareAsync(photo.uri).then(() => {
-        setPhoto(undefined);
-      });
-    };
-
-    return (
-      <>
-        <Image
-          style={styles.preview}
-          source={{ uri: "data:image/jpg;base64," + photo.base64 }}
-        />
-        {hasMediaLibraryPermission ? (
-          <Button title="Save" onPress={savePhoto} />
-        ) : undefined}
-        <Button title="Discard" onPress={() => setPhoto(undefined)} />
-      </>
-
-    );
-  }
-=======
     setPhoto(newPhoto);
     navigation.navigate('SavePost', { source: newPhoto.uri });
   }
@@ -142,7 +74,6 @@ export default function CameraScreen({ navigation, focused }) {
   //     });
   //   };
   // }
->>>>>>> bd45dce7a0f5e959c89287acbcc298beb04b5a09
 
   return (
     <>
