@@ -33,7 +33,6 @@ export default function ChatStack({ navigation }) {
             })
             .catch((error) => {
               // An error happened.
-              // should we do something with that error??
             });
         }}
         title="Log Out"

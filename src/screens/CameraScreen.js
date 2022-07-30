@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Camera, CameraType } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
 import { shareAsync } from 'expo-sharing';
 import * as ImagePicker from 'expo-image-picker';
 import db from "../../firebase";
@@ -15,20 +14,21 @@ import CameraOptions from "../components/CameraOptions";
 export default function CameraScreen({ navigation, focused }) {
   let cameraRef = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [type, setType] = useState(CameraType.back);
+  const [cameraType, setCameraType] = useState(CameraType.back);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
 
   useEffect(() => {
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      const mediaLibraryPermission =
-        await MediaLibrary.requestPermissionsAsync();
       setHasCameraPermission(cameraPermission.status === "granted");
+      const mediaLibraryPermission =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
       setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
 
+<<<<<<< HEAD
 
     let unsubscribeFromNewSnapshots = onSnapshot(doc(db, "feed", "stories"), (snapshot) => {
       console.log("New Snapshot! ", snapshot.data().photo);
@@ -57,28 +57,25 @@ export default function CameraScreen({ navigation, focused }) {
   if (hasCameraPermission === undefined) {
     return <Text>Requesting permissions...</Text>
   } else if (!hasCameraPermission) {
+=======
+  if (!hasCameraPermission || !hasMediaLibraryPermission) {
+>>>>>>> bd45dce7a0f5e959c89287acbcc298beb04b5a09
     return <Text>Permission for camera not granted. Please change this in settings.</Text>
   }
 
   function flipCamera() {
-    setType(type === CameraType.back ? CameraType.front : CameraType.back);
-  }
-
-  function switchFlash() {
-    setType(type === FlashMode.off ? FlashMode.on : FlashMode.off);
+    setCameraType(cameraType === CameraType.back ? CameraType.front : CameraType.back);
   }
 
   async function checkGallery() {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      aspect: [16, 9],
+      quality: 1
+    });
 
-    if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
-      return;
+    if (!pickerResult.cancelled) {
+      navigation.navigate('SavePost', { source: pickerResult.uri });
     }
-
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(pickerResult);
   }
 
   async function takePhoto() {
@@ -90,6 +87,7 @@ export default function CameraScreen({ navigation, focused }) {
     };
 
     let newPhoto = await cameraRef.current.takePictureAsync(options);
+<<<<<<< HEAD
     setPhoto(newPhoto.base64);
     console.log(newPhoto.base64)
     unsubscribeFromNewSnapshots();
@@ -125,11 +123,31 @@ export default function CameraScreen({ navigation, focused }) {
 
     );
   }
+=======
+    setPhoto(newPhoto);
+    navigation.navigate('SavePost', { source: newPhoto.uri });
+  }
+
+  // function savePhoto() {
+  //   MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+  //     setPhoto(undefined);
+  //     console.log(photo.uri);
+  //   });
+  // };
+
+  // if (photo) {
+  //   let sharePic = () => {
+  //     shareAsync(photo.uri).then(() => {
+  //       setPhoto(undefined);
+  //     });
+  //   };
+  // }
+>>>>>>> bd45dce7a0f5e959c89287acbcc298beb04b5a09
 
   return (
     <>
-      <Camera style={styles.camera} type={type} ref={cameraRef} />
-      <CameraOptions flipCamera={flipCamera} />
+      <Camera style={styles.camera} type={cameraType} ref={cameraRef} />
+      <CameraOptions flipCamera={flipCamera}/>
       <CameraActions checkGallery={checkGallery} takePhoto={takePhoto} />
     </>
   );

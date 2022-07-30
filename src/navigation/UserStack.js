@@ -1,21 +1,28 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { Button } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { getAuth, signOut } from "firebase/auth";
 
 // Screens
+<<<<<<< HEAD
 import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import MapScreen from "../screens/MapScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
 import OptionsScreen from "../screens/OptionsScreen";
+=======
+// import MapScreen from "../screens/MapScreen";
+// import SpotlightScreen from "../screens/SpotlightScreen";
+>>>>>>> bd45dce7a0f5e959c89287acbcc298beb04b5a09
 
 // Stacks
-import ChatStack from "./ChatStack";
+import CameraStack from "../navigation/CameraStack";
+import StoriesStack from "../navigation/StoriesStack";
+import ResourceStack from "../navigation/ResourceStack";
+import ChatStack from "../navigation/ChatStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,6 +31,7 @@ export default function UserStack() {
   const user = auth.currentUser;
 
   let screenOptions = {
+    headerShown: false,
     tabBarShowLabel: false,
     headerLeft: () => (
       <Button
@@ -49,7 +57,7 @@ export default function UserStack() {
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: '#694fad' }}
-        initialRouteName="Camera"
+        initialRouteName="CameraStack"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
@@ -58,18 +66,15 @@ export default function UserStack() {
             if (route.name == "Map") {
               iconName = "ios-location-outline";
               iconColor = focused ? "green" : "grey";
-            } else if (route.name === "ChatStack") {
+            } else if (route.name === "ResourceStack") {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
-            } else if (route.name === "Camera") {
+            } else if (route.name === "CameraStack") {
               iconName = focused ? "ios-scan-circle-outline" : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
-            } else if (route.name === "Stories") {
+            } else if (route.name === "StoriesStack") {
               iconName = "ios-people-outline";
               iconColor = focused ? "purple" : "grey";
-            } else if (route.name === "Spotlight") {
-              iconName = "ios-play-outline";
-              iconColor = focused ? "red" : "grey";
             }
             return <Ionicons name={iconName} size={size} color={iconColor} />;
           },
@@ -77,6 +82,7 @@ export default function UserStack() {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
+<<<<<<< HEAD
         
         {/* <Tab.Screen name="Map" component={OptionsScreen} options={{...screenOptions, headerShown: false}} /> */}
 
@@ -86,15 +92,19 @@ export default function UserStack() {
           component={OptionsScreen}
           options={screenOptions} 
         /> */}
+=======
+        {/* <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
+        <Tab.Screen name="ResourceStack" component={ResourceStack} options={{ headerShown: false, tabBarShowLabel: false }} />
+>>>>>>> bd45dce7a0f5e959c89287acbcc298beb04b5a09
         <Tab.Screen
-          name="Camera"
-          component={CameraScreen}
-          options={{...screenOptions, headerShown: false}} 
+          name="CameraStack"
+          component={CameraStack}
+          options={{ headerShown: false, tabBarShowLabel: false }} 
         />
         <Tab.Screen
-          name="Stories"
-          component={StoriesScreen}
-          options={screenOptions}
+          name="StoriesStack"
+          component={StoriesStack}
+          options={{ headerShown: false, tabBarShowLabel: false }}
         />
         
         {/* <Tab.Screen
