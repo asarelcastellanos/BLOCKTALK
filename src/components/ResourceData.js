@@ -2,8 +2,8 @@ var resourceData = [
     {
         "key": "1",
         "name": "nonprofit1",
-        "description": "description1"
-
+        "description": "description1",
+        "image": "https://place-hold.it/300x500"
     },
     {
         "key": "2",
