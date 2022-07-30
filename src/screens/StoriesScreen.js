@@ -1,11 +1,8 @@
 import React from "react";
-// import { View, Text } from "react-native";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   NativeBaseProvider,
   Container,
-  Heading,
-  Box,
   Center,
   VStack,
   HStack,
@@ -14,16 +11,8 @@ import {
   ScrollView,
 } from "native-base";
 
-// Carousel
-import { SafeAreaView, StyleSheet } from "react-native";
-import CarouselCards from "../../CarouselCards";
-
 export default function StoriesScreen() {
   return (
-    // <SafeAreaView style={styles.container}>
-    //   <CarouselCards />
-    // </SafeAreaView>
-
     <NativeBaseProvider>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Container style={styles.friends}>
@@ -85,14 +74,6 @@ export default function StoriesScreen() {
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   height: 200,
-  //   backgroundColor: "#fff",
-  //   alignItems: "flex-end",
-  //   justifyContent: "flex-end",
-  //   // padding: 50,
-  // },
-
   friends: {
     margin: 16,
     minWidth: 400,
