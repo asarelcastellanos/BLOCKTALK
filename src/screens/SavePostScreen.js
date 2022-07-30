@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { db, app } from '../../firebase';
-import { getStorage, ref } from "firebase/storage";
+import { db } from '../../firebase';
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 export default function SavePostScreen({ navigation, route }) {
   const [description, setDescription] = useState('');
   const media = route.params.source;
   
-  const saveMediaToStorage = () => new Promise((resolve, reject) => {
-    fetch(media)
-      .then(response => response.blob())
-      .then(blob => ref(getStorage(app), 'posts/').put(blob))
-      .then(task => task.ref.getDownloadURL())
-      .then(downloadUrl => resolve(downloadUrl))
-      .catch(() => reject())
-})
+//   const saveMediaToStorage = () => new Promise((resolve, reject) => {
+//     fetch(media)
+//       .then(response => response.blob())
+//       .then(blob => ref(getStorage(app), 'posts/image.jpg').put(blob))
+//       .then(task => task.ref.getDownloadURL())
+//       .then(downloadUrl => resolve(downloadUrl))
+//       .catch(() => reject())
+// })
+  const saveMediaToStorage = async() => {
+    const storageRef = ref(getStorage(), 'image.jpg');
+    const img = await fetch(media);
+    const bytes = await img.blob();
+    await uploadBytes(storageRef, bytes);
+  }
 
   return (
     <View style={styles.container}>
@@ -44,7 +50,7 @@ export default function SavePostScreen({ navigation, route }) {
           <Text>Cancel</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Stories')}
+          onPress={() => {saveMediaToStorage(); navigation.navigate('StoriesStack')}}
           style={styles.postButton}
         >
           <Ionicons name="albums-outline"/>

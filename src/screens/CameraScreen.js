@@ -8,10 +8,8 @@ import {
 } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { Camera, CameraType } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
 import { shareAsync } from 'expo-sharing';
 import * as ImagePicker from 'expo-image-picker';
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CameraActions from "../components/CameraActions";
 import CameraOptions from "../components/CameraOptions";
@@ -23,21 +21,17 @@ export default function CameraScreen({ navigation, focused }) {
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
 
-  const [image, setImage] = useState(null);
-
   useEffect(() => {
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      const mediaLibraryPermission =
-        await MediaLibrary.requestPermissionsAsync();
       setHasCameraPermission(cameraPermission.status === "granted");
+      const mediaLibraryPermission =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
       setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
 
-  if (hasCameraPermission === undefined) {
-    return <Text>Requesting permissions...</Text>
-  } else if (!hasCameraPermission) {
+  if (!hasCameraPermission || !hasMediaLibraryPermission) {
     return <Text>Permission for camera not granted. Please change this in settings.</Text>
   }
 
@@ -46,14 +40,6 @@ export default function CameraScreen({ navigation, focused }) {
   }
 
   async function checkGallery() {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
-      return;
-    }
-
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
       aspect: [16, 9],
       quality: 1
@@ -74,24 +60,23 @@ export default function CameraScreen({ navigation, focused }) {
 
     let newPhoto = await cameraRef.current.takePictureAsync(options);
     setPhoto(newPhoto);
+    navigation.navigate('SavePost', { source: newPhoto.uri });
   }
 
-  function savePhoto() {
-    MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
-      setPhoto(undefined);
-      console.log(photo.uri)
-    });
-  };
+  // function savePhoto() {
+  //   MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+  //     setPhoto(undefined);
+  //     console.log(photo.uri);
+  //   });
+  // };
 
-
-  if (photo) {
-    let sharePic = () => {
-      shareAsync(photo.uri).then(() => {
-        setPhoto(undefined);
-      });
-    };
-    navigation.navigate('SavePost', { source: photo.uri });
-  }
+  // if (photo) {
+  //   let sharePic = () => {
+  //     shareAsync(photo.uri).then(() => {
+  //       setPhoto(undefined);
+  //     });
+  //   };
+  // }
 
   return (
     <>

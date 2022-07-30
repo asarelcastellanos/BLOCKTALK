@@ -30,7 +30,9 @@ export default function CameraStack() {
   };
 
   return (
-      <Stack.Navigator>
+      <Stack.Navigator
+        initialRouteName="Camera"
+      >
         <Stack.Screen name="Camera" component={CameraScreen} options={{ headerShown: false  }} />
         <Stack.Screen name="SavePost" component={SavePostScreen} options={{ screenOptions }} />
       </Stack.Navigator>
