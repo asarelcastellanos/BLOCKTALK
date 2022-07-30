@@ -4,12 +4,8 @@ import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { shareAsync } from 'expo-sharing';
 import * as ImagePicker from 'expo-image-picker';
-// import { initializeApp } from 'firebase/app';
-// import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import db from "../../firebase";
-import firebase from "firebase/app";
-import { doc, onSnapshot, arrayUnion, updateDoc } from "firebase/firestore";
-// import {storage} from "../../firebase";
+import { doc, onSnapshot } from "firebase/firestore";
 
 import CameraActions from "../components/CameraActions";
 import CameraOptions from "../components/CameraOptions";
@@ -150,6 +146,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-
-//TEST TESTING TEST fjijfakdf

@@ -12,6 +12,7 @@ import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import MapScreen from "../screens/MapScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
+import OptionsScreen from "../screens/OptionsScreen";
 
 // Stacks
 import ChatStack from "./ChatStack";
@@ -76,7 +77,15 @@ export default function UserStack() {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
+        
+        {/* <Tab.Screen name="Map" component={OptionsScreen} options={{...screenOptions, headerShown: false}} /> */}
+
         <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
+        {/* <Tab.Screen
+          name="options"
+          component={OptionsScreen}
+          options={screenOptions} 
+        /> */}
         <Tab.Screen
           name="Camera"
           component={CameraScreen}
@@ -87,11 +96,13 @@ export default function UserStack() {
           component={StoriesScreen}
           options={screenOptions}
         />
+        
         {/* <Tab.Screen
           name="Spotlight"
           component={SpotlightScreen}
           options={screenOptions}
         /> */}
+
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -20,6 +20,3 @@ export default function AuthStack() {
     </NavigationContainer>
   );
 }
-
-
-//TETS TEST TEST TEST
