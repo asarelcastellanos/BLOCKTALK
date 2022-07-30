@@ -13,7 +13,8 @@ import { getAuth, signOut } from "firebase/auth";
 // Stacks
 import CameraStack from "../navigation/CameraStack";
 import StoriesStack from "../navigation/StoriesStack";
-import ChatStack from "./ChatStack";
+import ResourceStack from "../navigation/ResourceStack";
+import ChatStack from "../navigation/ChatStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +23,7 @@ export default function UserStack() {
   const user = auth.currentUser;
 
   let screenOptions = {
+    headerShown: false,
     tabBarShowLabel: false,
     headerLeft: () => (
       <Button
@@ -56,7 +58,7 @@ export default function UserStack() {
             if (route.name == "Map") {
               iconName = "ios-location-outline";
               iconColor = focused ? "green" : "grey";
-            } else if (route.name === "ChatStack") {
+            } else if (route.name === "ResourceStack") {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
             } else if (route.name === "CameraStack") {
@@ -72,7 +74,8 @@ export default function UserStack() {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
-        <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} />
+        {/* <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
+        <Tab.Screen name="ResourceStack" component={ResourceStack} options={{ headerShown: false, tabBarShowLabel: false }} />
         <Tab.Screen
           name="CameraStack"
           component={CameraStack}

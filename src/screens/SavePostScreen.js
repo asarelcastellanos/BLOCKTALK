@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { db } from '../../firebase';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 export default function SavePostScreen({ navigation, route }) {
