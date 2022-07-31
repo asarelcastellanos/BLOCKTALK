@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, Button, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { View, Image, Text, StyleSheet, Button, TextInput, TouchableOpacity, 
+         ScrollView, FlatList, SafeAreaView, SectionList, StatusBar, ListItem } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useIsFocused } from '@react-navigation/native';
 import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
@@ -49,6 +50,25 @@ export default function SavePostScreen({ navigation, route }) {
   //   fileName: fileName,
   // });
 
+  const names = [
+    {
+      index: "1",
+      name: "education",
+    },
+    {
+      index: "2",
+      name: " mental health ",
+    },
+    {
+      index: "3",
+      name: " finance ",
+    },
+    {
+      index: "4",
+      name: " mentorship ",
+    }
+  ]
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -64,10 +84,29 @@ export default function SavePostScreen({ navigation, route }) {
             multiline
           />
         </View> */}
+
         <View style={styles.categoryContainer}>
           <Text>Select categories</Text>
           <Button title="Education"/>
+            <FlatList 
+              style={styles.listStyle}
+              keyExtractor={(key) => {
+                return key.index;
+              }}
+              horizontal
+              inverted
+              showsHorizontalScrollIndicator={false}
+              data={names}
+              renderItem={({item}) => {
+                console.log(item.name);
+                return <Text style={styles.textStyle}>{item.name}</Text>
+              }}
+            />
         </View>
+
+        
+        
+
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -135,5 +174,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 10,
+  },
+  listStyle: {
+    textAlign: "center",
+    margin: 20,
+    padding: 5,
   },
 });

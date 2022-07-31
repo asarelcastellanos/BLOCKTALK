@@ -98,19 +98,20 @@ export default function UserStack() {
 
         {/* <Tab.Screen name="ResourceStack" component={ResourceStack} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
         <Tab.Screen
-          name="ResourceStack"
-          component={ResourceStack}
-          options={{ headerShown: false, tabBarShowLabel: false }} 
+          name="StoriesStack"
+          component={StoriesStack}
+          options={{ headerShown: false, tabBarShowLabel: false }}
         />
+      
         <Tab.Screen
           name="CameraStack"
           component={CameraStack}
           options={{ headerShown: false, tabBarShowLabel: false }} 
         />
         <Tab.Screen
-          name="StoriesStack"
-          component={StoriesStack}
-          options={{ headerShown: false, tabBarShowLabel: false }}
+          name="ResourceStack"
+          component={ResourceStack}
+          options={{ headerShown: false, tabBarShowLabel: false }} 
         />
         
         {/* <Tab.Screen

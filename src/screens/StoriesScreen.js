@@ -7,6 +7,7 @@ export default function StoriesScreen({ navigation, focused }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>Read</Text>
       {isFocused ?
         <TouchableOpacity>
           <Post/>
@@ -22,5 +23,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     // height: Dimensions.get('window').height,
   },
-  
+  header: {
+    padding: 10,
+    marginTop: 10,
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+    fontFamily: 'Avenir Next',
+  },
 })
