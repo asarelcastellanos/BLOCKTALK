@@ -1,3 +1,7 @@
+import carrot from "../../assets/stories-nav-bar/down_carrot.png";
+import bookmark from "../../assets/stories-nav-bar/charm_bookmark.png";
+import threeDots from "../../assets/stories-nav-bar/bi_three-dots-vertical.png";
+
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
@@ -14,15 +18,13 @@ import {
   Pressable,
   Button,
   Fab,
+  Image,
+  Divider,
 } from "native-base";
 
 export default function StoriesScreen() {
   // Set modal visibility
   const [isModalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
 
   return (
     <NativeBaseProvider>
@@ -95,7 +97,6 @@ export default function StoriesScreen() {
         onSwipeUp={() => setModalVisible(false)}
       >
         <Modal
-          style={styles.modalParent}
           isVisible={isModalVisible}
           animationIn="slideInDown"
           animationOut="slideOutUp"
@@ -104,7 +105,42 @@ export default function StoriesScreen() {
           backdropTransitionOutTiming={0}
         >
           <View style={styles.modalView}>
-            <Text>Hello!</Text>
+            <HStack style={styles.modalNav}>
+              <HStack space={4} alignItems="center">
+                <Pressable onPress={() => setModalVisible(false)}>
+                  <Image source={carrot} alt="carrot"></Image>
+                </Pressable>
+                <Divider thickness="2" orientation="vertical" />
+                <VStack>
+                  <Text style={styles.modalViewText} bold fontSize="xs">
+                    Insert Name Here
+                  </Text>
+                  <Text style={styles.modalViewText} fontSize="xs">
+                    Title
+                  </Text>
+                </VStack>
+              </HStack>
+
+              <HStack style={styles.modalNavRightSide} space={5}>
+                <Pressable onPress={() => setModalVisible(false)}>
+                  <Image source={bookmark} alt="bookmark"></Image>
+                </Pressable>
+                <Pressable onPress={() => setModalVisible(false)}>
+                  <Image source={threeDots} alt="menu"></Image>
+                </Pressable>
+              </HStack>
+            </HStack>
+
+            <Pressable
+              style={styles.modalMoreButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Center h="35" w="70" bg="white" rounded="3xl">
+                <Text bold fontSize="sm">
+                  More
+                </Text>
+              </Center>
+            </Pressable>
           </View>
         </Modal>
       </GestureRecognizer>
@@ -129,10 +165,28 @@ const styles = StyleSheet.create({
 
   modalView: {
     marginTop: -30,
-    width: 450,
+    width: 420,
     flex: 1,
     alignSelf: "center",
-    color: "#fff",
     backgroundColor: "#000",
+  },
+
+  modalViewText: {
+    color: "#fff",
+  },
+
+  modalNav: {
+    height: 40,
+    marginLeft: 16,
+    marginTop: 60,
+  },
+
+  modalNavRightSide: {
+    marginLeft: 140,
+  },
+
+  modalMoreButton: {
+    alignSelf: "center",
+    marginTop: 725,
   },
 });
