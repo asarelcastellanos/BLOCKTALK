@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Modal } from "react-native";
 import {
   NativeBaseProvider,
   Container,
@@ -9,19 +9,30 @@ import {
   Text,
   Circle,
   ScrollView,
+  Pressable,
+  FormControl,
+  Input,
+  Button,
+  Fab,
 } from "native-base";
+// import { Bubble } from "react-native-gifted-chat";
 
 export default function StoriesScreen() {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <NativeBaseProvider>
       <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Friends section */}
         <Container style={styles.friends}>
           <Text bold fontSize="md">
             Friends
           </Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={3} justifyContent="center">
-              <Circle size="74px" bg="light.300" />
+              <Pressable onPress={() => setModalVisible(true)}>
+                <Circle size="74px" bg="light.300" />
+              </Pressable>
               <Circle size="74px" bg="light.300" />
               <Circle size="74px" bg="light.300" />
               <Circle size="74px" bg="light.300" />
@@ -31,6 +42,7 @@ export default function StoriesScreen() {
           </ScrollView>
         </Container>
 
+        {/* Hugs section */}
         <Container style={styles.hugs}>
           <Text bold fontSize="md">
             HUGS
@@ -52,6 +64,7 @@ export default function StoriesScreen() {
           </ScrollView>
         </Container>
 
+        {/* Discover section */}
         <Container style={styles.discover}>
           <Text bold fontSize="md">
             Discover
@@ -69,6 +82,22 @@ export default function StoriesScreen() {
           </VStack>
         </Container>
       </ScrollView>
+
+      {/* Story overlay when you click on a friend */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+          </View>
+        </View>
+      </Modal>
     </NativeBaseProvider>
   );
 }
@@ -86,5 +115,26 @@ const styles = StyleSheet.create({
 
   discover: {
     margin: 16,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    // width: 400,
+
+    backgroundColor: "#000",
+    borderRadius: 20,
+    // padding: 35,
+    alignItems: "center",
+  },
+
+  modalText: {
+    color: "#fff",
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
