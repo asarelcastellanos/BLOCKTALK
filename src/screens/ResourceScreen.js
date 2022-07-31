@@ -1,10 +1,12 @@
-import { SafeAreaView, View, Text, StyleSheet, FlatList, Dimensions, Image } from 'react-native';
+import { Button, View, Text, StyleSheet, Linking,
+        FlatList, Dimensions, Image, SafeAreaView, Alert } from 'react-native';
 // import { useIsFocused } from '@react-navigation/native';
 import React, {useState, useEffect, Component } from 'react';
 // import { ActivityIndicator } from 'react-native-web';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import resourceData from '../components/ResourceData';
 // import { render } from 'react-dom';
+// import Hyperlink from 'react-native-hyperlink';
 
 class FlatListItem extends Component {
   render() {
@@ -20,6 +22,12 @@ class FlatListItem extends Component {
               <Text style={styles.title}>{this.props.item.name}</Text>
               <Text style={styles.description}>{this.props.item.description}</Text>
             </View>
+            <View style={styles.button}>
+              <Button
+                title="Click"
+                onPress={() => Linking.openURL(this.props.item.link)}
+              />
+            </View>
           </View>
       </View>
 
@@ -32,6 +40,7 @@ export default class ResourceScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Resources</Text>
+        <Text style={styles.slogan}>Slogan</Text>
         <FlatList
           data={resourceData}
           renderItem={({item, index}) => {
@@ -56,15 +65,15 @@ const styles = StyleSheet.create({
   title: {
     marginVertical: 8,
     marginHorizontal: 16,
-    padding: 15,
-    fontSize: 24,
+    padding: 5,
+    fontSize: 20,
     fontFamily: 'Avenir Next',
     fontWeight: 'bold'
   },
   description: {
     marginVertical: 8,
     marginHorizontal: 16,
-    padding: 15,
+    padding: 5,
     fontSize: 15,
     fontFamily: 'Avenir Next'
   },
@@ -91,14 +100,25 @@ const styles = StyleSheet.create({
 
     // width: '100%',
     // height: undefined,
+    resizeMode: 'contain',
     aspectRatio: 1,
   },
   header: {
-    padding: 5,
-    marginTop: 10,
+    padding: 20,
+    marginTop: 50,
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold',
     fontFamily: 'Avenir Next',
-  }
+  },
+  slogan: {
+    padding: 10,
+    textAlign: 'center',
+    fontSize: 15,
+    fontFamily: 'Avenir Next',
+  },
+  button: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 })

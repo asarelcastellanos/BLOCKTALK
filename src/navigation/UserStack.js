@@ -1,6 +1,7 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -18,8 +19,25 @@ import CameraStack from "../navigation/CameraStack";
 import StoriesStack from "../navigation/StoriesStack";
 import ResourceStack from "../navigation/ResourceStack";
 import ChatStack from "../navigation/ChatStack";
+import { createStackNavigator } from "@react-navigation/stack";
 
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+// const navOptionHandler = (navigation) => ({
+//   header: null
+// })
+
+// const CameraStack = createStackNavigator({
+//   Feed: {
+//     screen: Feed,
+//     navigationOptions:
+//   },
+//   FeedDetail: {
+//     screen: FeedDetail,
+//     navigationOptions: navOptionHandler
+//   }
+// })
 
 export default function UserStack() {
   const auth = getAuth();
@@ -77,8 +95,13 @@ export default function UserStack() {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
-        {/* <Tab.Screen name="ChatStack" component={ChatStack} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
-        <Tab.Screen name="ResourceStack" component={ResourceStack} options={{ headerShown: false, tabBarShowLabel: false }} />
+
+        {/* <Tab.Screen name="ResourceStack" component={ResourceStack} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
+        <Tab.Screen
+          name="ResourceStack"
+          component={ResourceStack}
+          options={{ headerShown: false, tabBarShowLabel: false }} 
+        />
         <Tab.Screen
           name="CameraStack"
           component={CameraStack}

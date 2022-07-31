@@ -31,7 +31,7 @@ export default function StoriesStack() {
       <Stack.Navigator
         nitialRouteName="Resources"
       >
-        <Stack.Screen name="Resources" component={ResourceScreen} options={{ screenOptions }} />
+        <Stack.Screen name="Resources" component={ResourceScreen} options={{ screenOptions, headerShown: false }} />
       </Stack.Navigator>
   )
 }

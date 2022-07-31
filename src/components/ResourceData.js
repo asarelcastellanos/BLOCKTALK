@@ -3,13 +3,15 @@ var resourceData = [
         "key": "1",
         "name": "nonprofit1",
         "description": "description1",
-        "image": "https://place-hold.it/300x500"
+        "image": "https://place-hold.it/300x500",
+        "link": "https://www.google.com/"
     },
     {
         "key": "2",
         "name": "nonprofit2",
         "description": "description2",
-        "image": "https://place-hold.it/300x500"
+        "image": "https://place-hold.it/300x500",
+        "link": "https://www.snapchat.com/"
     },
     {
         "key": "3",
