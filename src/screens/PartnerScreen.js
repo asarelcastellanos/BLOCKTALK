@@ -25,108 +25,66 @@ export default function PartnerScreen() {
         <Text style={styles.text}>Open modal</Text>
       </TouchableOpacity>
       <BottomSheet hasDraggableIcon ref={bottomSheet} height={700}>
-      {/* <ScrollView bounces={false} showsVerticalScrollIndicator={false} style={{height: Dimensions.get("window").height}}> */}
-        {/* <View style = {stylesheet._Scrolling_Content}> */}
-          <View style = {stylesheet._Profile_Information}>
-            <View style = {stylesheet._Rectangle_7}>
-            </View>
+        <View style = {stylesheet._Profile_Information}>
             <View style = {[stylesheet._Title_of_Organization, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-            <Text style = {[stylesheet._Title_of_Organization, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-              Title of Organization
-            </Text>
+				<Text style = {[stylesheet._Title_of_Organization, {width: "100%", position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+				Title of Organization
+				</Text>
             </View>
             <View style = {[stylesheet._Events, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-            <Text style = {[stylesheet._Events, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-              Events
-            </Text>
+				<Text style = {[stylesheet._Events, {position: "absolute", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+				Events
+				</Text>
             </View>
-            <View style = {[stylesheet._Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus_, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-            <Text style = {[stylesheet._Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus_, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
-            </Text>
+            <View style = {[stylesheet.description, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+				<Text style = {[stylesheet.description, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
+				</Text>
             </View>
-            <View style = {stylesheet._Group_1}>
-              <View style = {[stylesheet._Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__2, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-              <Text style = {[stylesheet._Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__2, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
-              </Text>
+            <View style = {stylesheet._Group}>
+              <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+				<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
+				</Text>
               </View>
-              <View style = {stylesheet._Rectangle_10}>
-              </View>
-            </View>
-            <View style = {stylesheet._Group_2}>
-              <View style = {[stylesheet._Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__3, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-              <Text style = {[stylesheet._Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__3, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
-              </Text>
-              </View>
-              <View style = {stylesheet._Rectangle_10_2}>
+              <View style = {stylesheet._Rectangle}>
               </View>
             </View>
-            <View style = {stylesheet._Group_3}>
-              <View style = {[stylesheet._Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__4, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-              <Text style = {[stylesheet._Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__4, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
-              </Text>
+            <View style = {stylesheet._Group}>
+              <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+				<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus. 
+				</Text>
               </View>
-              <View style = {stylesheet._Rectangle_10_3}>
+              <View style = {stylesheet._Rectangle}>
               </View>
             </View>
-          </View>
-          <View style = {stylesheet._Rectangle_11}>
-          </View>
-        {/* </View> */}
-		{/* </ScrollView> */}
+            <View style = {stylesheet._Group}>
+              <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+				<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
+				</Text>
+              </View>
+              <View style = {stylesheet._Rectangle}>
+              </View>
+            </View>
+        </View>
       </BottomSheet>
     </SafeAreaView>
   );
 
 }
 const stylesheet = StyleSheet.create({
-	_Scrolling_Content: {
-		position: "relative",
-		width: Dimensions.get("window").width,
-		height: 539,
-		borderRadius: 0,
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
-		backgroundColor: "rgba(255, 255, 255, 0)",
-		left: 0,
-		top: 0,
-	},
 	_Profile_Information: {
+		alignItems: 'center',
 		position: "absolute",
 		width: 390,
 		height: 652,
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
 		overflow: "hidden",
-		backgroundColor: "rgba(0,0,0,0)",
-	},
-	_Rectangle_7: {
-		position: "absolute",
-		width: 390,
-		height: 652,
-		borderRadius: 20,
-		opacity: 1,
-		left: 0,
-		right: "auto",
-		top: 0,
-		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
-		backgroundColor: "rgba(255, 255, 255, 1)",
 	},
 	_Title_of_Organization: {
+		textAlign: 'center',
+		fontWeight: 'bold',
 		position: "absolute",
 		width: 280,
 		height: 76,
@@ -134,21 +92,14 @@ const stylesheet = StyleSheet.create({
 		right: "auto",
 		top: 33,
 		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
 		// fontFamily: "Graphik",
 		// fontWeight: 600,
 		textDecorationLine: "none",
 		fontSize: 18,
-		color: "rgba(0, 0, 0, 1)",
-		textAlign: "center",
 		textAlignVertical: "top",
-		letterSpacing: 0.1,
 	},
 	_Events: {
+		fontWeight: 'bold',
 		position: "absolute",
 		width: 280,
 		height: 76,
@@ -156,21 +107,26 @@ const stylesheet = StyleSheet.create({
 		right: "auto",
 		top: 183,
 		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
 		// fontFamily: "Graphik",
 		// fontWeight: 600,
 		textDecorationLine: "none",
 		fontSize: 18,
-		color: "rgba(0, 0, 0, 1)",
 		textAlign: "center",
 		textAlignVertical: "top",
-		letterSpacing: 0.1,
 	},
-	_Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus_: {
+	_Group: {
+		position: "relative",
+		width: 370,
+		height: 82,
+		padding: 50,
+		transform: [
+			{translateX: 10},
+			{translateY: 214},
+		],
+		overflow: "hidden",
+	},
+	description: {
+		textAlign: 'center',
 		position: "absolute",
 		width: 354,
 		height: 96,
@@ -178,33 +134,15 @@ const stylesheet = StyleSheet.create({
 		right: "auto",
 		top: 91,
 		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
 		// fontFamily: "Graphik",
 		// fontWeight: 400,
 		textDecorationLine: "none",
 		fontSize: 14,
-		color: "rgba(0, 0, 0, 1)",
 		textAlign: "left",
 		textAlignVertical: "top",
 		letterSpacing: 0.1,
 	},
-	_Group_1: {
-		position: "absolute",
-		width: 370,
-		height: 82,
-		transform: [
-			{translateX: 10},
-			{translateY: 214},
-			{rotate: "0deg"},
-		],
-		overflow: "hidden",
-		backgroundColor: "rgba(0,0,0,0)",
-	},
-	_Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__2: {
+	text_content: {
 		position: "absolute",
 		width: 354,
 		height: 55,
@@ -221,12 +159,11 @@ const stylesheet = StyleSheet.create({
 		// fontWeight: 400,
 		textDecorationLine: "none",
 		fontSize: 14,
-		color: "rgba(0, 0, 0, 1)",
 		textAlign: "left",
 		textAlignVertical: "top",
-		letterSpacing: 0.1,
 	},
-	_Rectangle_10: {
+	
+	_Rectangle: {
 		position: "absolute",
 		width: 370,
 		height: 82,
@@ -243,130 +180,6 @@ const stylesheet = StyleSheet.create({
 			{translateY: 0},
 			{rotate: "0deg"},
 		],
-		backgroundColor: "rgba(0,0,0,0)",
-	},
-	_Group_2: {
-		position: "absolute",
-		width: 370,
-		height: 82,
-		transform: [
-			{translateX: 10},
-			{translateY: 310},
-			{rotate: "0deg"},
-		],
-		overflow: "hidden",
-		backgroundColor: "rgba(0,0,0,0)",
-	},
-	_Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__3: {
-		position: "absolute",
-		width: 354,
-		height: 56,
-		left: 8,
-		right: "auto",
-		top: 16,
-		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
-		// fontFamily: "Graphik",
-		// fontWeight: 400,
-		textDecorationLine: "none",
-		fontSize: 14,
-		color: "rgba(0, 0, 0, 1)",
-		textAlign: "left",
-		textAlignVertical: "top",
-		letterSpacing: 0.1,
-	},
-	_Rectangle_10_2: {
-		position: "absolute",
-		width: 370,
-		height: 82,
-		borderRadius: 20,
-		opacity: 1,
-		borderWidth: 1,
-		borderColor: "rgba(217, 217, 217, 1)",
-		left: 0,
-		right: "auto",
-		top: 0,
-		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
-		backgroundColor: "rgba(0,0,0,0)",
-	},
-	_Group_3: {
-		position: "absolute",
-		width: 370,
-		height: 82,
-		transform: [
-			{translateX: 10},
-			{translateY: 406},
-			{rotate: "0deg"},
-		],
-		overflow: "hidden",
-		backgroundColor: "rgba(0,0,0,0)",
-	},
-	_Lorem_ipsum_dolor_sit_amet__consectetur_adipiscing_elit__Mattis_dui_magna_at_commodo_in_urna__In_eget_viverra_id_diam_posuere_diam_cursus_sodales_lectus__4: {
-		position: "absolute",
-		width: 354,
-		height: 56,
-		left: 8,
-		right: "auto",
-		top: 16,
-		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
-		// fontFamily: "Graphik",
-		// fontWeight: 400,
-		textDecorationLine: "none",
-		fontSize: 14,
-		color: "rgba(0, 0, 0, 1)",
-		textAlign: "left",
-		textAlignVertical: "top",
-		letterSpacing: 0.1,
-	},
-	_Rectangle_10_3: {
-		position: "absolute",
-		width: 370,
-		height: 82,
-		borderRadius: 20,
-		opacity: 1,
-		borderWidth: 1,
-		borderColor: "rgba(217, 217, 217, 1)",
-		left: 0,
-		right: "auto",
-		top: 0,
-		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
-		backgroundColor: "rgba(0,0,0,0)",
-	},
-	_Rectangle_11: {
-		position: "absolute",
-		width: 78,
-		height: 7,
-		borderRadius: 20,
-		opacity: 1,
-		left: 156,
-		right: "auto",
-		top: 7,
-		bottom: "auto",
-		transform: [
-			{translateX: 0},
-			{translateY: 0},
-			{rotate: "0deg"},
-		],
-		backgroundColor: "rgba(217, 217, 217, 1)",
 	},
 });
 
