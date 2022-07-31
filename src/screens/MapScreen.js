@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import MapView, { Callout, CalloutSubview, Marker } from "react-native-maps";
+import MapView, {
+    Callout,
+    CalloutSubview,
+    PROVIDER_GOOGLE,
+    Marker, Circle
+} from "react-native-maps";
 import {
     StyleSheet,
     View,
@@ -7,21 +12,243 @@ import {
     Image,
     Text,
     TouchableOpacity,
+    SafeAreaView,
 } from "react-native";
-
+import Modal  from "react-native-modal";
 import * as Location from "expo-location";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function MapScreen({ navigation }) {
+    var custMap = [
+        {
+            featureType: "administrative.country",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "administrative.land_parcel",
+            elementType: "geometry",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "administrative.province",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "landscape",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "landscape",
+            elementType: "labels.text",
+            stylers: [
+                {
+                    visibility: "simplified",
+                },
+            ],
+        },
+        {
+            featureType: "landscape.man_made",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "landscape.natural",
+            elementType: "geometry",
+            stylers: [
+                {
+                    visibility: "simplified",
+                },
+            ],
+        },
+        {
+            featureType: "landscape.natural.landcover",
+            stylers: [
+                {
+                    visibility: "simplified",
+                },
+            ],
+        },
+        {
+            featureType: "poi.attraction",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "poi.business",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "poi.government",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "poi.medical",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "poi.park",
+            elementType: "geometry",
+            stylers: [
+                {
+                    color: "#5EC96B",
+                },
+            ],
+        },
+        {
+            featureType: "poi.place_of_worship",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "poi.school",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "poi.sports_complex",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "road.arterial",
+            stylers: [
+                {
+                    visibility: "simplified",
+                },
+                {
+                    weight: 0.5,
+                },
+            ],
+        },
+        {
+            featureType: "road.highway",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "road.highway.controlled_access",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "transit",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "transit.line",
+            elementType: "geometry",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "transit.station",
+            elementType: "geometry",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "transit.station.airport",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "transit.station.bus",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "transit.station.rail",
+            stylers: [
+                {
+                    visibility: "off",
+                },
+            ],
+        },
+        {
+            featureType: "water",
+            stylers: [
+                {
+                    color: "#8AAEF4",
+                },
+            ],
+        },
+    ];
+    const [activeGreen, setActiveGreen] = useState(false);
+    const [greenView, setGreenView] = useState([]);
     const parks = [
         {
-            name: "Echo Park",
+            name: "Mac Arthur Park",
             latitude: 34.075493,
             longitude: -118.260597,
         },
         {
-            name: "Reynier Park",
+            name: "Bellevue Park",
             latitude: 34.0355665,
             longitude: -118.3864665,
         },
@@ -75,11 +302,14 @@ export default function MapScreen({ navigation }) {
     let text = "Waiting...";
     text = JSON.stringify(location);
 
+    const [profile, setProfile] = useState(false);
     return (
         <View style={styles.container}>
             <MapView
                 style={styles.map}
                 region={currentRegion}
+                provider={PROVIDER_GOOGLE}
+                customMapStyle={greenView}
             >
                 <Marker
                     coordinate={currentRegion}
@@ -98,26 +328,27 @@ export default function MapScreen({ navigation }) {
                         image={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/parkIcon.png")}
                         onPress={() => setParkName(item.name)}
                         key={item.name}
-                        
                     >
-                        <Callout>
+                        <Callout tooltip>
                             <CalloutSubview
-                            onPress = {() => navigation.navigate("ChatStack")}>
+                                onPress={() => {
+                                    navigation.navigate("Stories");
+                                }}
+                            >
                                 <Text style={styles.titleText}>{parkName}</Text>
                                 <TouchableOpacity
                                     style={styles.appButtonContainer}
-                                    
                                 >
-                            
-                            
                                     <Text style={styles.appButtonText}>
                                         Events Schedule
                                     </Text>
                                 </TouchableOpacity>
-                                </CalloutSubview>
-                                <CalloutSubview
-                                onPress = {() => navigation.navigate("Stories")}>
-                            
+                            </CalloutSubview>
+                            <CalloutSubview
+                                onPress={() => {
+                                  console.log(parkName)
+                                  navigation.navigate("ChatStack")}}
+                            >
                                 <TouchableOpacity
                                     style={styles.appButtonContainer}
                                 >
@@ -125,12 +356,32 @@ export default function MapScreen({ navigation }) {
                                         Community Chat
                                     </Text>
                                 </TouchableOpacity>
-                                </CalloutSubview>
+                            </CalloutSubview>
                         </Callout>
                     </Marker>
                 ))}
+            {activeGreen && <Circle
+              center={currentRegion}
+              radius={1500}
+              fillColor={"rgba(200, 300, 200, 0.6)"}
+              strokeColor = 'green'
+              strokeWidth={3}
+            />}
             </MapView>
-
+            <View style = {styles.mapLayers}>
+                    <TouchableOpacity style={styles.containerLayer}
+                                      onPress = {()=>{
+                                               setActiveGreen(true);
+                                               setGreenView(custMap)}}>
+                        <Text style={styles.layerText}>GV</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.containerLayerTwo}
+                                      onPress = {()=>{
+                                                      setActiveGreen(false);
+                                                      setGreenView([])}}>
+                        <Text style={styles.layerText}>RM</Text>
+                    </TouchableOpacity>
+            </View>
             <View style={styles.locationContainer}>
                 <TouchableOpacity
                     style={styles.userLocation}
@@ -149,10 +400,15 @@ export default function MapScreen({ navigation }) {
             </View>
             <View style={styles.bitmojiContainer}>
                 <View style={styles.myBitmoji}>
+                   <TouchableOpacity
+                    onPress = {()=> setProfile(true)}
+                    >
                     <Image
                         style={styles.bitmojiImage}
                         source={require("../../assets/snapchat/personalBitmoji.png")}
+                        
                     />
+                    </TouchableOpacity>
                     <View style={styles.bitmojiTextContainer}>
                         <Text style={styles.bitmojiText}>My Bitmoji</Text>
                     </View>
@@ -175,7 +431,13 @@ export default function MapScreen({ navigation }) {
                         <Text style={styles.bitmojiText}>Friends</Text>
                     </View>
                 </View>
+                
             </View>
+          {
+            profile && <View>
+              <Text>profile</Text>
+            </View>
+          }
         </View>
     );
 }
@@ -248,24 +510,64 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     appButtonContainer: {
+        elevation: 8,
+        backgroundColor: "#009688",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+    },
+    containerLayer: {
       elevation: 8,
       backgroundColor: "#009688",
-      borderRadius: 10,
-      paddingVertical: 10,
+      borderRadius: 50,
+      paddingVertical: 15,
       paddingHorizontal: 12,
+      width: 40,
+      height: 40,
+      borderColor: 'white'
   },
-  appButtonText: {
-      fontSize: 18,
-      color: "#fff",
-      fontWeight: "bold",
-      alignSelf: "center",
-      textTransform: "uppercase",
-  },
-  titleText: {
-      fontSize: 18,
-      color: "#000",
-      fontWeight: "bold",
-      alignSelf: "center",
-      textTransform: "uppercase",
-  },
+  containerLayerTwo: {
+    elevation: 8,
+    backgroundColor: "blue",
+    borderRadius: 50,
+    paddingVertical: 15,
+    paddingHorizontal: 12,
+    width: 40,
+    height: 40,
+    borderColor: 'white'
+},
+  layerText: {
+    fontSize: 8,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase",
+},
+    appButtonText: {
+        fontSize: 18,
+        color: "#fff",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase",
+    },
+    titleText: {
+        fontSize: 18,
+        color: "#000",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase",
+    },
+    mapLayers:{
+       
+        position: 'absolute',//use absolute position to show button on top of the map
+        top: '10%', //for center align
+        right: '5%',
+        alignSelf: 'flex-end', //for align to right
+        backgroundColor: "transparent",
+        borderRadius: 15,
+        width: 50,
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });

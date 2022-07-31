@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import React, { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import db from "../../firebase";
 
