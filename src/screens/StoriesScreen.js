@@ -1,6 +1,6 @@
 import PartnerScreen from "../screens/PartnerScreen";
 import StoriesOverlay from "./StoriesOverlay";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { StyleSheet } from "react-native";
 import {
   NativeBaseProvider,
