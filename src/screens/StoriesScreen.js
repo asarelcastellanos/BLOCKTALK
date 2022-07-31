@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import React, { useRef }from "react";
-import { View, StyleSheet, Button} from "react-native";
-=======
 import carrot from "../../assets/stories-nav-bar/down_carrot.png";
 import bookmark from "../../assets/stories-nav-bar/charm_bookmark.png";
 import threeDots from "../../assets/stories-nav-bar/bi_three-dots-vertical.png";
@@ -10,7 +6,6 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
 import Modal from "react-native-modal";
->>>>>>> 5df48457c93408e3ee6b61ddb02e666f73558f2d
 import {
   NativeBaseProvider,
   Container,
@@ -20,31 +15,12 @@ import {
   Text,
   Circle,
   ScrollView,
-<<<<<<< HEAD
-} from "native-base";
-
-import PartnerScreen from "../screens/PartnerScreen";
-
-export default function StoriesScreen({ navigation }) {
-  // Needed in order to use .show()
-  const bottomSheet = useRef();
-
-  function handleClick() {
-    // 👇️ update input value
-    bottomSheet.current.value = 'Hello World';
-
-    // 👇️ access input value
-    console.log(inputRef.current.value);
-  }
-
-  return (
-    <NativeBaseProvider>
-      <ScrollView showsVerticalScrollIndicator={false}>
-=======
   Pressable,
   Image,
   Divider,
 } from "native-base";
+
+import PartnerScreen from "../screens/PartnerScreen";
 
 export default function StoriesScreen() {
   // Set modal visibility
@@ -55,20 +31,15 @@ export default function StoriesScreen() {
       {/* ScrollView enables scrolling. Scroll bar indicator is turned off */}
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Friends section */}
->>>>>>> 5df48457c93408e3ee6b61ddb02e666f73558f2d
         <Container style={styles.friends}>
           <Text bold fontSize="md">
             Friends
           </Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={3} justifyContent="center">
-<<<<<<< HEAD
-              <Circle size="74px" bg="light.300" />
-=======
               <Pressable onPress={() => setModalVisible(true)}>
                 <Circle size="74px" bg="light.300" />
               </Pressable>
->>>>>>> 5df48457c93408e3ee6b61ddb02e666f73558f2d
               <Circle size="74px" bg="light.300" />
               <Circle size="74px" bg="light.300" />
               <Circle size="74px" bg="light.300" />
@@ -78,10 +49,7 @@ export default function StoriesScreen() {
           </ScrollView>
         </Container>
 
-<<<<<<< HEAD
-=======
         {/* Hugs section */}
->>>>>>> 5df48457c93408e3ee6b61ddb02e666f73558f2d
         <Container style={styles.hugs}>
           <Text bold fontSize="md">
             HUGS
@@ -103,23 +71,16 @@ export default function StoriesScreen() {
           </ScrollView>
         </Container>
 
-<<<<<<< HEAD
-=======
         {/* Discover section */}
->>>>>>> 5df48457c93408e3ee6b61ddb02e666f73558f2d
         <Container style={styles.discover}>
           <Text bold fontSize="md">
             Discover
           </Text>
           <VStack space={3}>
             <HStack space={3}>
-<<<<<<< HEAD
               <Center h="263" w="177" bg="light.300" rounded="2xl">
                 <PartnerScreen/>
               </Center>
-=======
-              <Center h="263" w="177" bg="light.300" rounded="2xl" />
->>>>>>> 5df48457c93408e3ee6b61ddb02e666f73558f2d
               <Center h="263" w="177" bg="light.300" rounded="2xl" />
             </HStack>
 
@@ -130,8 +91,6 @@ export default function StoriesScreen() {
           </VStack>
         </Container>
       </ScrollView>
-<<<<<<< HEAD
-=======
 
       {/* Story modal/overlay */}
       {/* Dismiss modal/overlay on swipe up */}
@@ -187,7 +146,6 @@ export default function StoriesScreen() {
           </View>
         </Modal>
       </GestureRecognizer>
->>>>>>> 5df48457c93408e3ee6b61ddb02e666f73558f2d
     </NativeBaseProvider>
   );
 }
@@ -206,8 +164,6 @@ const styles = StyleSheet.create({
   discover: {
     margin: 16,
   },
-<<<<<<< HEAD
-=======
 
   modalView: {
     marginTop: -30,
@@ -235,5 +191,4 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 725,
   },
->>>>>>> 5df48457c93408e3ee6b61ddb02e666f73558f2d
 });
