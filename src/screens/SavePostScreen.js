@@ -69,6 +69,9 @@ export default function SavePostScreen({ navigation, route }) {
     }
   ]
 
+
+
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -87,7 +90,7 @@ export default function SavePostScreen({ navigation, route }) {
 
         <View style={styles.categoryContainer}>
           <Text>Select categories</Text>
-          <Button title="Education"/>
+
             <FlatList 
               style={styles.listStyle}
               keyExtractor={(key) => {
@@ -98,10 +101,10 @@ export default function SavePostScreen({ navigation, route }) {
               showsHorizontalScrollIndicator={false}
               data={names}
               renderItem={({item}) => {
-                console.log(item.name);
                 return <Text style={styles.textStyle}>{item.name}</Text>
               }}
             />
+
         </View>
 
         
@@ -127,8 +130,10 @@ export default function SavePostScreen({ navigation, route }) {
         </View>
       </ScrollView>
     </View>
-  )
+   )
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -175,9 +180,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
   },
+  textStyle: {
+    fontSize: 15,
+    padding: 10,
+    backgroundColor: "gray",
+    margin: 5,
+    color: "white",
+  },
   listStyle: {
     textAlign: "center",
-    margin: 20,
+    margin: 5,
     padding: 5,
   },
 });
