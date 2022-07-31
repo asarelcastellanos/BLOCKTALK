@@ -1,6 +1,6 @@
 import PartnerScreen from "../screens/PartnerScreen";
 import StoriesOverlay from "./StoriesOverlay";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { StyleSheet } from "react-native";
 import {
   NativeBaseProvider,
@@ -14,17 +14,6 @@ import {
 } from "native-base";
 
 export default function StoriesScreen({ navigation }) {
-  // Needed in order to use .show()
-  const bottomSheet = useRef();
-
-  function handleClick() {
-    // 👇️ update input value
-    bottomSheet.current.value = "Hello World";
-
-    // 👇️ access input value
-    console.log(inputRef.current.value);
-  }
-
   return (
     <NativeBaseProvider>
       {/* ScrollView enables scrolling. Scroll bar indicator is turned off */}
