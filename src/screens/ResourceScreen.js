@@ -9,36 +9,18 @@ import resourceData from '../components/ResourceData';
 class FlatListItem extends Component {
   render() {
     return (
-      <View style={{
-        flex: 1,
-        flexDirection: 'column',
-      }}>
-          <View style={{
-            flex: 1,
-            flexDirection: 'row',
-            // backgroundColor: this.props.index % 2 == 0 ? 'yellow' : 'red'
-            backgroundColor: 'pink'
-          }}>
+      <View style={styles.itemSeparator}>
+          <View style={styles.oneCard}>
             <Image
               source={{uri: this.props.item.image}}
-              style={{width:120, height: 150, margin: 5}}
+              style={styles.image}
             >
             </Image>
-            <View style={{
-              flex: 1,
-              flexDirection: 'column',
-            }}>
-              <Text style={styles.flatListItem}>{this.props.item.name}</Text>
-              <Text style={styles.flatListItem}>{this.props.item.description}</Text>
+            <View style={styles.column}>
+              <Text style={styles.title}>{this.props.item.name}</Text>
+              <Text style={styles.description}>{this.props.item.description}</Text>
             </View>
           </View>
-          <View style={{
-            height: 3,
-            backgroundColor: 'white'
-          }}>
-
-          </View>
-
       </View>
 
     );
@@ -49,6 +31,7 @@ export default class ResourceScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.header}>Resources</Text>
         <FlatList
           data={resourceData}
           renderItem={({item, index}) => {
@@ -70,13 +53,52 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: Dimensions.get('window').height,
   },
-  flatListItem: {
-    // marginTop: 24,
+  title: {
     marginVertical: 8,
     marginHorizontal: 16,
     padding: 15,
-    // backgroundColor: 'white',
     fontSize: 24,
-    color: '#fff'
+    fontFamily: 'Avenir Next',
+    fontWeight: 'bold'
+  },
+  description: {
+    marginVertical: 8,
+    marginHorizontal: 16,
+    padding: 15,
+    fontSize: 15,
+    fontFamily: 'Avenir Next'
+  },
+  itemSeparator: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  oneCard: {
+    flex: 1,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    flexDirection: 'row',
+    backgroundColor: 'pink',
+    borderRadius: 10,
+  },
+  column: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  image: {
+    // width: 120, 
+    // height: 150, 
+    // margin: 5,
+
+    // width: '100%',
+    // height: undefined,
+    aspectRatio: 1,
+  },
+  header: {
+    padding: 5,
+    marginTop: 10,
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+    fontFamily: 'Avenir Next',
   }
 })
