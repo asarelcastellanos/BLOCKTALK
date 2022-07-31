@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
 import Modal from "react-native-modal";
+import { Video, AVPlaybackStatus } from "expo-av";
 import {
   Center,
   VStack,
