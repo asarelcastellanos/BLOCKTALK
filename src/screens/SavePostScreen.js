@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, Button, TextInput, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { View, Image, Text, StyleSheet, Button, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useIsFocused } from '@react-navigation/native';
 import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
 import { collection, getDoc, addDoc, serverTimestamp } from 'firebase/firestore';
 import db from '../../firebase';
@@ -16,8 +17,9 @@ export default function SavePostScreen({ navigation, route }) {
 
   const { user } = useAuthentication();
   const media = route.params.source;
+  const isFocused = useIsFocused();
   
-  async function saveMediaToStorage() {
+  const saveMediaToStorage = async () => {
     const storageRef = ref(getStorage(), `posts/${uuid()}.jpg`);
     const img = await fetch(media);
     const bytes = await img.blob();
