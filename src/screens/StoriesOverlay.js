@@ -33,8 +33,8 @@ export default function StoriesOverlay() {
         isVisible={isModalVisible}
         animationIn="slideInDown"
         animationOut="slideOutUp"
-        animationInTiming={150}
-        animationOutTiming={150}
+        animationInTiming={250}
+        animationOutTiming={250}
         backdropTransitionOutTiming={0}
       >
         <View style={styles.modalView}>
