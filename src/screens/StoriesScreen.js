@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useRef }from "react";
+import { View, StyleSheet, Button} from "react-native";
 import {
   NativeBaseProvider,
   Container,
@@ -11,7 +11,9 @@ import {
   ScrollView,
 } from "native-base";
 
-export default function StoriesScreen() {
+import PartnerScreen from "../screens/PartnerScreen";
+
+export default function StoriesScreen({ navigation }) {
   // Needed in order to use .show()
   const bottomSheet = useRef();
 
@@ -69,7 +71,9 @@ export default function StoriesScreen() {
           </Text>
           <VStack space={3}>
             <HStack space={3}>
-              <Center h="263" w="177" bg="light.300" rounded="2xl" />
+              <Center h="263" w="177" bg="light.300" rounded="2xl">
+                <PartnerScreen/>
+              </Center>
               <Center h="263" w="177" bg="light.300" rounded="2xl" />
             </HStack>
 
