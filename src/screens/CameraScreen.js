@@ -53,6 +53,7 @@ export default function CameraScreen({ navigation, focused }) {
   async function takePhoto() {
     console.log("Just took photo!");
     let options = {
+      aspect: [16, 9],
       quality: 1,
       base64: true,
       exif: false,
