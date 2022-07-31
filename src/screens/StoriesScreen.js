@@ -16,8 +16,6 @@ import {
   Circle,
   ScrollView,
   Pressable,
-  Button,
-  Fab,
   Image,
   Divider,
 } from "native-base";
