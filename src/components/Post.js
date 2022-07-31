@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import { Video } from 'expo-av';
 
-export default function Post({ uri }) {
+export default function Post({ url, type }) {
   // const renderItem = ({item}) => {
   //   return (
   //     <View style={styles.container}>
@@ -17,16 +17,23 @@ export default function Post({ uri }) {
           // data={array}
           renderItem={renderItem}
         /> */}
-        <Video
-          ref={videoRef}
-          style={styles.videoContainer}
-          // resizeMode={Video.RESIZE_MODE_COVER}
-          shouldPlay={true}
-          isMuted={true}
-          isLooping={true}
-          source={{uri: 'https://firebasestorage.googleapis.com/v0/b/fosteryouthpractice.appspot.com/o/posts%2Fpexels-cup-of-couple-7657365.mp4?alt=media&token=946aead2-9306-4d00-a8eb-1cd0b375d745'}}
+        {
+        type === 'video/mp4'?
+          <Video
+            ref={videoRef}
+            style={styles.videoContainer}
+            // resizeMode={Video.RESIZE_MODE_COVER}
+            isMuted={true}
+            source={{uri: url}}
+          />
+        :<Image
+          style={styles.image}
+          source={{uri: url}}
         />
-        
+        }
+        <Image
+          source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+        />
     </View>
   )
 }
@@ -42,5 +49,9 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignSelf: 'center',
     // height: 400,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'contain'
   }
 })

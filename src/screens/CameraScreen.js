@@ -38,6 +38,7 @@ export default function CameraScreen({ navigation, focused }) {
 
   async function checkGallery() {
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      // mediaTypes: ImagePicker.MediaTypeOptions.Videos,
       aspect: [16, 9],
       quality: 1
     });
