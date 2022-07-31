@@ -47,7 +47,6 @@ export default function StoriesScreen({ navigation }) {
           </Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={3} justifyContent="center">
-              <Circle size="74px" bg="light.300" />
               <Pressable onPress={() => setModalVisible(true)}>
                 <Circle size="74px" bg="light.300" />
               </Pressable>
