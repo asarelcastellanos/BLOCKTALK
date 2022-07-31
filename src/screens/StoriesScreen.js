@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Modal } from "react-native";
+import { View, StyleSheet } from "react-native";
+import GestureRecognizer from "react-native-swipe-gestures";
+import Modal from "react-native-modal";
 import {
   NativeBaseProvider,
   Container,
@@ -10,18 +12,21 @@ import {
   Circle,
   ScrollView,
   Pressable,
-  FormControl,
-  Input,
   Button,
   Fab,
 } from "native-base";
-// import { Bubble } from "react-native-gifted-chat";
 
 export default function StoriesScreen() {
-  const [modalVisible, setModalVisible] = useState(false);
+  // Set modal visibility
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <NativeBaseProvider>
+      {/* ScrollView enables scrolling. Scroll bar indicator is turned off */}
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Friends section */}
         <Container style={styles.friends}>
@@ -83,21 +88,26 @@ export default function StoriesScreen() {
         </Container>
       </ScrollView>
 
-      {/* Story overlay when you click on a friend */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
+      {/* Story modal/overlay */}
+      {/* Dismiss modal/overlay on swipe up */}
+      <GestureRecognizer
+        style={{ flex: 1 }}
+        onSwipeUp={() => setModalVisible(false)}
       >
-        <View style={styles.centeredView}>
+        <Modal
+          style={styles.modalParent}
+          isVisible={isModalVisible}
+          animationIn="slideInDown"
+          animationOut="slideOutUp"
+          animationInTiming={150}
+          animationOutTiming={150}
+          backdropTransitionOutTiming={0}
+        >
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text>Hello!</Text>
           </View>
-        </View>
-      </Modal>
+        </Modal>
+      </GestureRecognizer>
     </NativeBaseProvider>
   );
 }
@@ -117,24 +127,12 @@ const styles = StyleSheet.create({
     margin: 16,
   },
 
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
   modalView: {
-    // width: 400,
-
-    backgroundColor: "#000",
-    borderRadius: 20,
-    // padding: 35,
-    alignItems: "center",
-  },
-
-  modalText: {
+    marginTop: -30,
+    width: 450,
+    flex: 1,
+    alignSelf: "center",
     color: "#fff",
-    marginBottom: 15,
-    textAlign: "center",
+    backgroundColor: "#000",
   },
 });
