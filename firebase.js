@@ -13,7 +13,7 @@ const firebaseConfig = {
   storageBucket: "snaphugs-f43d4.appspot.com",
   messagingSenderId: "383651216479",
   appId: "1:383651216479:web:03f6ee7f608b2dc80fefea",
-  measurementId: "G-15L5JE6L2P"
+  measurementId: "G-15L5JE6L2P",
 };
 
 // Initialize Firebase

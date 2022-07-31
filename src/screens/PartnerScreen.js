@@ -4,7 +4,7 @@ import BottomSheet from "react-native-gesture-bottom-sheet";
 import { Svg, Path } from "react-native-svg";
 
 
-export default function StoriesScreen() {
+export default function PartnerScreen() {
   // Needed in order to use .show()
   const bottomSheet = useRef();
 
