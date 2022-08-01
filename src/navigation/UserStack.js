@@ -44,7 +44,9 @@ export default function UserStack() {
     };
 
     return (
-        <NavigationContainer>
+        <NavigationContainer
+          
+        >
             <Tab.Navigator
                 activeColor="#f0edf6"
                 inactiveColor="#3e2465"

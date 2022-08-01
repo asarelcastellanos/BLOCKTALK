@@ -16,7 +16,7 @@ export default function ChatScreen({ route }) {
 
     useEffect(() => {
         let unsubscribeFromNewSnapshots = onSnapshot(
-            doc(db, "chats", ""),
+            doc(db, "chats", "Mac Arthur Park"),
             (snapshot) => {
                 console.log( user, "New Snapshot! ", snapshot.data().messages);
                 setMessages(snapshot.data().messages);
