@@ -3,26 +3,28 @@ import {
   Text,
   View,
   SafeAreaView,
+  Pressable,
   Button,
   Image,
 } from "react-native";
-import { useEffect, useRef, useState } from "react";
+
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { shareAsync } from 'expo-sharing';
-import * as ImagePicker from 'expo-image-picker';
+import { shareAsync } from "expo-sharing";
+import * as ImagePicker from "expo-image-picker";
 
 import CameraActions from "../components/CameraActions";
 import CameraOptions from "../components/CameraOptions";
+import ScanResults from "../components/ScanResults";
 
 export default function CameraScreen({ navigation, focused }) {
   let cameraRef = useRef();
+  const scanResultsRef = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
   const [type, setType] = useState(CameraType.back);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
-
-  const [image, setImage] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -34,10 +36,18 @@ export default function CameraScreen({ navigation, focused }) {
     })();
   }, []);
 
+  const handlePresentModalPress = useCallback(() => {
+    scanResultsRef.current.present();
+  }, []);
+
   if (hasCameraPermission === undefined) {
-    return <Text>Requesting permissions...</Text>
+    return <Text>Requesting permissions...</Text>;
   } else if (!hasCameraPermission) {
-    return <Text>Permission for camera not granted. Please change this in settings.</Text>
+    return (
+      <Text>
+        Permission for camera not granted. Please change this in settings.
+      </Text>
+    );
   }
 
   function flipCamera() {
@@ -77,8 +87,7 @@ export default function CameraScreen({ navigation, focused }) {
     MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
       setPhoto(undefined);
     });
-  };
-
+  }
 
   if (photo) {
     let sharePic = () => {
@@ -104,8 +113,13 @@ export default function CameraScreen({ navigation, focused }) {
   return (
     <>
       <Camera style={styles.camera} type={type} ref={cameraRef} />
+      <Pressable
+        style={styles.scanButton}
+        onLongPress={handlePresentModalPress}
+      />
       <CameraOptions flipCamera={flipCamera} />
       <CameraActions checkGallery={checkGallery} takePhoto={takePhoto} />
+      <ScanResults scanResultsRef={scanResultsRef} />
     </>
   );
 }
@@ -119,5 +133,15 @@ const styles = StyleSheet.create({
   preview: {
     height: "80%",
     width: "100%",
+  },
+
+  scanButton: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    height: "100%",
+    width: "100%",
+    // backgroundColor: "gray",
+    color: "black",
   },
 });
