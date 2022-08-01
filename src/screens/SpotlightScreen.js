@@ -22,6 +22,7 @@ import {
   Button
 } from "native-base";
 
+import StoriesOverlay from "./StoriesOverlay";
 import PartnerScreen from "./PartnerScreen";
 
 export default function SpotlightScreen({ navigation }) {
@@ -49,9 +50,9 @@ export default function SpotlightScreen({ navigation }) {
           </Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={3} justifyContent="center">
-              <Pressable onPress={() => setModalVisible(true)}>
-                <Circle size="74px" bg="light.300" />
-              </Pressable>
+              <Circle size="74px" bg="light.300">
+                <StoriesOverlay />
+              </Circle>
               <Circle size="74px" bg="light.300" />
               <Circle size="74px" bg="light.300" />
               <Circle size="74px" bg="light.300" />
@@ -89,62 +90,6 @@ export default function SpotlightScreen({ navigation }) {
           </Center>
         </Container>
       </ScrollView>
-
-
-      {/* Story modal/overlay */}
-      {/* Dismiss modal/overlay on swipe up */}
-      <GestureRecognizer
-        style={{ flex: 1 }}
-        onSwipeUp={() => setModalVisible(false)}
-      >
-        <Modal
-          isVisible={isModalVisible}
-          animationIn="slideInDown"
-          animationOut="slideOutUp"
-          animationInTiming={150}
-          animationOutTiming={150}
-          backdropTransitionOutTiming={0}
-        >
-          <View style={styles.modalView}>
-            <HStack style={styles.modalNav}>
-              <HStack space={4} alignItems="center">
-                <Pressable onPress={() => setModalVisible(false)}>
-                  <Image source={carrot} alt="carrot"></Image>
-                </Pressable>
-                <Divider thickness="2" orientation="vertical" />
-                <VStack>
-                  <Text style={styles.modalViewText} bold fontSize="xs">
-                    Insert Name Here
-                  </Text>
-                  <Text style={styles.modalViewText} fontSize="xs">
-                    Title
-                  </Text>
-                </VStack>
-              </HStack>
-
-              <HStack style={styles.modalNavRightSide} space={5}>
-                <Pressable onPress={() => setModalVisible(false)}>
-                  <Image source={bookmark} alt="bookmark"></Image>
-                </Pressable>
-                <Pressable onPress={() => setModalVisible(false)}>
-                  <Image source={threeDots} alt="menu"></Image>
-                </Pressable>
-              </HStack>
-            </HStack>
-
-            <Pressable
-              style={styles.modalMoreButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Center h="35" w="70" bg="white" rounded="3xl">
-                <Text bold fontSize="sm">
-                  More
-                </Text>
-              </Center>
-            </Pressable>
-          </View>
-        </Modal>
-      </GestureRecognizer>
     </NativeBaseProvider>
   );
 }
