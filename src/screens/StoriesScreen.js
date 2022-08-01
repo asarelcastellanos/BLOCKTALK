@@ -66,9 +66,7 @@ export default function StoriesScreen({ navigation }) {
           </Text>
           <VStack space={3}>
             <HStack space={3}>
-              <Center h="263" w="177" bg="light.300" rounded="2xl">
-                <PartnerScreen />
-              </Center>
+              <Center h="263" w="177" bg="light.300" rounded="2xl" />
               <Center h="263" w="177" bg="light.300" rounded="2xl" />
             </HStack>
 
