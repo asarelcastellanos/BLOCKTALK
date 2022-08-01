@@ -3,8 +3,12 @@ import { View, Image, StyleSheet, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native';
 import { Button } from "@rneui/themed";
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function SpotlightScreen() {
+  // const Stack = createNativeStackNavigator();
+
   return (
         <View style={styles.container}>
           <Text style={styles.textTitle}>Welcome</Text>
@@ -15,18 +19,13 @@ export default function SpotlightScreen() {
             source={require("../../assets/img/img_4.png")} 
             />   
           </View>     
-          <Button size="sm" style={styles.btn}>Recipes</Button>
-          <Button size="sm" style={styles.btn}>"How To" Tutorials</Button>
-          <Button size="sm" style={styles.btn}>Snack Facts</Button>
-        {/* <TouchableOpacity style={styles.btn}>
-          <Text>Recipes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text>"How To" Tutorials</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text>Snack Facts</Text>
-        </TouchableOpacity> */}
+            <Button size="sm" style={styles.btn}>Recipes</Button>
+            <Button size="sm" style={styles.btn}>"How To" Tutorials</Button>
+            <Button size="sm" style={styles.btn}>Snack Facts</Button>
+          {/* <NavigationContainer>
+            <Stack.Navigator>
+            </Stack.Navigator>
+          </NavigationContainer> */}
         </View>
   )
 }
@@ -34,6 +33,7 @@ const styles= StyleSheet.create({
   container:{
     flex: 1,
     alignItems: "center",
+    backgroundColor: "black",
   },
   imgSection: {
     flex: 3
