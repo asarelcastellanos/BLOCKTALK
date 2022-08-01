@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button } from 'react-native';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import Feed from '../components/Feed';
 import db from "../../firebase";
 import { StatusBar } from "expo-status-bar";
+import { useIsFocused } from '@react-navigation/native';
+import { enableIndexedDbPersistence } from 'firebase/firestore';
 
 export default function StoriesScreen({ navigation }) {
   const [posts, setPosts] = useState([]);
@@ -49,6 +51,7 @@ export default function StoriesScreen({ navigation }) {
           />
         : <></>
       }
+      {/* <Button title="Go Back Home!" onPress={() => navigation.navigate('HomeResourceScreen')} /> */}
       <StatusBar/>
     </View>
   )

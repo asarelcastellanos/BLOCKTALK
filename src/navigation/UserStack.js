@@ -7,6 +7,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { StatusBar } from 'expo-status-bar';
 
 import { getAuth, signOut } from "firebase/auth";
+
+// Screens
+import HomeResourceScreen from "../screens/HomeResourceScreen";
+
 // Stacks
 import CameraStack from "../navigation/CameraStack";
 import StoriesStack from "../navigation/StoriesStack";
@@ -89,19 +93,20 @@ export default function UserStack() {
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
         <Tab.Screen
-          name="ResourceStack"
-          component={ResourceStack}
-          options={{ headerShown: false, tabBarShowLabel: false }} 
+          name="StoriesStack"
+          component={StoriesStack}
+          options={{ headerShown: false, tabBarShowLabel: false }}
         />
+      
         <Tab.Screen
           name="CameraStack"
           component={CameraStack}
           options={{ headerShown: false, tabBarShowLabel: false }} 
         />
         <Tab.Screen
-          name="StoriesStack"
-          component={StoriesStack}
-          options={{ headerShown: false, tabBarShowLabel: false }}
+          name="ResourceStack"
+          component={ResourceStack}
+          options={{ headerShown: false, tabBarShowLabel: false }} 
         />
         
         {/* <Tab.Screen
