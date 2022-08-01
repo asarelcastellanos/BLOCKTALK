@@ -110,12 +110,12 @@ export default function UserStack() {
           component={CameraScreen}
           options={{...screenOptions, headerShown: false}} 
         />
-        <Tab.Screen name="StoriesStack" component={StoriesStack} options={{ headerShown: false, tabBarShowLabel: false }}/>
-        {/* <Tab.Screen
+        {/* <Tab.Screen name="StoriesStack" component={StoriesStack} options={{ headerShown: false, tabBarShowLabel: false }}/> */}
+        <Tab.Screen
           name="Stories"
           component={StoriesScreen}
           options={screenOptions}
-        /> */}
+        />
         <Tab.Screen
           name="Spotlight"
           component={SpotlightScreen}
