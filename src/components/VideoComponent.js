@@ -26,10 +26,6 @@ export default function VideoComponent() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    // justifyContent: "center",
-  },
   video: {
     alignSelf: "center",
     marginTop: 10,
