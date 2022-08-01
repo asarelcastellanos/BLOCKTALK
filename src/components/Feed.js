@@ -1,14 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, Dimensions } from 'react-native';
 import { Video } from 'expo-av';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useNavigation } from '@react-navigation/native'
 
-export default function Post({ url, type }) {
+const WIDTH = Dimensions.get('window').width;
+
+export default function Feed({ url, type }) {
   const videoRef = useRef(null);
+  const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('Post', { url, type })}
+    >
     {
       (type === 'video/mp4')?
         <Video
@@ -24,19 +31,21 @@ export default function Post({ url, type }) {
         source={{uri: url}}
         />
     }
-      <Ionicons name={"play"} color={"white"} size={40}style={styles.playButton}/>
+      <Ionicons name={"play"} color={"white"} size={40} style={styles.playButton}/>
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
     margin: 5,
-    width: 180,
-    height: 320,
+    width: WIDTH/2-30,
+    height: 16*(WIDTH/2-30)/9,
     borderRadius: 10,
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    // alignItems: 'center',
+    // flex: 1,
+    // height: 1,
   },
   videoContainer: {
     flex: 1,

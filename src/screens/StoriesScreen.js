@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
-import Post from '../components/Post';
+import Feed from '../components/Feed';
 import db from "../../firebase";
 import { StatusBar } from "expo-status-bar";
 
@@ -30,16 +30,20 @@ export default function StoriesScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>ClubHouse</Text>
+      <View style={styles.header}>
+        <Text style={{fontWeight: 'bold', fontSize: 30}}>Club</Text>
+        <Text style={{fontSize: 30}}>House</Text>
+      </View>
       {
         (posts.length)?
           <FlatList
             data={posts}
             renderItem={(post, index) =>{
               return (
-                <Post url={post.item.downloadURL} type={post.item.contentType} key={index}/>
+                <Feed url={post.item.downloadURL} type={post.item.contentType} key={index}/>
               )
             }}
+            // keyExtractor={(post) => post.fileName}
             numColumns={2}
             style={styles.list}
           />
@@ -56,15 +60,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   header: {
+    flexDirection: 'row',
+    alignSelf: 'center',
     marginTop: 50,
     paddingTop: 10,
     textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
     fontFamily: 'Avenir Next',
   },
   list :{
-    flex: 1,
+    // flex: 1,
     paddingHorizontal: 20,
   }
 })

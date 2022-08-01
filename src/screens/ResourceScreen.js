@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Avenir Next',
     fontWeight: 'bold',
-    paddingBottom: 5,
+    paddingBottom: 4,
   },
   description: {
     fontSize: 14,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold',
-    fontFamily: 'Avenir Next',
+    // fontFamily: 'Avenir Next',
   },
   slogan: {
     paddingBottom: 10,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   categoryContainer: {
     flexDirection: 'row',
-    marginTop: 4,
+    marginTop: 6,
   },
   category: {
     marginRight: 5,

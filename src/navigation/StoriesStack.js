@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import StoriesScreen from '../screens/StoriesScreen';
-
+import PostScreen from '../screens/PostScreen';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +31,7 @@ export default function StoriesStack() {
   return (
       <Stack.Navigator>
         <Stack.Screen name="Stories" component={StoriesScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Post" component={PostScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
   )
 }
