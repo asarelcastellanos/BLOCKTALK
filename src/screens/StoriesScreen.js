@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from '
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import Post from '../components/Post';
 import db from "../../firebase";
+import { StatusBar } from "expo-status-bar";
 
 export default function StoriesScreen({ navigation }) {
   const [posts, setPosts] = useState([]);
@@ -14,26 +15,37 @@ export default function StoriesScreen({ navigation }) {
     });
   }
   
+  // useEffect(() => {
+  //   let unsubscribeFromNewSnapshots = onSnapshot(collection(db, "Stories"), (snapshot) => {
+  //     getPosts();
+  //   });
+    
+  //   return function cleanupBeforeUnmounting() {
+  //     unsubscribeFromNewSnapshots();
+  //   };
+  // }, []);
   useEffect(() => {
     getPosts();
   }, []);
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>ClubHouse</Text>
       {
         (posts.length)?
-          <ScrollView>
-            {
-              posts.map((post, index) => {
-                return (
-                  <Post url={post.downloadURL} type={post.contentType}/>
-                  // <Text>post.downloadURL</Text>
-                )
-              })
-            }
-          </ScrollView>
-        :<></>
+          <FlatList
+            data={posts}
+            renderItem={(post, index) =>{
+              return (
+                <Post url={post.item.downloadURL} type={post.item.contentType} key={index}/>
+              )
+            }}
+            numColumns={2}
+            style={styles.list}
+          />
+        : <></>
       }
+      <StatusBar/>
     </View>
   )
 }
@@ -42,7 +54,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    // height: Dimensions.get('window').height,
   },
-  
+  header: {
+    marginTop: 50,
+    paddingTop: 10,
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+    fontFamily: 'Avenir Next',
+  },
+  list :{
+    flex: 1,
+    paddingHorizontal: 20,
+  }
 })

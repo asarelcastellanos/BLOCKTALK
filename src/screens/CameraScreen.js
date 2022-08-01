@@ -1,15 +1,13 @@
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Camera, CameraType } from "expo-camera";
-import { shareAsync } from 'expo-sharing';
 import * as ImagePicker from 'expo-image-picker';
+import { StatusBar } from 'expo-status-bar';
 import db from "../../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
 import CameraActions from "../components/CameraActions";
 import CameraOptions from "../components/CameraOptions";
-
-// initializeApp(firebaseConfig);
 
 export default function CameraScreen({ navigation, focused }) {
   let cameraRef = useRef();
@@ -82,6 +80,7 @@ export default function CameraScreen({ navigation, focused }) {
       <Camera style={styles.camera} type={cameraType} ref={cameraRef} />
       <CameraOptions flipCamera={flipCamera}/>
       <CameraActions checkGallery={checkGallery} takePhoto={takePhoto} />
+      <StatusBar style='light'/>
     </>
   );
 }

@@ -7,6 +7,7 @@ import { collection, getDoc, addDoc, serverTimestamp } from 'firebase/firestore'
 import db from '../../firebase';
 import uuid from 'uuid-random';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
+import { StatusBar } from 'expo-status-bar';
 
 export default function SavePostScreen({ navigation, route }) {
   // const [description, setDescription] = useState('');
@@ -78,7 +79,7 @@ export default function SavePostScreen({ navigation, route }) {
             <Text>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {saveMediaToStorage(); navigation.navigate('StoriesStack')}}
+            onPress={() => {/*saveMediaToStorage();*/ navigation.navigate('StoriesStack').navigate('StoriesStack')}}
             style={styles.postButton}
           >
             <Ionicons name="albums-outline"/>
@@ -87,6 +88,7 @@ export default function SavePostScreen({ navigation, route }) {
 
         </View>
       </ScrollView>
+      <StatusBar/>
     </View>
   )
 }

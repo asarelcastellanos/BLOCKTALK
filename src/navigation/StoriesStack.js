@@ -30,7 +30,7 @@ export default function StoriesStack() {
 
   return (
       <Stack.Navigator>
-        <Stack.Screen name="Stories" component={StoriesScreen} options={{ screenOptions }} />
+        <Stack.Screen name="Stories" component={StoriesScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
   )
 }
