@@ -18,10 +18,20 @@ export default function SpotlightScreen() {
             style={styles.Img} 
             source={require("../../assets/img/img_4.png")} 
             />   
-          </View>     
-            <Button size="sm" style={styles.btn}>Recipes</Button>
-            <Button size="sm" style={styles.btn}>"How To" Tutorials</Button>
-            <Button size="sm" style={styles.btn}>Snack Facts</Button>
+          </View>   
+            <Text style={styles.textInputHead}>Let's get ...</Text>  
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.textInput}>Cookin's with Chefs</Text>
+            </TouchableOpacity>
+            <TouchableOpacity  style={styles.btn}>
+              <Text style={styles.textInput}>Our Own's Recipes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity  style={styles.btn}>
+              <Text style={styles.textInput}>Snack Facts</Text>
+            </TouchableOpacity>
+            {/* <Button size="sm" style={styles.btn}>Cookin' with Chefs</Button> */}
+            {/* <Button size="sm" style={styles.btn}>Our Own's Recipes</Button> */}
+            {/* <Button size="sm" style={styles.btn}>Snack Facts</Button> */}
           {/* <NavigationContainer>
             <Stack.Navigator>
             </Stack.Navigator>
@@ -36,16 +46,27 @@ const styles= StyleSheet.create({
     backgroundColor: "black",
   },
   imgSection: {
-    flex: 3
+    flex: 1
   },
   Img: {
-    flex: 1,
+    flex: 0.9,
     marginBottom: 10,
   },
   textTitle: {
     color: "#A8B0B6",
     fontSize: 40,
   },
+  textInput:{
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold",
+  },
+  textInputHead:{
+    // flex: 1,
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold"
+  },  
   btn:{
     margin: 5,
   }
