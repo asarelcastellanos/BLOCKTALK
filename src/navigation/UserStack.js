@@ -49,8 +49,8 @@ export default function UserStack() {
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: "#694fad" }}
-        initialRouteName="Test"
-        // initialRouteName="Camera"
+        // initialRouteName="Test"
+        initialRouteName="Camera"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
