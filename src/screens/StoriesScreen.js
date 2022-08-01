@@ -1,6 +1,6 @@
 import StoriesOverlay from "./StoriesOverlay";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import {
   NativeBaseProvider,
   Container,
@@ -44,7 +44,9 @@ export default function StoriesScreen({ navigation }) {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={9}>
               <VStack space={3} justifyContent="center">
+              <TouchableOpacity onPress={() => {navigation.navigate("Hug");}}>
                 <Center h="60" w="330" bg="light.300" rounded="2xl" />
+              </TouchableOpacity>
                 <Center h="60" w="330" bg="light.300" rounded="2xl" />
                 <Center h="60" w="330" bg="light.300" rounded="2xl" />
               </VStack>
