@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import Post from '../components/Post'
+import * as React from 'react';
+import { enableIndexedDbPersistence } from 'firebase/firestore';
 
 export default function StoriesScreen({ navigation, focused }) {
   const isFocused = useIsFocused();
@@ -13,6 +15,9 @@ export default function StoriesScreen({ navigation, focused }) {
           <Post/>
         </TouchableOpacity>
       : null}
+
+
+      <Button title="Go Back Home!" onPress={() => navigation.navigate('HomeResourceScreen')} />
     </View>
   )
 }

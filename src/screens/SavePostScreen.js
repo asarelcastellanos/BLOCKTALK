@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Text, StyleSheet, Button, TextInput, TouchableOpacity, 
-         ScrollView, FlatList, SafeAreaView, SectionList, StatusBar, ListItem } from 'react-native';
+         ScrollView, FlatList, SafeAreaView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useIsFocused } from '@react-navigation/native';
 import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
@@ -10,8 +10,6 @@ import uuid from 'uuid-random';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 
 export default function SavePostScreen({ navigation, route }) {
-  // const [description, setDescription] = useState('');
-  const [categories, setCategories] = useState([]);
   const [contentType, setContentType] = useState('');
   const [fileName, setFileName] = useState('');
   const [downloadURL, setdownloadURL] = useState('');
@@ -89,7 +87,7 @@ export default function SavePostScreen({ navigation, route }) {
         </View> */}
 
         <View style={styles.categoryContainer}>
-          <Text>Select categories</Text>
+          <Text style={styles.categoryHeader}>Select categories</Text>
 
             <FlatList 
               style={styles.listStyle}
@@ -104,11 +102,7 @@ export default function SavePostScreen({ navigation, route }) {
                 return <Text style={styles.textStyle}>{item.name}</Text>
               }}
             />
-
         </View>
-
-        
-        
 
 
         <View style={styles.buttonContainer}>
@@ -164,6 +158,11 @@ const styles = StyleSheet.create({
   // },
   categoryContainer: {
     paddingVertical:10,
+  },
+  categoryHeader: {
+    fontSize: 19,
+    fontFamily: 'Avenir Next',
+    padding: 5,
   },
   buttonContainer: {
     flexDirection:'row',

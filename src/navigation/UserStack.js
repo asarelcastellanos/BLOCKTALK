@@ -13,6 +13,7 @@ import StoriesScreen from "../screens/StoriesScreen";
 import MapScreen from "../screens/MapScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
 import OptionsScreen from "../screens/OptionsScreen";
+import HomeResourceScreen from "../screens/HomeResourceScreen";
 
 // Stacks
 import CameraStack from "../navigation/CameraStack";
