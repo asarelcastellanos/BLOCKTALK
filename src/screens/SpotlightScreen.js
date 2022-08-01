@@ -11,8 +11,11 @@ export default function SpotlightScreen() {
 
   return (
         <View style={styles.container}>
-          <Text style={styles.textTitle}>Welcome</Text>
-          <Text style={styles.textTitle}>Snap Chopper</Text>
+          <View style={styles.textTitle}>
+            <Text style={styles.textTitle2}>Welcome</Text>
+            <Text style={styles.textTitle2}>Snap Chopper</Text>
+          </View>
+         
           <View style={styles.imgSection}>
             <Image 
             style={styles.Img} 
@@ -42,7 +45,7 @@ export default function SpotlightScreen() {
 const styles= StyleSheet.create({
   container:{
     flex: 1,
-    alignItems: "center",
+    // alignItems: "center",
     backgroundColor: "black",
   },
   imgSection: {
@@ -53,9 +56,12 @@ const styles= StyleSheet.create({
     marginBottom: 10,
   },
   textTitle: {
+    alignItems: "center"
+  },
+  textTitle2:{
     color: "#A8B0B6",
     fontSize: 40,
-  },
+  },  
   textInput:{
     fontSize: 20,
     color: "white",
@@ -65,7 +71,7 @@ const styles= StyleSheet.create({
     // flex: 1,
     fontSize: 20,
     color: "white",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },  
   btn:{
     margin: 5,
