@@ -20,10 +20,10 @@ import MapScreen from "../screens/MapScreen";
 import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
-import AddFriendIcon from "../../assets/top_nav_bar/add_friend.png";
 
 // Stacks
 import ChatStack from "./ChatStack";
+import StoriesStack from "./StoriesStack";
 
 const Tab = createBottomTabNavigator();
 

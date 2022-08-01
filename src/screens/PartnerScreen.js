@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { SafeAreaView, ScrollView, Dimensions, TouchableOpacity, Text, StyleSheet, View, Pressable} from 'react-native'
 import BottomSheet from "react-native-gesture-bottom-sheet";
-import { Svg, Path } from "react-native-svg";
 
 
 export default function PartnerScreen() {
@@ -22,8 +21,8 @@ export default function PartnerScreen() {
         style={styles.button}
         onPress={(handleClick) => bottomSheet.current.show()}
       >
-        <Text style={styles.text}>Open modal</Text>
       </TouchableOpacity>
+
       <BottomSheet hasDraggableIcon ref={bottomSheet} height={700}>
         <View style = {stylesheet._Profile_Information}>
             <View style = {[stylesheet._Title_of_Organization, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
@@ -193,9 +192,8 @@ const styles = StyleSheet.create({
 
   },
   button: {
-    height: 50,
+    height: 300,
     width: 150,
-    backgroundColor: "#140078",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,

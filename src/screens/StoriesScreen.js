@@ -21,8 +21,9 @@ import {
 } from "native-base";
 
 import PartnerScreen from "../screens/PartnerScreen";
+import HugScreen from "./HugScreen";
 
-export default function StoriesScreen() {
+export default function StoriesScreen({ navigation }) {
   // Set modal visibility
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -78,9 +79,7 @@ export default function StoriesScreen() {
           </Text>
           <VStack space={3}>
             <HStack space={3}>
-              <Center h="263" w="177" bg="light.300" rounded="2xl">
-                <PartnerScreen/>
-              </Center>
+              <Center h="263" w="177" bg="light.300" rounded="2xl" />
               <Center h="263" w="177" bg="light.300" rounded="2xl" />
             </HStack>
 
