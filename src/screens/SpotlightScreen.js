@@ -1,7 +1,3 @@
-import carrot from "../../assets/stories-nav-bar/down_carrot.png";
-import bookmark from "../../assets/stories-nav-bar/charm_bookmark.png";
-import threeDots from "../../assets/stories-nav-bar/bi_three-dots-vertical.png";
-
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
@@ -25,10 +21,7 @@ import {
 import StoriesOverlay from "./StoriesOverlay";
 import PartnerScreen from "./PartnerScreen";
 
-export default function SpotlightScreen({ navigation }) {
-  // Set modal visibility
-  const [isModalVisible, setModalVisible] = useState(false);
-
+export default function SpotlightScreen() {
   return (
     <NativeBaseProvider>
       {/* ScrollView enables scrolling. Scroll bar indicator is turned off */}
@@ -119,32 +112,5 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     justifyContent: 'center',
     alignSelf: "center",
-  },
-
-  modalView: {
-    marginTop: -30,
-    width: 420,
-    flex: 1,
-    alignSelf: "center",
-    backgroundColor: "#000",
-  },
-
-  modalViewText: {
-    color: "#fff",
-  },
-
-  modalNav: {
-    height: 40,
-    marginLeft: 16,
-    marginTop: 60,
-  },
-
-  modalNavRightSide: {
-    marginLeft: 140,
-  },
-
-  modalMoreButton: {
-    alignSelf: "center",
-    marginTop: 725,
   },
 });

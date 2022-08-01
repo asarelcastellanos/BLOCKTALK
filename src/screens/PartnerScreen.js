@@ -22,14 +22,17 @@ export default function PartnerScreen() {
         onPress={(handleClick) => bottomSheet.current.show()}
       >
       </TouchableOpacity>
-
+	  
+	  {/* Bottom Sheet, basically pops up partner info from bottom of screen */}
       <BottomSheet hasDraggableIcon ref={bottomSheet} height={700}>
         <View style = {stylesheet._Profile_Information}>
+			{/* Organization Name Section */}
             <View style = {[stylesheet._Title_of_Organization, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
 				<Text style = {[stylesheet._Title_of_Organization, {width: "100%", position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
 				Title of Organization
 				</Text>
             </View>
+			{/* Organization's Events Section */}
             <View style = {[stylesheet._Events, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
 				<Text style = {[stylesheet._Events, {position: "absolute", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
 				Events

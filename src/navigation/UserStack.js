@@ -20,6 +20,7 @@ import MapScreen from "../screens/MapScreen";
 import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
+import HugScreen from "../screens/HugScreen";
 
 // Stacks
 import ChatStack from "./ChatStack";
@@ -90,7 +91,7 @@ export default function UserStack() {
             } else if (route.name === "Camera") {
               iconName = focused ? "ios-scan-circle-outline" : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
-            } else if (route.name === "Stories") {
+            } else if (route.name === "StoriesStack") {
               iconName = "ios-people-outline";
               iconColor = focused ? "purple" : "grey";
             } else if (route.name === "Spotlight") {
@@ -109,11 +110,12 @@ export default function UserStack() {
           component={CameraScreen}
           options={{...screenOptions, headerShown: false}} 
         />
-        <Tab.Screen
+        <Tab.Screen name="StoriesStack" component={StoriesStack} options={{ headerShown: false, tabBarShowLabel: false }}/>
+        {/* <Tab.Screen
           name="Stories"
           component={StoriesScreen}
           options={screenOptions}
-        />
+        /> */}
         <Tab.Screen
           name="Spotlight"
           component={SpotlightScreen}
