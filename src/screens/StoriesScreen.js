@@ -1,23 +1,55 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
-import Post from '../components/Post'
-import * as React from 'react';
-import { enableIndexedDbPersistence } from 'firebase/firestore';
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import Feed from '../components/Feed';
+import db from "../../firebase";
+import { StatusBar } from "expo-status-bar";
 
-export default function StoriesScreen({ navigation, focused }) {
-  const isFocused = useIsFocused();
+export default function StoriesScreen({ navigation }) {
+  const [posts, setPosts] = useState([]);
+
+  async function getPosts() {
+    const querySnapshot = await getDocs(collection(db, "Stories"));
+    querySnapshot.forEach((doc) => {
+      setPosts((post) => [...post, doc.data()]);
+    });
+  }
+  
+  // useEffect(() => {
+  //   let unsubscribeFromNewSnapshots = onSnapshot(collection(db, "Stories"), (snapshot) => {
+  //     getPosts();
+  //   });
+    
+  //   return function cleanupBeforeUnmounting() {
+  //     unsubscribeFromNewSnapshots();
+  //   };
+  // }, []);
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Read</Text>
-      {isFocused ?
-        <TouchableOpacity>
-          <Post/>
-        </TouchableOpacity>
-      : null}
-
-
-      <Button title="Go Back Home!" onPress={() => navigation.navigate('HomeResourceScreen')} />
+      <View style={styles.header}>
+        <Text style={{fontWeight: 'bold', fontSize: 30}}>Club</Text>
+        <Text style={{fontSize: 30}}>House</Text>
+      </View>
+      {
+        (posts.length)?
+          <FlatList
+            data={posts}
+            renderItem={(post, index) =>{
+              return (
+                <Feed url={post.item.downloadURL} type={post.item.contentType} key={index}/>
+              )
+            }}
+            // keyExtractor={(post) => post.fileName}
+            numColumns={2}
+            style={styles.list}
+          />
+        : <></>
+      }
+      <StatusBar/>
     </View>
   )
 }
@@ -26,14 +58,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    // height: Dimensions.get('window').height,
   },
   header: {
-    padding: 10,
-    marginTop: 10,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginTop: 50,
+    paddingTop: 10,
     textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
     fontFamily: 'Avenir Next',
   },
+  list :{
+    // flex: 1,
+    paddingHorizontal: 20,
+  }
 })

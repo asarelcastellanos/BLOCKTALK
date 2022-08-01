@@ -1,5 +1,5 @@
 import { Button, View, Text, StyleSheet, Linking,
-        FlatList, Dimensions, Image, SafeAreaView, Alert } from 'react-native';
+        FlatList, TouchableOpacity, Image, SafeAreaView, Alert } from 'react-native';
 // import { useIsFocused } from '@react-navigation/native';
 import React, {useState, useEffect, Component } from 'react';
 // import { ActivityIndicator } from 'react-native-web';
@@ -11,25 +11,27 @@ import resourceData from '../components/ResourceData';
 class FlatListItem extends Component {
   render() {
     return (
-      <View style={styles.itemSeparator}>
-          <View style={styles.oneCard}>
-            <Image
-              source={{uri: this.props.item.image}}
-              style={styles.image}
-            >
-            </Image>
-            <View style={styles.column}>
-              <Text style={styles.title}>{this.props.item.name}</Text>
-              <Text style={styles.description}>{this.props.item.description}</Text>
-            </View>
-            <View style={styles.button}>
-              <Button
-                title="Click"
-                onPress={() => Linking.openURL(this.props.item.link)}
-              />
+      <TouchableOpacity
+        style={styles.itemSeparator}
+        onPress={() => Linking.openURL(this.props.item.link)}
+      >
+        <View style={styles.resourceCard}>
+          <Image
+            style={styles.resourceImg}
+            source={{uri: this.props.item.image}}
+          />
+          <View style={styles.resourceInfo}>
+            <Text style={styles.title}>{this.props.item.name}</Text>
+            <Text style={styles.description} numberOfLines={4}>
+              {this.props.item.description}descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptionscriptiondescription
+            </Text>
+            <View style={styles.categoryContainer}>
+              <Text style={styles.category}>internship</Text>
+              <Text style={styles.category}>workshop</Text>
             </View>
           </View>
-      </View>
+        </View>
+      </TouchableOpacity>
 
     );
   }
@@ -40,8 +42,9 @@ export default class ResourceScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Resources</Text>
-        <Text style={styles.slogan}>Slogan</Text>
+        <Text style={styles.slogan}>Slogan or description</Text>
         <FlatList
+          style={styles.list}
           data={resourceData}
           renderItem={({item, index}) => {
             return (
@@ -60,65 +63,67 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    height: Dimensions.get('window').height,
+  },
+  resourceCard: {
+    flex: 1,
+    flexDirection: 'row',
+    marginHorizontal: 5,
+    marginVertical: 6,
+    backgroundColor: 'pink',
+    borderRadius: 10,
+    height: 160,
+  },
+  resourceImg: {
+    flex: 1,
+    width: '100%',
+    resizeMode: 'cover',
+    borderRadius: 10,
+    // aspectRatio: 1,
+  },
+  resourceInfo: {
+    flex: 2,
+    flexDirection: 'column',
+    padding: 15,
   },
   title: {
-    marginVertical: 8,
-    marginHorizontal: 16,
-    padding: 5,
     fontSize: 20,
     fontFamily: 'Avenir Next',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    paddingBottom: 4,
   },
   description: {
-    marginVertical: 8,
-    marginHorizontal: 16,
-    padding: 5,
-    fontSize: 15,
+    fontSize: 14,
     fontFamily: 'Avenir Next'
   },
   itemSeparator: {
     flex: 1,
     flexDirection: 'column',
   },
-  oneCard: {
-    flex: 1,
-    marginHorizontal: 10,
-    marginVertical: 5,
-    flexDirection: 'row',
-    backgroundColor: 'pink',
-    borderRadius: 10,
-  },
-  column: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  image: {
-    // width: 120, 
-    // height: 150, 
-    // margin: 5,
-
-    // width: '100%',
-    // height: undefined,
-    resizeMode: 'contain',
-    aspectRatio: 1,
-  },
   header: {
-    padding: 20,
+    paddingTop: 10,
     marginTop: 50,
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold',
-    fontFamily: 'Avenir Next',
+    // fontFamily: 'Avenir Next',
   },
   slogan: {
-    padding: 10,
+    paddingBottom: 10,
     textAlign: 'center',
     fontSize: 15,
     fontFamily: 'Avenir Next',
   },
-  button: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  list: {
+    paddingHorizontal: 20,
   },
+  categoryContainer: {
+    flexDirection: 'row',
+    marginTop: 6,
+  },
+  category: {
+    marginRight: 5,
+    backgroundColor: 'yellow',
+    padding: 3,
+    fontSize: 10,
+  }
 })

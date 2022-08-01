@@ -1,25 +1,17 @@
 import React from "react";
+import { Button } from "react-native";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { StatusBar } from 'expo-status-bar';
 
 import { getAuth, signOut } from "firebase/auth";
-
-// Screens
-import CameraScreen from "../screens/CameraScreen";
-import StoriesScreen from "../screens/StoriesScreen";
-import MapScreen from "../screens/MapScreen";
-import SpotlightScreen from "../screens/SpotlightScreen";
-import OptionsScreen from "../screens/OptionsScreen";
-import HomeResourceScreen from "../screens/HomeResourceScreen";
-
 // Stacks
 import CameraStack from "../navigation/CameraStack";
 import StoriesStack from "../navigation/StoriesStack";
 import ResourceStack from "../navigation/ResourceStack";
-import ChatStack from "../navigation/ChatStack";
+// import ChatStack from "../navigation/ChatStack";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createNativeStackNavigator();
@@ -96,8 +88,6 @@ export default function UserStack() {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
-
-        {/* <Tab.Screen name="ResourceStack" component={ResourceStack} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
         <Tab.Screen
           name="StoriesStack"
           component={StoriesStack}
@@ -122,6 +112,7 @@ export default function UserStack() {
         /> */}
 
       </Tab.Navigator>
+      <StatusBar/>
     </NavigationContainer>
   );
 }
