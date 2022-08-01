@@ -1,10 +1,12 @@
 import carrot from "../../assets/stories-nav-bar/down_carrot.png";
 import bookmark from "../../assets/stories-nav-bar/charm_bookmark.png";
 import threeDots from "../../assets/stories-nav-bar/bi_three-dots-vertical.png";
+import VideoComponent from "../components/VideoComponent";
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
 import Modal from "react-native-modal";
+
 import {
   Center,
   VStack,
@@ -38,6 +40,7 @@ export default function StoriesOverlay() {
         backdropTransitionOutTiming={0}
       >
         <View style={styles.modalView}>
+          {/* Modal Nav Bar */}
           <HStack style={styles.modalNav}>
             <HStack space={4} alignItems="center">
               <Pressable onPress={() => setModalVisible(false)}>
@@ -64,6 +67,10 @@ export default function StoriesOverlay() {
             </HStack>
           </HStack>
 
+          {/* Video Component */}
+          <VideoComponent />
+
+          {/* More Button */}
           <Pressable
             style={styles.modalMoreButton}
             onPress={() => setModalVisible(false)}
@@ -105,6 +112,6 @@ const styles = StyleSheet.create({
 
   modalMoreButton: {
     alignSelf: "center",
-    marginTop: 725,
+    marginTop: -45,
   },
 });

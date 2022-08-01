@@ -70,7 +70,6 @@ export default function StoriesScreen({ navigation }) {
                 <PartnerScreen />
               </Center>
               <Center h="263" w="177" bg="light.300" rounded="2xl" />
-              <Center h="263" w="177" bg="light.300" rounded="2xl" />
             </HStack>
 
             <HStack space={3}>
