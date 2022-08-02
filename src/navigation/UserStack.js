@@ -11,10 +11,7 @@ import { getAuth, signOut } from "firebase/auth";
 import CameraStack from "../navigation/CameraStack";
 import StoriesStack from "../navigation/StoriesStack";
 import ResourceStack from "../navigation/ResourceStack";
-import HomeStack from "./HomeStack";
-// import ChatStack from "../navigation/ChatStack";
 import { createStackNavigator } from "@react-navigation/stack";
-import Test from "../screens/Test";
 
 //Screens
 import IntroStack from "./IntroStack";
@@ -38,30 +35,6 @@ const Tab = createBottomTabNavigator();
 // })
 
 export default function UserStack({ navigation }) {
-  // const auth = getAuth();
-  // const user = auth.currentUser;
-
-  // let screenOptions = {
-  //   headerShown: false,
-  //   tabBarShowLabel: false,
-  //   headerLeft: () => (
-  //     <Button
-  //       onPress={() => {
-  //         signOut(auth)
-  //           .then(() => {
-  //             // Sign-out successful.
-  //             user = null;
-  //           })
-  //           .catch((error) => {
-  //             // An error happened.
-  //             // should we do something with that error??
-  //           });
-  //       }}
-  //       title="Log Out"
-  //     />
-  //   ),
-  // };
-
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator

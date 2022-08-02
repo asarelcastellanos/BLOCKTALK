@@ -1,53 +1,18 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { createStackNavigator } from "@react-navigation/stack";
-import { TouchableOpacity } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 
 //Screens
-import CameraScreen from "../screens/CameraScreen";
 import IntroFirst from "../screens/IntroFirst";
 import IntroSecond from "../screens/IntroSecond";
 import IntroThird from "../screens/IntroThird";
 
 //Stacks
 import UserStack from "./UserStack";
-import CameraStack from "./CameraStack";
-import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
-
-// function First({ navigation }) {
-//   return (
-//     <View>
-//       <Text>First</Text>
-//       <TouchableOpacity onPress={() => navigation.navigate("Second")}>
-//         <Text>Next</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
-// function Second({ navigation }) {
-//   return (
-//     <View>
-//       <Text>Second</Text>
-//       <TouchableOpacity onPress={() => navigation.navigate("Third")}>
-//         <Text>Next</Text>
-//         {console.log("navigation", navigation)}
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
-// function Third({ navigation }) {
-//   return (
-//     <View>
-//       <Text>Third</Text>
-//       <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
-//         <Text>Next</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
 
 export default function IntroStack({ navigation }) {
   console.log("navigation first", navigation);
@@ -60,12 +25,22 @@ export default function IntroStack({ navigation }) {
           options={{
             headerTitle: () => (
               <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-                Share Your Story
+                ONE ONE ONE
               </Text>
             ),
           }}
         ></Stack.Screen>
-        <Stack.Screen name="Second" component={IntroSecond}></Stack.Screen>
+        <Stack.Screen
+          name="Second"
+          component={IntroSecond}
+          options={{
+            headerTitle: () => (
+              <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+                TWO TWO TWO
+              </Text>
+            ),
+          }}
+        ></Stack.Screen>
         <Stack.Screen
           name="Third"
           component={IntroThird}
@@ -73,7 +48,6 @@ export default function IntroStack({ navigation }) {
             headerTitle: () => (
               <Text style={{ fontSize: 20, fontWeight: "bold" }}>Third</Text>
             ),
-
             headerLeft: () => (
               <Ionicons
                 name={"chevron-back-outline"}
@@ -92,7 +66,7 @@ export default function IntroStack({ navigation }) {
             ),
             headerShadowVisible: false,
           }}
-        ></Stack.Screen>
+        />
         <Stack.Screen
           name="UserStack"
           component={UserStack}

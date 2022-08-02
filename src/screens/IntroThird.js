@@ -5,7 +5,7 @@ export default function IntroThird({ navigation }) {
   return (
     <View>
       <Text>Third</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Second")}>
+      <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
         <Text>Next</Text>
       </TouchableOpacity>
     </View>
