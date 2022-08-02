@@ -2,23 +2,39 @@ import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function StatBar({ navigation, screen = "camera" }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Profile");
-        }}
-      >
-        <Image
-          style={styles.bitmojiImage}
-          source={require("../../assets/snapchat/personalBitmoji.png")} //<i class="fa-solid fa-magnifying-glass"></i>
-        />
-      </TouchableOpacity>
-      <View style={styles.iconContainer}>
-        <Icon name="search" size={15} color="#ffffff" />
-      </View>
+      {/* Profile Button */}
+
+      {console.log(screen)}
+
+      {screen === "Profile" ? (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <View style={styles.iconContainer}>
+            <Ionicons name="chevron-back-outline" size={15} color="#ffffff" />
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Profile");
+            }}
+          >
+            <Image
+              style={styles.bitmojiImage}
+              source={require("../../assets/snapchat/personalBitmoji.png")} //<i class="fa-solid fa-magnifying-glass"></i>
+            />
+          </TouchableOpacity>
+          {/* Search Button */}
+          <View style={styles.iconContainer}>
+            <Icon name="search" size={15} color="#ffffff" />
+          </View>
+        </>
+      )}
 
       {/* Different titles for different screensx */}
       {screen === "map" && (
