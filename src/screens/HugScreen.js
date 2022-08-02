@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
 import Modal from "react-native-modal";
 import {
@@ -21,13 +21,14 @@ import {
 import StoriesOverlay from "./StoriesOverlay";
 import PartnerScreen from "./PartnerScreen";
 
-export default function HugScreen() {
+export default function HugScreen({ navigation }) {
     return (
       <NativeBaseProvider>
         {/* ScrollView enables scrolling. Scroll bar indicator is turned off */}
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* Logo Image of Hug Community */}
           <Container>
+            {/* <Image sytle = {styles.logo} source={require("../../assets/hug_logo.png")}/> */}
             <Heading h="250" w="415" bg="light.300" />
           </Container>
           {/* Learn More Button */}
@@ -62,9 +63,12 @@ export default function HugScreen() {
             </Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               <HStack space={3} justifyContent="center">
-                <Center h="190" w="150" bg="light.300" rounded="2xl">
+                <TouchableOpacity onPress={() => {navigation.navigate("Partner");}}>
+                  <Center h="190" w="150" bg="light.300" rounded="2xl" />
+                </TouchableOpacity>
+                {/* <Center h="190" w="150" bg="light.300" rounded="2xl">
                   <PartnerScreen/>
-                </Center>
+                </Center> */}
                 <Center h="190" w="150" bg="light.300" rounded="2xl" />
                 <Center h="190" w="150" bg="light.300" rounded="2xl" />
                 <Center h="190" w="150" bg="light.300" rounded="2xl" />
@@ -88,6 +92,12 @@ export default function HugScreen() {
   }
 
   const styles = StyleSheet.create({
+
+    logo: {
+      width: 415,
+      justifyContent: 'center',
+      alignItems: 'center',
+  },
 
     stories_partners: {
       margin: 16,

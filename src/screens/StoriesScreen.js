@@ -44,7 +44,7 @@ export default function StoriesScreen({ navigation }) {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <HStack space={9}>
               <VStack space={3} justifyContent="center">
-              <TouchableOpacity onPress={() => {navigation.navigate("Hug");}}>
+              <TouchableOpacity onPress={() => {navigation.navigate("HugStack");}}>
                 <Center h="60" w="330" bg="light.300" rounded="2xl" />
               </TouchableOpacity>
                 <Center h="60" w="330" bg="light.300" rounded="2xl" />

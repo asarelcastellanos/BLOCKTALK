@@ -13,16 +13,12 @@ import CustomHeaderButton from "../components/CustomHeaderButton";
 import { getAuth, signOut } from "firebase/auth";
 
 // Screens
-import StoriesScreen from "../screens/StoriesScreen";
 import HugScreen from "../screens/HugScreen";
 import PartnerScreen from "../screens/PartnerScreen";
 
-// Stacks
-import HugStack from "./HugStack";
-
 const Stack = createStackNavigator();
 
-export default function StoriesStack({ navigation }) {
+export default function HugStack({ navigation }) {
   const auth = getAuth();
   const user = auth.currentUser;
   
@@ -85,14 +81,44 @@ export default function StoriesStack({ navigation }) {
 
   };
 
+  let PartnerTopNav = {
+    tabBarShowLabel: false,
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <TouchableOpacity style={styles.nav_icon} onPress={() => {navigation.navigate("Hug");}}>
+          <Image source={require("../../assets/top_nav_bar/backButton.png")}/>
+        </TouchableOpacity>
+      </HeaderButtons>
+    ),
+    
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <TouchableOpacity style={styles.nav_icon} onPress={()=>{alert("More!")}}>
+          <Image source={require("../../assets/top_nav_bar/more.png")}/>
+        </TouchableOpacity>
+      </HeaderButtons>
+      
+    ),
+
+  };
+
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Stories"
         component={StoriesScreen}
         options={screenOptions}
+      /> */}
+       <Stack.Screen
+        name="Hug"
+        component={HugScreen}
+        options={HugTopNav}
       />
-      <Stack.Screen name="HugStack" component={HugStack} options={{ headerShown: false, tabBarShowLabel: false }}/>
+      <Stack.Screen
+        name="Partner"
+        component={PartnerScreen}
+        options={PartnerTopNav}
+      />
     </Stack.Navigator>
   );
 }

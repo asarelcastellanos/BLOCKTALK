@@ -1,7 +1,17 @@
 import React, { useRef } from "react";
 import { SafeAreaView, ScrollView, Dimensions, TouchableOpacity, Text, StyleSheet, View, Pressable} from 'react-native'
 import BottomSheet from "react-native-gesture-bottom-sheet";
-
+import {
+	NativeBaseProvider,
+	Container,
+	Center,
+	VStack,
+	Circle,
+	Image,
+	Divider,
+	Heading,
+	Button
+  } from "native-base";
 
 export default function PartnerScreen() {
   // Needed in order to use .show()
@@ -16,15 +26,7 @@ export default function PartnerScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={(handleClick) => bottomSheet.current.show()}
-      >
-      </TouchableOpacity>
-	  
-	  {/* Bottom Sheet, basically pops up partner info from bottom of screen */}
-      <BottomSheet hasDraggableIcon ref={bottomSheet} height={700}>
+	  <ScrollView contentContainerStyle={styles.container}>
         <View style = {stylesheet._Profile_Information}>
 			{/* Organization Name Section */}
             <View style = {[stylesheet._Title_of_Organization, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
@@ -71,18 +73,19 @@ export default function PartnerScreen() {
               </View>
             </View>
         </View>
-      </BottomSheet>
-    </SafeAreaView>
+	  </ScrollView>
   );
 
 }
 const stylesheet = StyleSheet.create({
 	_Profile_Information: {
 		alignItems: 'center',
+		textAlign: 'center',
 		position: "absolute",
 		width: 390,
 		height: 652,
 		overflow: "hidden",
+		backgroundColor: "white"
 	},
 	_Title_of_Organization: {
 		textAlign: 'center',
@@ -102,6 +105,7 @@ const stylesheet = StyleSheet.create({
 	},
 	_Events: {
 		fontWeight: 'bold',
+		textAlign: 'center',
 		position: "absolute",
 		width: 280,
 		height: 76,
