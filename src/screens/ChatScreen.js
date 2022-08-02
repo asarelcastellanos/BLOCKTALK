@@ -6,17 +6,22 @@ import { updateDoc, arrayUnion, doc, onSnapshot } from "firebase/firestore";
 import { useAuthentication } from "../utils/hooks/useAuthentication";
 //import firebase from "firebase/app";
 
-export default function ChatScreen({ route }) {
+export default function ChatScreen({route, navigation}) {
     const [messages, setMessages] = useState([]);
     const { user, userData } = useAuthentication();
+    
+  //   const routeParams = route.params;
+  //  console.log('navigation: ', routeParams)
 
   
+  //console.log('just route edit: ', route.params.paramKey)
+  //console.log('route edit: ', routeParams)
       
-    console.log("Park Name", route)
-
+    // console.log("Park Name", paramKey)
+    
     useEffect(() => {
         let unsubscribeFromNewSnapshots = onSnapshot(
-            doc(db, "chats", "Mac Arthur Park"),
+            doc(db, "chats", route.params.paramKey.toString()),
             (snapshot) => {
                 console.log( user, "New Snapshot! ", snapshot.data().messages);
                 setMessages(snapshot.data().messages);
@@ -27,9 +32,9 @@ export default function ChatScreen({ route }) {
             unsubscribeFromNewSnapshots();
         };
     }, []);
-
+  // console.log("Message after effect---",route.params.paramKey.toString(), messages)
     const onSend = useCallback(async (messages = []) => {
-        await updateDoc(doc(db, "chats", navigation.params.paramKey), {
+        await updateDoc(doc(db, "chats", route.params.paramKey.toString()), {
             messages: arrayUnion(messages[0]),
         });
     }, []);

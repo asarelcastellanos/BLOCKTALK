@@ -15,6 +15,7 @@ import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
 import CustomHeaderTab from "../components/CustomHeaderTab";
+import ChatScreen from "../screens/ChatScreen";
 // Stacks
 import ChatStack from "./ChatStack";
 const Tab = createBottomTabNavigator();
@@ -60,7 +61,7 @@ export default function UserStack() {
                         if (route.name == "Map") {
                             iconName = "ios-location-outline";
                             iconColor = focused ? "green" : "grey";
-                        } else if (route.name === "ChatStack") {
+                        } else if (route.name === "Chat") {
                             iconName = "ios-chatbox-outline";
                             iconColor = focused ? "#2b83b3" : "grey";
                         } else if (route.name === "Camera") {
@@ -92,9 +93,9 @@ export default function UserStack() {
                     options={{ ...screenOptions, headerShown: false }}
                 />
                 <Tab.Screen
-                    name="ChatStack"
-                    component={ChatStack}
-                    options={{ headerShown: false, tabBarShowLabel: false }}
+                    name="Chat"
+                    component={ChatScreen}
+                    options={{ ...screenOptions, headerShown: false, tabBarShowLabel: false }}
                 />
                 <Tab.Screen
                     name="Camera"

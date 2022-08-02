@@ -246,8 +246,6 @@ export default function MapScreen({ navigation }) {
     ];
     const [activeGreen, setActiveGreen] = useState(false);
     const [greenView, setGreenView] = useState([]);
-    
-
 
     const parks = [
         {
@@ -302,7 +300,7 @@ export default function MapScreen({ navigation }) {
             ],
         },
         {
-            name: "MacArthur Park",
+            name: "Mac Arthur Park",
             latitude: 34.05973407549204,
             longitude: -118.28316704628648,
             eventSchedule: [
@@ -319,7 +317,7 @@ export default function MapScreen({ navigation }) {
             ],
         },
         {
-            name: "Vista Hermosa Natural Park",
+            name: "Visa Hermosa Park",
             latitude: 34.06207758901168,
             longitude: -118.25692881037423,
             eventSchedule: [
@@ -350,25 +348,25 @@ export default function MapScreen({ navigation }) {
     });
 
     const locationA = {
-      latitude: 34.0845657476488,
+        latitude: 34.0845657476488,
         longitude: -118.25692881037423,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
     };
     const locationB = {
-      latitude: 34.001216855498675,
+        latitude: 34.001216855498675,
         longitude: -118.35007599325494,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
     };
     const locationC = {
-      latitude: 34.051216551498675,
+        latitude: 34.051216551498675,
         longitude: -118.45007599325494,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
     };
     const locationD = {
-      latitude: 34.091216555428675,
+        latitude: 34.091216555428675,
         longitude: -118.45007599325494,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
@@ -416,10 +414,10 @@ export default function MapScreen({ navigation }) {
                         backgroundColor="white"
                         padding={20}
                         borderRadius={20}
-                        justifyContent = 'space-between'
-                        alignContent = 'center'
+                        justifyContent="space-between"
+                        alignContent="center"
                     >
-                        <View alignItems = 'center'>
+                        <View alignItems="center">
                             <Text> Community Rewards </Text>
                             <Image
                                 style={styles.pinPoint}
@@ -440,10 +438,10 @@ export default function MapScreen({ navigation }) {
                         backgroundColor="white"
                         padding={20}
                         borderRadius={20}
-                        justifyContent = 'space-between'
-                        alignContent = 'center'
+                        justifyContent="space-between"
+                        alignContent="center"
                     >
-                        <View alignItems = 'center'>
+                        <View alignItems="center">
                             <Text> Community Rewards </Text>
                             <Image
                                 style={styles.pinPoint}
@@ -455,7 +453,7 @@ export default function MapScreen({ navigation }) {
                 <Marker
                     coordinate={locationB}
                     image={{
-                        uri: "https://sdk.bitmoji.com/render/panel/8791767c-d526-45fd-8095-1ef7df540569-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
+                        uri: "https://sdk.bitmoji.com/render/panel/cd93ec3d-79fe-48d6-ab04-22f69f72dcda-68e74f65-0aca-4d46-908f-7315368c4a0a-v1.png?transparent=1&palette=1",
                     }}
                     key={3}
                 >
@@ -464,10 +462,10 @@ export default function MapScreen({ navigation }) {
                         backgroundColor="white"
                         padding={20}
                         borderRadius={20}
-                        justifyContent = 'space-between'
-                        alignContent = 'center'
+                        justifyContent="space-between"
+                        alignContent="center"
                     >
-                        <View alignItems = 'center'>
+                        <View alignItems="center">
                             <Text> Community Rewards </Text>
                             <Image
                                 style={styles.pinPoint}
@@ -488,10 +486,10 @@ export default function MapScreen({ navigation }) {
                         backgroundColor="white"
                         padding={20}
                         borderRadius={20}
-                        justifyContent = 'space-between'
-                        alignContent = 'center'
+                        justifyContent="space-between"
+                        alignContent="center"
                     >
-                        <View alignItems = 'center'>
+                        <View alignItems="center">
                             <Text> Community Rewards </Text>
                             <Image
                                 style={styles.pinPoint}
@@ -500,40 +498,47 @@ export default function MapScreen({ navigation }) {
                         </View>
                     </Callout>
                 </Marker>
-                {parks.map((item, index) => (
-                   activeGreen && <Marker
-                        style={styles.pinPoint}
-                        coordinate={{
-                            latitude: item.latitude,
-                            longitude: item.longitude,
-                        }}
-                        onPress={() => setParkName(item.name)}
-                        key={item.name}
-                    >
-                        <Image
-                            style={styles.pinPoint}
-                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/ChillaLogo.png")}
-                        />
-                        <Callout
-                            tooltip
-                            backgroundColor="rgba(200, 300, 200, 0.6)"
-                            borderRadius={30}
-                            height={300}
-                            padding={20}
-                            justifyContent = 'space-between'
-                        >
-                            <CalloutSubview>
-                               <View  width = {200} >
-                                    <View justifyContent = 'space-evenly' flexDirection = "row">
-                                        <Image style={styles.pinPoint}
-                                          source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/ChillaLogo.png")}
-                                        />
-                                        <Text style={styles.eventText}>{parkName}</Text>
-                                    </View>
-                               </View>
-                                
+                {parks.map(
+                    (item, index) =>
+                        activeGreen && (
+                            <Marker
+                                style={styles.pinPoint}
+                                coordinate={{
+                                    latitude: item.latitude,
+                                    longitude: item.longitude,
+                                }}
+                                onPress={() => setParkName(item.name)}
+                                key={item.name}
+                            >
+                                <Image
+                                    style={styles.pinPoint}
+                                    source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/ChillaLogo.png")}
+                                />
+                                <Callout
+                                    tooltip
+                                    backgroundColor="rgba(200, 300, 200, 0.6)"
+                                    borderRadius={30}
+                                    height={300}
+                                    padding={20}
+                                    justifyContent="space-between"
+                                >
+                                    <CalloutSubview>
+                                        <View width={200}>
+                                            <View
+                                                justifyContent="space-evenly"
+                                                flexDirection="row"
+                                            >
+                                                <Image
+                                                    style={styles.pinPoint}
+                                                    source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/ChillaLogo.png")}
+                                                />
+                                                <Text style={styles.eventText}>
+                                                    {parkName}
+                                                </Text>
+                                            </View>
+                                        </View>
 
-                                {/* {item.eventSchedule.map((a, b) => (
+                                        {/* {item.eventSchedule.map((a, b) => (
                                     <View
                                         style={styles.eventContainerHeader}
                                         key={b}
@@ -556,24 +561,30 @@ export default function MapScreen({ navigation }) {
                                         </View>
                                     </View>
                                 ))} */}
-                            </CalloutSubview>
-                            <CalloutSubview
-                                onPress={() => {
-                                    console.log(parkName);
-                                    navigation.navigate("ChatStack");
-                                }}
-                            >
-                                <TouchableOpacity
-                                    style={styles.appButtonContainer}
-                                >
-                                    <Text style={styles.appButtonText}>
-                                        Community Chat
-                                    </Text>
-                                </TouchableOpacity>
-                            </CalloutSubview>
-                        </Callout>
-                    </Marker>
-                ))}
+                                    </CalloutSubview>
+                                    <CalloutSubview
+                                        onPress={() => 
+                                            {
+                                              console.log("within mapscreen", parkName);
+                                              navigation.navigate("Chat", {
+                                                paramKey: parkName
+                                              })
+                                              console.log(parkName)
+                                          }
+                                        }
+                                    >
+                                        <TouchableOpacity
+                                            style={styles.appButtonContainer}
+                                        >
+                                            <Text style={styles.appButtonText}>
+                                                Community Chat
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </CalloutSubview>
+                                </Callout>
+                            </Marker>
+                        )
+                )}
                 {activeGreen && (
                     <Circle
                         center={currentRegion}
@@ -585,24 +596,61 @@ export default function MapScreen({ navigation }) {
                 )}
             </MapView>
             <View style={styles.mapLayers}>
-                <TouchableOpacity
-                    style={styles.containerLayer}
-                    onPress={() => {
-                        setActiveGreen(true);
-                        setGreenView(custMap);
-                    }}
-                >
-                    <Text style={styles.layerText}>GV</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.containerLayerTwo}
-                    onPress={() => {
-                        setActiveGreen(false);
-                        setGreenView([]);
-                    }}
-                >
-                    <Text style={styles.layerText}>SM</Text>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            setActiveGreen(true);
+                            setGreenView(custMap);
+                        }}
+                    >
+                        <Image
+                            style={styles.layerMapImage}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/Infatuation.png")}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View marginTop={-30}>
+                    <TouchableOpacity
+                        style={styles.layerMapImage}
+                        onPress={() => {
+                            setActiveGreen(false);
+                            setGreenView([]);
+                        }}
+                    >
+                        <Image
+                            style={styles.layerMapImage}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/Memories.png")}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View marginTop={-30}>
+                    <TouchableOpacity
+                        style={styles.layerMapImage}
+                        onPress={() => {
+                            setActiveGreen(false);
+                            setGreenView([]);
+                        }}
+                    >
+                        <Image
+                            style={styles.layerMapImage}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/see_through_chilla.png")}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View marginTop={-30}>
+                    <TouchableOpacity
+                        style={styles.layerMapImage}
+                        onPress={() => {
+                            setActiveGreen(false);
+                            setGreenView([]);
+                        }}
+                    >
+                        <Image
+                            style={styles.layerMapImage}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/Memories.png")}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
             <View style={styles.locationContainer}>
                 <TouchableOpacity
@@ -626,8 +674,9 @@ export default function MapScreen({ navigation }) {
                         <Image
                             style={styles.bitmojiImage}
                             source={{
-                              uri: "https://sdk.bitmoji.com/render/panel/096dffe0-3934-41db-842c-34c180d0615c-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
-                          }}/>
+                                uri: "https://sdk.bitmoji.com/render/panel/096dffe0-3934-41db-842c-34c180d0615c-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
+                            }}
+                        />
                     </TouchableOpacity>
                     <View style={styles.bitmojiTextContainer}>
                         <Text style={styles.bitmojiText}>My Bitmoji</Text>
@@ -646,18 +695,14 @@ export default function MapScreen({ navigation }) {
                     <Image
                         style={styles.bitmojiImage}
                         source={{
-                          uri: "https://sdk.bitmoji.com/render/panel/096dffe0-3934-41db-842c-34c180d0615c-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
-                      }}/>
+                            uri: "https://sdk.bitmoji.com/render/panel/096dffe0-3934-41db-842c-34c180d0615c-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
+                        }}
+                    />
                     <View style={styles.bitmojiTextContainer}>
                         <Text style={styles.bitmojiText}>Friends</Text>
                     </View>
                 </View>
             </View>
-            {profile && (
-                <View>
-                    <Text>profile</Text>
-                </View>
-            )}
         </View>
     );
 }
@@ -766,20 +811,16 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: "white",
     },
+    layerMapImage: {
+        height: 75,
+        width: 75,
+        alignContent: "center",
+    },
     pinPoint: {
         height: 50,
         width: 50,
     },
-    containerLayerTwo: {
-        elevation: 8,
-        backgroundColor: "blue",
-        borderRadius: 50,
-        paddingVertical: 15,
-        paddingHorizontal: 12,
-        width: 40,
-        height: 40,
-        borderColor: "white",
-    },
+
     layerText: {
         fontSize: 8,
         color: "#fff",
@@ -787,13 +828,13 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         textTransform: "uppercase",
     },
-  eventText: {
-      fontSize: 12,
-      color: "#000",
-      fontWeight: "bold",
-      alignSelf: "center",
-      textTransform: "uppercase",
-  },
+    eventText: {
+        fontSize: 12,
+        color: "#000",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase",
+    },
     appButtonText: {
         fontSize: 18,
         color: "#fff",
@@ -810,13 +851,13 @@ const styles = StyleSheet.create({
     },
     mapLayers: {
         position: "absolute", //use absolute position to show button on top of the map
-        top: "10%", //for center align
-        right: "5%",
+        top: "15%", //for center align
+        right: "4%",
         alignSelf: "flex-end", //for align to right
-        backgroundColor: "transparent",
+        backgroundColor: "rgba(200,200,200, 0.7)",
         borderRadius: 15,
         width: 50,
-        height: 100,
+        height: 200,
         justifyContent: "center",
         alignItems: "center",
     },
