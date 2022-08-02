@@ -2,6 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React, { useCallback, useMemo, useRef } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BottomSheet from "@gorhom/bottom-sheet";
+import { Box, Card, AspectRatio } from "native-base";
 
 const Stack = createStackNavigator();
 export default function ProfileScreen() {
@@ -22,9 +23,7 @@ export default function ProfileScreen() {
         onChange={handleSheetChanges}
       >
         <View style={styles.contentContainer}>
-
-
-          
+          <Box shadow="9" />
         </View>
       </BottomSheet>
     </View>
