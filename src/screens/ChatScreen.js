@@ -24,6 +24,8 @@ export default function ChatScreen({ navigation }) {
     getUsers();
   }, []);
 
+  
+
   return (
     <View style={styles.container}>
 

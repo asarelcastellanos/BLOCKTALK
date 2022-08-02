@@ -10,7 +10,7 @@ const WIDTH = Dimensions.get('window').width;
 export default function Feed({ url, type }) {
   const videoRef = useRef(null);
   const navigation = useNavigation();
-
+  
   return (
     <TouchableOpacity
       style={styles.container}
@@ -27,39 +27,50 @@ export default function Feed({ url, type }) {
           source={{uri: url}}
         />
       : <Image
-        style={styles.image}
+        style={styles.imageContainer}
         source={{uri: url}}
         />
     }
-      <Ionicons name={"play"} color={"white"} size={40} style={styles.playButton}/>
+      <View style={styles.playButtonContainer}>
+        <Ionicons name={"play"} color={"white"} size={35} style={styles.playButton}/>
+      </View>
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin: 5,
-    width: WIDTH/2-30,
-    height: 16*(WIDTH/2-30)/9,
+    flex: 1,
     borderRadius: 10,
     backgroundColor: 'black',
-    // alignItems: 'center',
-    // flex: 1,
-    // height: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    height: 280,
+    margin: 5,
   },
   videoContainer: {
     flex: 1,
+    height: '100%',
     borderRadius: 10,
   },
-  image: {
+  imageContainer: {
     flex: 1,
+    height: '100%',
     borderRadius: 10,
   },
-  playButton: {
-    position: 'absolute',
+  playButtonContainer: {
     backgroundColor: 'black',
     borderRadius: 30,
-    padding: 10,
+    position: 'absolute',
+    padding: 5,
     opacity: 0.5,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+  },
+  playButton: {
+    alignSelf: 'center',
+    marginLeft: 5
   }
 })

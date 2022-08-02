@@ -26,8 +26,12 @@ class FlatListItem extends Component {
               {this.props.item.description}descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptionscriptiondescription
             </Text>
             <View style={styles.categoryContainer}>
-              <Text style={styles.category}>internship</Text>
-              <Text style={styles.category}>workshop</Text>
+              <View style={styles.category}>
+                <Text style={styles.categoryText}>internship</Text>
+              </View>
+              <View style={styles.category}>
+                <Text style={styles.categoryText}>workshop</Text>
+              </View>
             </View>
           </View>
         </View>
@@ -41,8 +45,8 @@ export default class ResourceScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Resources</Text>
-        <Text style={styles.slogan}>Slogan or description</Text>
+        {/* <Text style={styles.header}>Resources</Text> */}
+        {/* <Text style={styles.slogan}>Slogan or description</Text> */}
         <FlatList
           style={styles.list}
           data={resourceData}
@@ -121,9 +125,12 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   category: {
-    marginRight: 5,
+    borderRadius: 15,
     backgroundColor: 'yellow',
-    padding: 3,
+    marginRight: 5,
+    padding: 5,
+  },
+  categoryText: {
     fontSize: 10,
   }
 })

@@ -4,50 +4,39 @@ import { View, Image, Text, StyleSheet, Button, TextInput, TouchableOpacity,
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useIsFocused } from '@react-navigation/native';
 import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
-import { collection, getDoc, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import db from '../../firebase';
 import uuid from 'uuid-random';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { StatusBar } from 'expo-status-bar';
+import { useNavigation } from '@react-navigation/native';
 
-export default function SavePostScreen({ navigation, route }) {
-  const [contentType, setContentType] = useState('');
-  const [fileName, setFileName] = useState('');
-  const [downloadURL, setdownloadURL] = useState('');
+export default function SavePostScreen({ route }) {
+  const storageRef = ref(getStorage(), `posts/${uuid()}.jpg`);
 
   const { user } = useAuthentication();
   const media = route.params.source;
+  const navigation = useNavigation();
   const isFocused = useIsFocused();
   
   const saveMediaToStorage = async () => {
-    const storageRef = ref(getStorage(), `posts/${uuid()}.jpg`);
     const img = await fetch(media);
     const bytes = await img.blob();
+
+    console.log('start uploading image...');
     await uploadBytes(storageRef, bytes);
-    await getMetadata(storageRef)
-      .then((metadata) => {
-        setContentType(metadata.contentType);
-        setFileName(metadata.name);
-      });
-    await getDownloadURL(storageRef).then(async (url) => {
-      setdownloadURL(url);
-    });
+    const metadata = await getMetadata(storageRef);
+    const downloadURL = await getDownloadURL(storageRef);
+
     await addDoc(collection(db, 'Stories'), {
       userID: user.uid,
       downloadURL: downloadURL,
       creationDate: serverTimestamp(),
-      contentType: contentType,
-      fileName: fileName,
+      contentType: metadata.contentType,
+      fileName: metadata.name,
     });
   }
 
-  // const saveMediaToFirestore = addDoc(collection(db, 'Stories'), {
-  //   userID: user.uid,
-  //   downloadURL: downloadURL,
-  //   creationDate: serverTimestamp(),
-  //   contentType: contentType,
-  //   fileName: fileName,
-  // });
 
   const names = [
     {
@@ -66,69 +55,81 @@ export default function SavePostScreen({ navigation, route }) {
       index: "4",
       name: " mentorship ",
     }
-  ]
-
+  ];
 
 
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <Image
-            style={styles.mediaPreview}
-            source={{uri: media}}
-        />
-        {/* <View style={styles.formContainer}>
-          <TextInput
-            style={styles.inputText}
-            maxLength={150}
-            placeholder='share here'
-            multiline
+      {isFocused?
+        <ScrollView style={styles.scrollView}>
+          <Image
+              style={styles.mediaPreview}
+              source={{uri: media}}
           />
-        </View> */}
-
-        <View style={styles.categoryContainer}>
-          <Text style={styles.categoryHeader}>Select categories</Text>
-
-            <FlatList 
-              style={styles.listStyle}
-              keyExtractor={(key) => {
-                return key.index;
-              }}
-              horizontal
-              inverted
-              showsHorizontalScrollIndicator={false}
-              data={names}
-              renderItem={({item}) => {
-                return <Text style={styles.textStyle}>{item.name}</Text>
-              }}
+          {/* <View style={styles.formContainer}>
+            <TextInput
+              style={styles.inputText}
+              maxLength={150}
+              placeholder='share here'
+              multiline
             />
-        </View>
+          </View> */}
 
+          <View style={styles.categoryContainer}>
+            <Text style={styles.categoryHeader}>Select categories</Text>
+              <FlatList 
+                style={styles.listStyle}
+                keyExtractor={(key) => {
+                  return key.index;
+                }}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                data={names}
+                renderItem={({item}) => {
+                  return (
+                    <TouchableOpacity
+                      style={styles.categorySelection}
+                    >
+                      <Text style={styles.categoryText}>{item.name}</Text>
+                    </TouchableOpacity>
+                  )
+                }}
+              />
+          </View>
+  {/*
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Camera')}
+              style={styles.cancelButton}
+            >
+              <Ionicons name="alert-outline"/>
+              <Text>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {saveMediaToStorage(); navigation.popToTop(); navigation.navigate('Stories')}}
+              style={styles.postButton}
+            >
+              <Ionicons name="albums-outline"/>
+              <Text>Post</Text>
+            </TouchableOpacity>
+          </View>
+  */}
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Camera')}
-            style={styles.cancelButton}
-          >
-            <Ionicons name="alert-outline"/>
-            <Text>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {/*saveMediaToStorage();*/ navigation.navigate('StoriesStack').navigate('StoriesStack')}}
-            style={styles.postButton}
-          >
-            <Ionicons name="albums-outline"/>
-            <Text>Post</Text>
-          </TouchableOpacity>
+        </ScrollView>
+      :<></>}
 
-        </View>
-      </ScrollView>
+      <TouchableOpacity
+          onPress={() => {/*saveMediaToStorage();*/ navigation.popToTop(); navigation.navigate('Stories')}}
+          style={styles.postButton}
+        >
+          <Ionicons name="arrow-redo" color={'white'} size={23} style={{marginTop:4}}/>
+      </TouchableOpacity>
+
       <StatusBar/>
     </View>
    )
 }
-
 
 
 const styles = StyleSheet.create({
@@ -159,12 +160,11 @@ const styles = StyleSheet.create({
   //   flexDirection: 'row',
   // },
   categoryContainer: {
-    paddingVertical:10,
+    marginVertical:15,
   },
   categoryHeader: {
-    fontSize: 19,
+    fontSize: 16,
     fontFamily: 'Avenir Next',
-    padding: 5,
   },
   buttonContainer: {
     flexDirection:'row',
@@ -176,21 +176,34 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'yellow',
   },
+  // postButton: {
+  //   flex: 1,
+  //   flexDirection: 'row',
+  //   padding: 10,
+  // },
   postButton: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 10,
+    backgroundColor: '#5F86FF',
+    borderRadius: 20,
+    width: 35,
+    height: 35,
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    alignItems: 'center',
   },
-  textStyle: {
-    fontSize: 15,
-    padding: 10,
-    backgroundColor: "gray",
-    margin: 5,
-    color: "white",
+  categorySelection: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: '#FBE869',
+    borderRadius: 20,
+    marginRight: 5,
+  },
+  categoryText: {
+    fontSize: 13,
+    color: 'black',
   },
   listStyle: {
     textAlign: "center",
-    margin: 5,
-    padding: 5,
+    marginVertical: 5,
   },
 });

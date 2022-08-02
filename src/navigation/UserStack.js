@@ -67,7 +67,7 @@ export default function UserStack() {
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: '#694fad' }}
-        initialRouteName="CameraStack"
+        initialRouteName="StoriesStack"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
@@ -101,7 +101,7 @@ export default function UserStack() {
         <Tab.Screen
           name="CameraStack"
           component={CameraStack}
-          options={{ headerShown: false, tabBarShowLabel: false }} 
+          options={{ headerShown: false, tabBarShowLabel: false }}
         />
         <Tab.Screen
           name="ResourceStack"

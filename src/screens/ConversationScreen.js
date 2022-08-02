@@ -29,9 +29,12 @@ export default function ConversationScreen({ navigation, route }) {
       messages: arrayUnion(messages[0]),
     });
   }, []);
+  
   if (!user || !userData) {
     return <View></View>;
   }
+
+
   return (
     <GiftedChat
       messages={messages}
