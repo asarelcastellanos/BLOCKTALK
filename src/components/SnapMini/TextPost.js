@@ -21,7 +21,9 @@ export default function TextPost({ message, user }) {
             color="#3F78BA"
           />
         </TouchableOpacity>
-        <Text style={styles.userName}>{user.name}</Text>
+        <Text style={styles.userName}>
+          {user == "Snapchat User" ? user : user.name}
+        </Text>
       </View>
     </View>
   );
@@ -33,7 +35,12 @@ const styles = StyleSheet.create({
     height: 500,
     width: "100%",
     padding: 10,
-    marginBottom: 25
+    marginBottom: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,  
+    elevation: 5
   },
   titleContainer: {
     height: 40,
@@ -56,7 +63,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
   },
   userName: {
-    color: "#3F78BA"
+    color: "#3F78BA",
   },
   profileIcon: {
     marginLeft: 10,

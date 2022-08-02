@@ -2,13 +2,13 @@ import React from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 
 // Component
-import PostForm from "../../../components/SnapMini/PostForm";
+import TextForm from "../../../components/SnapMini/TextForm";
 import TopNav from "../../../components/SnapMini/TopNav";
 import PinnedPrompt from "../../../components/SnapMini/PinnedPrompt";
 
 export default function PostScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    <>
       <TopNav
         chevron={"ios-chevron-back-outline"}
         navigation={navigation}
@@ -16,14 +16,11 @@ export default function PostScreen({ navigation }) {
           navigation.navigate("Feed");
         }}
       />
-      <PinnedPrompt />
-      {/* <View style={styles.switchInput}>
-        <Text>
-          Switch Between
-        </Text>
-      </View> */}
-      <PostForm />
-    </View>
+      <View style={styles.container}>
+        <PinnedPrompt />
+        <TextForm />
+      </View>
+    </>
   );
 }
 
@@ -31,11 +28,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#FFF"
+    backgroundColor: "#E2F0FF",
+    padding: 25
   },
-  switchInput: {
-    width: "100%",
-    height: 50,
-    backgroundColor: "blue"
-  }
-})
+});

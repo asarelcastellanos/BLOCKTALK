@@ -24,6 +24,7 @@ export default function FeedScreen({ navigation }) {
   useEffect(() => {
     let unsubscribeFromNewSnapshots = onSnapshot(postRef, (doc) => {
       setPosts(doc.data().posts);
+      console.log(doc.data().posts);
     });
 
     return function cleanupBeforeUnmounting() {
@@ -43,6 +44,15 @@ export default function FeedScreen({ navigation }) {
       <ScrollView style={styles.scrollableView}>
         <PinnedPrompt />
         {posts?.map((post, id) => {
+          if (post.anonymous == true) {
+            return (
+              <TextPost
+                key={id}
+                message={post.message}
+                user={"Snapchat User"}
+              />
+            );
+          }
           return <TextPost key={id} message={post.message} user={post.user} />;
         })}
       </ScrollView>
