@@ -23,12 +23,13 @@ export default function FeedScreen({ navigation }) {
     const querySnapshot = await getDocs(collection(db, "Posts"));
     querySnapshot.forEach((doc) => {
       setPosts(doc.data().posts);
+      console.log("i ran");
     });
   }
 
   useEffect(() => {
     getPosts();
-  }, [posts]);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -54,5 +55,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#E2F0FF",
     height: "100%",
     width: "100%",
+  },
+  scrollableView: {
+    padding: 25
   }
 });
