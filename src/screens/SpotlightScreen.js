@@ -1,12 +1,8 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native';
-import { Button } from "@rneui/themed";
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function SpotlightScreen() {
+export default function SpotlightScreen({navigation}) {
   // const Stack = createNativeStackNavigator();
 
   return (
@@ -22,23 +18,20 @@ export default function SpotlightScreen() {
             source={require("../../assets/img/img_4.png")} 
             />   
           </View>   
-            <Text style={styles.textInputHead}>Let's get ...</Text>  
-            <TouchableOpacity style={styles.btn}>
-              <Text style={styles.textInput}>Cookin's with Chefs</Text>
-            </TouchableOpacity>
-            <TouchableOpacity  style={styles.btn}>
-              <Text style={styles.textInput}>Our Own's Recipes</Text>
-            </TouchableOpacity>
-            <TouchableOpacity  style={styles.btn}>
-              <Text style={styles.textInput}>Snack Facts</Text>
-            </TouchableOpacity>
-            {/* <Button size="sm" style={styles.btn}>Cookin' with Chefs</Button> */}
-            {/* <Button size="sm" style={styles.btn}>Our Own's Recipes</Button> */}
-            {/* <Button size="sm" style={styles.btn}>Snack Facts</Button> */}
-          {/* <NavigationContainer>
-            <Stack.Navigator>
-            </Stack.Navigator>
-          </NavigationContainer> */}
+            <View style={styles.midText}>
+              <Text style={styles.textInputHead}>Let's get ...</Text>  
+            </View>
+            <View style={styles.btnContainer}>
+              <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Cooking")}>
+                <Text style={styles.textInput}>Cookin's with Chefs</Text>
+              </TouchableOpacity>
+              <TouchableOpacity  style={styles.btn} onPress={() => navigation.navigate("Recipes")}>
+                <Text style={styles.textInput}>Our Own's Recipes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity  style={styles.btn} onPress={() => navigation.navigate("Snack")}>
+                <Text style={styles.textInput}>Snack Facts</Text>
+              </TouchableOpacity>
+            </View>
         </View>
   )
 }
@@ -49,10 +42,10 @@ const styles= StyleSheet.create({
     backgroundColor: "black",
   },
   imgSection: {
-    flex: 1
+    flex: 4
   },
   Img: {
-    flex: 0.9,
+    flex: 2,
     marginBottom: 10,
   },
   textTitle: {
@@ -67,12 +60,18 @@ const styles= StyleSheet.create({
     color: "white",
     fontWeight: "bold",
   },
+  midText:{
+    flex: 1
+  },
   textInputHead:{
     // flex: 1,
     fontSize: 20,
     color: "white",
     fontWeight: "bold",
   },  
+  btnContainer: {
+    flex: 1.5
+  },
   btn:{
     margin: 5,
   }

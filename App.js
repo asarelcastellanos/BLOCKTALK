@@ -7,10 +7,13 @@ import "./firebase";
 // Importing Root Component
 import RootNavigation from "./src/navigation/RootNavigation";
 
+import { NativeBaseProvider } from "native-base";
 export default function App() {
   return (
     // <GestureHandlerRootView>
+    <NativeBaseProvider>
       <RootNavigation />
+    </NativeBaseProvider>
     // {/* </GestureHandlerRootView> */}
   );
 }

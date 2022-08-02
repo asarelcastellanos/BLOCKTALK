@@ -16,6 +16,7 @@ import Test from "../screens/Test";
 
 // Stacks
 import ChatStack from "./ChatStack";
+import MiniStack from "../navigation/MiniStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -70,7 +71,7 @@ export default function UserStack() {
             } else if (route.name === "Stories") {
               iconName = "ios-people-outline";
               iconColor = focused ? "purple" : "grey";
-            } else if (route.name === "Spotlight") {
+            } else if (route.name === "MiniStack") {
               iconName = "ios-play-outline";
               iconColor = focused ? "red" : "grey";
             }
@@ -106,9 +107,9 @@ export default function UserStack() {
           options={screenOptions}
         />
         <Tab.Screen
-          name="Spotlight"
-          component={SpotlightScreen}
-          options={screenOptions}
+          name="MiniStack"
+          component={MiniStack}
+          options={{ headerShown: false, tabBarShowLabel: false }}
         />
       </Tab.Navigator>
     </NavigationContainer>
