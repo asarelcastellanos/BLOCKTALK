@@ -37,13 +37,10 @@ export default function ChatStack({ navigation }) {
   };
 
   return (
-    <Stack.Navigator>
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
         options={screenOptions}
       />
-      <Stack.Screen name="Conversation" component={ConversationScreen} />
-    </Stack.Navigator>
   );
 }

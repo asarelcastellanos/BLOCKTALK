@@ -8,7 +8,6 @@ import {
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 
-
 // Components
 import ReturnButton from "../components/ReturnButton";
 
@@ -78,7 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     letterSpacing: 2,
   },
-  logInFields: {
+  logInFields: { 
     width: 250,
     height: 80,
     position: "absolute",

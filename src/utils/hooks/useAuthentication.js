@@ -7,38 +7,28 @@ const auth = getAuth();
 
 export function useAuthentication() {
   const [user, setUser] = useState();
-  const [userData, setUserData] = useState();
-
+  const [userData, setData] = useState();
   useEffect(() => {
-    const unsubscribeFromAuthStatusChanged = onAuthStateChanged(
-      auth,
-      (user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          setUser(user);
-
-          // get Doc from User collection
-          getDoc(doc(db, "Users", user.uid))
-            .then((userData) => {
-              // console.log("User Doc", userData.data());
-              setUserData(userData.data());
-            })
-            .catch((error) => {
-              console.log("Error getting document:", error);
-            });
-        } else {
-          // User is signed out
-          setUser(undefined);
-        }
-      }
-    );
-
-    return unsubscribeFromAuthStatusChanged;
+      const unsubscribeFromAuthStatusChanged = onAuthStateChanged(auth, (user) => {
+          if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              setUser(user);
+              const docRef = doc(db, "Users", user.uid);
+              getDoc(docRef).then((dataSnapshot) => {
+                  console.log("Document data:", dataSnapshot.data());
+                  setData(dataSnapshot.data())
+                  console.log(user);
+              })
+          } else {
+              // User is signed out
+              setUser(undefined);
+          }
+      });
+      return unsubscribeFromAuthStatusChanged;
   }, []);
-
   return {
-    user,
-    userData,
+      user,
+      userData
   };
 }

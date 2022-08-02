@@ -23,6 +23,7 @@ import FontAwesome, {
     RegularIcons,
     BrandIcons,
 } from "@expo/vector-icons/FontAwesome";
+
 export default function MapScreen({ navigation }) {
     var custMap = [
         {
@@ -246,8 +247,6 @@ export default function MapScreen({ navigation }) {
     const [activeGreen, setActiveGreen] = useState(false);
     const [greenView, setGreenView] = useState([]);
 
-
-
     const parks = [
         {
             name: "Bellevue Park",
@@ -301,7 +300,7 @@ export default function MapScreen({ navigation }) {
             ],
         },
         {
-            name: "MacArthur Park",
+            name: "Mac Arthur Park",
             latitude: 34.05973407549204,
             longitude: -118.28316704628648,
             eventSchedule: [
@@ -318,7 +317,7 @@ export default function MapScreen({ navigation }) {
             ],
         },
         {
-            name: "Vista Hermosa Natural Park",
+            name: "Visa Hermosa Park",
             latitude: 34.06207758901168,
             longitude: -118.25692881037423,
             eventSchedule: [
@@ -393,21 +392,26 @@ export default function MapScreen({ navigation }) {
 
     let text = "Waiting...";
     text = JSON.stringify(location);
-
-
     const [profile, setProfile] = useState(false);
     return (
         <View style={styles.container}>
             <MapView
                 style={styles.map}
-                region={currentRegion}
+                //region={currentRegion}
+                initialRegion = {{
+                  longitude:-118.2437,
+                  latitude: 34.0522,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }
+                }
                 provider={PROVIDER_GOOGLE}
                 customMapStyle={greenView}
             >
                 <Marker
                     coordinate={currentRegion}
                     image={{
-                        uri: "https://sdk.bitmoji.com/render/panel/06ea9fd3-9236-49c1-9d15-d1552781d3bf-20960538-50bc-4baa-8e28-26b9f0d7bb09-v1.png?transparent=1&palette=1",
+                        uri: "https://sdk.bitmoji.com/render/panel/8791767c-d526-45fd-8095-1ef7df540569-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
                     }}
                     key={1}
                 >
@@ -416,14 +420,14 @@ export default function MapScreen({ navigation }) {
                         backgroundColor="white"
                         padding={20}
                         borderRadius={20}
-                        justifyContent='space-between'
-                        alignContent='center'
+                        justifyContent="space-between"
+                        alignContent="center"
                     >
-                        <View alignItems='center'>
+                        <View alignItems="center">
                             <Text> Community Rewards </Text>
                             <Image
                                 style={styles.pinPoint}
-                                source={require("/Users/eliaswoldie/Documents/Amanuel Snap Project/GreenView/assets/parkIcon.png")}
+                                source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/parkIcon.png")}
                             />
                         </View>
                     </Callout>
@@ -431,7 +435,7 @@ export default function MapScreen({ navigation }) {
                 <Marker
                     coordinate={locationA}
                     image={{
-                        uri: "https://sdk.bitmoji.com/render/panel/5ec9454b-e321-4007-a4fb-e1b511ef9e1d-5e164e7d-562e-4bdf-8c26-7d8aff1906af-v1.png?transparent=1&palette=1",
+                        uri: "https://sdk.bitmoji.com/render/panel/8791767c-d526-45fd-8095-1ef7df540569-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
                     }}
                     key={2}
                 >
@@ -440,14 +444,14 @@ export default function MapScreen({ navigation }) {
                         backgroundColor="white"
                         padding={20}
                         borderRadius={20}
-                        justifyContent='space-between'
-                        alignContent='center'
+                        justifyContent="space-between"
+                        alignContent="center"
                     >
-                        <View alignItems='center'>
+                        <View alignItems="center">
                             <Text> Community Rewards </Text>
                             <Image
                                 style={styles.pinPoint}
-                                source={require("/Users/eliaswoldie/Documents/Amanuel Snap Project/GreenView/assets/parkIcon.png")}
+                                source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/parkIcon.png")}
                             />
                         </View>
                     </Callout>
@@ -455,7 +459,7 @@ export default function MapScreen({ navigation }) {
                 <Marker
                     coordinate={locationB}
                     image={{
-                        uri: "https://sdk.bitmoji.com/render/panel/8791767c-d526-45fd-8095-1ef7df540569-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
+                        uri: "https://sdk.bitmoji.com/render/panel/cd93ec3d-79fe-48d6-ab04-22f69f72dcda-68e74f65-0aca-4d46-908f-7315368c4a0a-v1.png?transparent=1&palette=1",
                     }}
                     key={3}
                 >
@@ -464,14 +468,14 @@ export default function MapScreen({ navigation }) {
                         backgroundColor="white"
                         padding={20}
                         borderRadius={20}
-                        justifyContent='space-between'
-                        alignContent='center'
+                        justifyContent="space-between"
+                        alignContent="center"
                     >
-                        <View alignItems='center'>
+                        <View alignItems="center">
                             <Text> Community Rewards </Text>
                             <Image
                                 style={styles.pinPoint}
-                                source={require("/Users/eliaswoldie/Documents/Amanuel Snap Project/GreenView/assets/parkIcon.png")}
+                                source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/parkIcon.png")}
                             />
                         </View>
                     </Callout>
@@ -488,92 +492,81 @@ export default function MapScreen({ navigation }) {
                         backgroundColor="white"
                         padding={20}
                         borderRadius={20}
-                        justifyContent='space-between'
-                        alignContent='center'
+                        justifyContent="space-between"
+                        alignContent="center"
                     >
-                        <View alignItems='center'>
+                        <View alignItems="center">
                             <Text> Community Rewards </Text>
                             <Image
                                 style={styles.pinPoint}
-                                source={require("/Users/eliaswoldie/Documents/Amanuel Snap Project/GreenView/assets/parkIcon.png")}
+                                source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/parkIcon.png")}
                             />
                         </View>
                     </Callout>
                 </Marker>
-                {parks.map((item, index) => (
-                    activeGreen && <Marker
-                        style={styles.pinPoint}
-                        coordinate={{
-                            latitude: item.latitude,
-                            longitude: item.longitude,
-                        }}
-                        onPress={() => setParkName(item.name)}
-                        key={item.name}
-                    >
-                        <Image
-                            style={styles.pinPoint}
-                            source={require("/Users/eliaswoldie/Documents/Amanuel Snap Project/GreenView/assets/ChillaLogo.png")}
-                        />
-                        <Callout
-                            tooltip
-                            backgroundColor="rgba(200, 300, 200, 0.6)"
-                            borderRadius={30}
-                            height={300}
-                            padding={20}
-                            justifyContent='space-between'
-                        >
-                            <CalloutSubview>
-                                <View width={200} >
-                                    <View justifyContent='space-evenly' flexDirection="row">
-                                        <Image style={styles.pinPoint}
-                                            source={require("/Users/eliaswoldie/Documents/Amanuel Snap Project/GreenView/assets/ChillaLogo.png")}
-                                        />
-                                        <Text style={styles.eventText}>{parkName}</Text>
-                                    </View>
-                                </View>
-
-
-                                {/* {item.eventSchedule.map((a, b) => (
-                                    <View
-                                        style={styles.eventContainerHeader}
-                                        key={b}
-                                    >
-                                        <View>
-                                            <Text>{a.eventName}</Text>
-                                        </View>
-                                        <View>
-                                            <Text>{a.organizer}</Text>
-                                        </View>
-                                        <View>
-                                            <TouchableOpacity
-                                                style={styles.containerLayer}
-                                                onPress={() => {}}
-                                            >
-                                                <Text style={styles.layerText}>
-                                                    RSVP
-                                                </Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                ))} */}
-                            </CalloutSubview>
-                            <CalloutSubview
-                                onPress={() => {
-                                    console.log(parkName);
-                                    navigation.navigate("ChatStack");
+                {parks.map(
+                    (item, index) =>
+                        activeGreen && (
+                            <Marker
+                                style={styles.pinPoint}
+                                coordinate={{
+                                    latitude: item.latitude,
+                                    longitude: item.longitude,
                                 }}
+                                onPress={() => setParkName(item.name)}
+                                key={item.name}
                             >
-                                <TouchableOpacity
-                                    style={styles.appButtonContainer}
+                                <Image
+                                    style={styles.pinPoint}
+                                    source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/ChillaLogo.png")}
+                                />
+                                <Callout
+                                    tooltip
+                                    backgroundColor="rgba(200, 300, 200, 0.6)"
+                                    borderRadius={30}
+                                    height={300}
+                                    padding={20}
+                                    justifyContent="space-between"
                                 >
-                                    <Text style={styles.appButtonText}>
-                                        Community Chat
-                                    </Text>
-                                </TouchableOpacity>
-                            </CalloutSubview>
-                        </Callout>
-                    </Marker>
-                ))}
+                                    <CalloutSubview>
+                                        <View width={200}>
+                                            <View
+                                                justifyContent="space-evenly"
+                                                flexDirection="row"
+                                            >
+                                                <Image
+                                                    style={styles.pinPoint}
+                                                    source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/ChillaLogo.png")}
+                                                />
+                                                <Text style={styles.eventText}>
+                                                    {item.name}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                    </CalloutSubview>
+                                    <CalloutSubview
+                                        onPress={() => 
+                                            {
+                                              //console.log("within mapscreen", parkName);
+                                              navigation.navigate("Chat", {
+                                                paramKey: parkName
+                                              })
+                                              console.log(parkName)
+                                          }
+                                        }
+                                    >
+                                        <TouchableOpacity
+                                            style={styles.appButtonContainer}
+                                        >
+                                            <Text style={styles.appButtonText}>
+                                                Community Chat
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </CalloutSubview>
+                                </Callout>
+                            </Marker>
+                        )
+                )}
                 {activeGreen && (
                     <Circle
                         center={currentRegion}
@@ -585,24 +578,61 @@ export default function MapScreen({ navigation }) {
                 )}
             </MapView>
             <View style={styles.mapLayers}>
-                <TouchableOpacity
-                    style={styles.containerLayer}
-                    onPress={() => {
-                        setActiveGreen(true);
-                        setGreenView(custMap);
-                    }}
-                >
-                    <Text style={styles.layerText}>GV</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.containerLayerTwo}
-                    onPress={() => {
-                        setActiveGreen(false);
-                        setGreenView([]);
-                    }}
-                >
-                    <Image style={styles.layerText} source={require("/Users/eliaswoldie/Documents/Amanuel Snap Project/GreenView/assets/Memories.png")}/>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            setActiveGreen(false);
+                            setGreenView([]);
+                        }}
+                    >
+                        <Image
+                            style={styles.layerMapImage}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/Infatuation.png")}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View marginTop={-30}>
+                    <TouchableOpacity
+                        style={styles.layerMapImage}
+                        onPress={() => {
+                            setActiveGreen(false);
+                            setGreenView([]);
+                        }}
+                    >
+                        <Image
+                            style={styles.layerMapImage}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/Memories.png")}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View marginTop={-30}>
+                    <TouchableOpacity
+                        style={styles.layerMapImage}
+                        onPress={() => {
+                            setActiveGreen(true);
+                            setGreenView(custMap);
+                        }}
+                    >
+                        <Image
+                            style={styles.layerMapImage}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/chiila.png")}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View marginTop={-30}>
+                    <TouchableOpacity
+                        style={styles.layerMapImage}
+                        onPress={() => {
+                            setActiveGreen(false);
+                            setGreenView([]);
+                        }}
+                    >
+                        <Image
+                            style={styles.layerMapImage}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/Memories.png")}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
             <View style={styles.locationContainer}>
                 <TouchableOpacity
@@ -622,12 +652,18 @@ export default function MapScreen({ navigation }) {
             </View>
             <View style={styles.bitmojiContainer}>
                 <View style={styles.myBitmoji}>
-                    <TouchableOpacity onPress={() => setProfile(true)}>
+                    <TouchableOpacity  
+                    
+                      onPress={() => navigation.navigate("Communities")}
+                    
+                    >
                         <Image
                             style={styles.bitmojiImage}
                             source={{
                                 uri: "https://sdk.bitmoji.com/render/panel/096dffe0-3934-41db-842c-34c180d0615c-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
-                            }} />
+                            }}
+                           
+                        />
                     </TouchableOpacity>
                     <View style={styles.bitmojiTextContainer}>
                         <Text style={styles.bitmojiText}>My Bitmoji</Text>
@@ -636,7 +672,7 @@ export default function MapScreen({ navigation }) {
                 <View style={styles.places}>
                     <Image
                         style={styles.bitmojiImage}
-                        source={require("/Users/eliaswoldie/Documents/Amanuel Snap Project/GreenView/assets/parks.png")}
+                        source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/parks.png")}
                     />
                     <View style={styles.bitmojiTextContainer}>
                         <Text style={styles.bitmojiText}>Parks</Text>
@@ -647,17 +683,13 @@ export default function MapScreen({ navigation }) {
                         style={styles.bitmojiImage}
                         source={{
                             uri: "https://sdk.bitmoji.com/render/panel/096dffe0-3934-41db-842c-34c180d0615c-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
-                        }} />
+                        }}
+                    />
                     <View style={styles.bitmojiTextContainer}>
                         <Text style={styles.bitmojiText}>Friends</Text>
                     </View>
                 </View>
             </View>
-            {profile && (
-                <View>
-                    <Text>profile</Text>
-                </View>
-            )}
         </View>
     );
 }
@@ -766,6 +798,11 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: "white",
     },
+    layerMapImage: {
+        height: 70,
+        width: 70,
+        alignContent: "center",
+    },
     pinPoint: {
         height: 50,
         width: 50,
@@ -781,8 +818,6 @@ const styles = StyleSheet.create({
         borderColor: "white",
     },
     layerText: {
-        height: 70,
-        width: 70,
         fontSize: 8,
         color: "#fff",
         fontWeight: "bold",
@@ -812,13 +847,13 @@ const styles = StyleSheet.create({
     },
     mapLayers: {
         position: "absolute", //use absolute position to show button on top of the map
-        top: "10%", //for center align
-        right: "5%",
+        top: "15%", //for center align
+        right: "4%",
         alignSelf: "flex-end", //for align to right
-        backgroundColor: "transparent",
+        backgroundColor: "rgba(200,200,200, 0.7)",
         borderRadius: 15,
         width: 50,
-        height: 100,
+        height: 200,
         justifyContent: "center",
         alignItems: "center",
     },
