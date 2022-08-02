@@ -18,6 +18,7 @@ import CustomHeaderTab from "../components/CustomHeaderTab";
 import ChatScreen from "../screens/ChatScreen";
 // Stacks
 import ChatStack from "./ChatStack";
+import MapStack from "./MapStack";
 const Tab = createBottomTabNavigator();
 
 export default function UserStack() {
@@ -89,7 +90,7 @@ export default function UserStack() {
             >
                 <Tab.Screen
                     name="Map"
-                    component={MapScreen}
+                    component={MapStack}
                     options={{ ...screenOptions, headerShown: false }}
                 />
                 <Tab.Screen

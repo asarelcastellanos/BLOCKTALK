@@ -252,7 +252,7 @@ export default function MapScreen({ navigation }) {
             name: "Bellevue Park",
             latitude: 34.08428677217567,
             longitude: -118.28281060285326,
-            eventSchedule: [
+            eventSchedule: [  
                 {
                     parkName: "Mac Arthur Park",
                     eventName: "Clean The Park",
@@ -398,7 +398,14 @@ export default function MapScreen({ navigation }) {
         <View style={styles.container}>
             <MapView
                 style={styles.map}
-                region={currentRegion}
+                //region={currentRegion}
+                initialRegion = {{
+                  longitude:-118.2437,
+                  latitude: 34.0522,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }
+                }
                 provider={PROVIDER_GOOGLE}
                 customMapStyle={greenView}
             >
@@ -533,39 +540,15 @@ export default function MapScreen({ navigation }) {
                                                     source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/ChillaLogo.png")}
                                                 />
                                                 <Text style={styles.eventText}>
-                                                    {parkName}
+                                                    {item.name}
                                                 </Text>
                                             </View>
                                         </View>
-
-                                        {/* {item.eventSchedule.map((a, b) => (
-                                    <View
-                                        style={styles.eventContainerHeader}
-                                        key={b}
-                                    >
-                                        <View>
-                                            <Text>{a.eventName}</Text>
-                                        </View>
-                                        <View>
-                                            <Text>{a.organizer}</Text>
-                                        </View>
-                                        <View>
-                                            <TouchableOpacity
-                                                style={styles.containerLayer}
-                                                onPress={() => {}}
-                                            >
-                                                <Text style={styles.layerText}>
-                                                    RSVP
-                                                </Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                ))} */}
                                     </CalloutSubview>
                                     <CalloutSubview
                                         onPress={() => 
                                             {
-                                              console.log("within mapscreen", parkName);
+                                              //console.log("within mapscreen", parkName);
                                               navigation.navigate("Chat", {
                                                 paramKey: parkName
                                               })
@@ -599,8 +582,8 @@ export default function MapScreen({ navigation }) {
                 <View>
                     <TouchableOpacity
                         onPress={() => {
-                            setActiveGreen(true);
-                            setGreenView(custMap);
+                            setActiveGreen(false);
+                            setGreenView([]);
                         }}
                     >
                         <Image
@@ -627,13 +610,13 @@ export default function MapScreen({ navigation }) {
                     <TouchableOpacity
                         style={styles.layerMapImage}
                         onPress={() => {
-                            setActiveGreen(false);
-                            setGreenView([]);
+                            setActiveGreen(true);
+                            setGreenView(custMap);
                         }}
                     >
                         <Image
                             style={styles.layerMapImage}
-                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/see_through_chilla.png")}
+                            source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/chiila.png")}
                         />
                     </TouchableOpacity>
                 </View>
@@ -670,12 +653,17 @@ export default function MapScreen({ navigation }) {
             </View>
             <View style={styles.bitmojiContainer}>
                 <View style={styles.myBitmoji}>
-                    <TouchableOpacity onPress={() => setProfile(true)}>
+                    <TouchableOpacity  
+                    
+                      onPress={() => navigation.navigate("Communities")}
+                    
+                    >
                         <Image
                             style={styles.bitmojiImage}
                             source={{
                                 uri: "https://sdk.bitmoji.com/render/panel/096dffe0-3934-41db-842c-34c180d0615c-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1",
                             }}
+                           
                         />
                     </TouchableOpacity>
                     <View style={styles.bitmojiTextContainer}>
@@ -812,8 +800,8 @@ const styles = StyleSheet.create({
         borderColor: "white",
     },
     layerMapImage: {
-        height: 75,
-        width: 75,
+        height: 70,
+        width: 70,
         alignContent: "center",
     },
     pinPoint: {
