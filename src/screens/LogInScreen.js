@@ -32,6 +32,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.logInScreen}>
+
       <ReturnButton navigation={navigation} returnName="AuthHome" />
       <Text style={styles.logInTitle}>Log In</Text>
       <View style={styles.logInFields}>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     letterSpacing: 2,
   },
-  logInFields: {
+  logInFields: { 
     width: 250,
     height: 80,
     position: "absolute",

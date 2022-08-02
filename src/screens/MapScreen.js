@@ -15,7 +15,6 @@ import {
     TouchableOpacity,
     SafeAreaView,
 } from "react-native";
-import Modal from "react-native-modal";
 import * as Location from "expo-location";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -23,7 +22,8 @@ import FontAwesome, {
     SolidIcons,
     RegularIcons,
     BrandIcons,
-} from "react-native-fontawesome";
+} from "@expo/vector-icons/FontAwesome";
+
 export default function MapScreen({ navigation }) {
     var custMap = [
         {
@@ -252,7 +252,7 @@ export default function MapScreen({ navigation }) {
             name: "Bellevue Park",
             latitude: 34.08428677217567,
             longitude: -118.28281060285326,
-            eventSchedule: [  
+            eventSchedule: [
                 {
                     parkName: "Mac Arthur Park",
                     eventName: "Clean The Park",
@@ -392,7 +392,6 @@ export default function MapScreen({ navigation }) {
 
     let text = "Waiting...";
     text = JSON.stringify(location);
-
     const [profile, setProfile] = useState(false);
     return (
         <View style={styles.container}>
@@ -808,7 +807,16 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
     },
-
+    containerLayerTwo: {
+        elevation: 8,
+        backgroundColor: "blue",
+        borderRadius: 50,
+        paddingVertical: 15,
+        paddingHorizontal: 12,
+        width: 40,
+        height: 40,
+        borderColor: "white",
+    },
     layerText: {
         fontSize: 8,
         color: "#fff",

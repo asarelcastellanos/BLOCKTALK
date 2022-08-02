@@ -1,11 +1,11 @@
 
 import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Button,
-  Image,
+    StyleSheet,
+    Text,
+    View,
+    SafeAreaView,
+    Button,
+    Image,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { Camera, CameraType } from "expo-camera";
