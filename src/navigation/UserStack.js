@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "react-native";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
 
 import { getAuth, signOut } from "firebase/auth";
 // Stacks
@@ -14,6 +14,7 @@ import ResourceStack from "../navigation/ResourceStack";
 import HomeStack from "./HomeStack";
 // import ChatStack from "../navigation/ChatStack";
 import { createStackNavigator } from "@react-navigation/stack";
+import Test from "../screens/Test";
 
 //Screens
 import HomeReadScreen from "../screens/HomeReadScreen";
@@ -36,7 +37,7 @@ const Tab = createBottomTabNavigator();
 //   }
 // })
 
-export default function UserStack({navigation}) {
+export default function UserStack({ navigation }) {
   // const auth = getAuth();
   // const user = auth.currentUser;
 
@@ -66,8 +67,9 @@ export default function UserStack({navigation}) {
       <Tab.Navigator
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
-        barStyle={{ backgroundColor: '#694fad' }}
-        initialRouteName="CameraStack"
+        barStyle={{ backgroundColor: "#694fad" }}
+        // initialRouteName="CameraStack"
+        initialRouteName="Test"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
@@ -80,7 +82,9 @@ export default function UserStack({navigation}) {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
             } else if (route.name === "CameraStack") {
-              iconName = focused ? "ios-scan-circle-outline" : "ios-camera-outline";
+              iconName = focused
+                ? "ios-scan-circle-outline"
+                : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
             } else if (route.name === "StoriesStack") {
               iconName = "ios-people-outline";
@@ -93,30 +97,36 @@ export default function UserStack({navigation}) {
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
         <Tab.Screen
+          name="HomeReadScreen"
+          component={HomeReadScreen}
+          options={{ headerShown: false, tabBarShowLabel: false }}
+        />
+
+        <Tab.Screen
           name="StoriesStack"
           component={StoriesStack}
           options={{ headerShown: false, tabBarShowLabel: false }}
         />
-      
+
         <Tab.Screen
           name="CameraStack"
           component={CameraStack}
-          options={{ headerShown: false, tabBarShowLabel: false }} 
+          options={{ headerShown: false, tabBarShowLabel: false }}
         />
+
         <Tab.Screen
           name="ResourceStack"
           component={ResourceStack}
-          options={{ headerShown: false, tabBarShowLabel: false }} 
+          options={{ headerShown: false, tabBarShowLabel: false }}
         />
-        
+
         {/* <Tab.Screen
           name="Spotlight"
           component={SpotlightScreen}
           options={screenOptions}
         /> */}
-
       </Tab.Navigator>
-      <StatusBar/>
+      <StatusBar />
     </NavigationContainer>
   );
 }
