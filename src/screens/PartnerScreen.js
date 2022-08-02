@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { SafeAreaView, ScrollView, Dimensions, TouchableOpacity, Text, StyleSheet, View, Pressable} from 'react-native'
+import { SafeAreaView, ScrollView, Dimensions, Image, TouchableOpacity, Text, StyleSheet, View, Pressable} from 'react-native'
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import {
 	NativeBaseProvider,
@@ -7,7 +7,6 @@ import {
 	Center,
 	VStack,
 	Circle,
-	Image,
 	Divider,
 	Heading,
 	Button
@@ -15,65 +14,78 @@ import {
 
 export default function PartnerScreen() {
   // Needed in order to use .show()
-  const bottomSheet = useRef();
+//   const bottomSheet = useRef();
 
-  function handleClick() {
-    // 👇️ update input value
-    bottomSheet.current.value = 'Hello World';
+//   function handleClick() {
+//     // 👇️ update input value
+//     bottomSheet.current.value = 'Hello World';
 
-    // 👇️ access input value
-    console.log(inputRef.current.value);
-  }
+//     // 👇️ access input value
+//     console.log(inputRef.current.value);
+//   }
 
   return (
-	  <ScrollView contentContainerStyle={styles.container}>
-        <View style = {stylesheet._Profile_Information}>
-			{/* Organization Name Section */}
-            <View style = {[stylesheet._Title_of_Organization, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-				<Text style = {[stylesheet._Title_of_Organization, {width: "100%", position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
-				Title of Organization
-				</Text>
-            </View>
-			{/* Organization's Events Section */}
-            <View style = {[stylesheet._Events, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-				<Text style = {[stylesheet._Events, {position: "absolute", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
-				Events
-				</Text>
-            </View>
-            <View style = {[stylesheet.description, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-				<Text style = {[stylesheet.description, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
-				</Text>
-            </View>
-            <View style = {stylesheet._Group}>
-              <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-				<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
-				</Text>
-              </View>
-              <View style = {stylesheet._Rectangle}>
-              </View>
-            </View>
-            <View style = {stylesheet._Group}>
-              <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-				<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus. 
-				</Text>
-              </View>
-              <View style = {stylesheet._Rectangle}>
-              </View>
-            </View>
-            <View style = {stylesheet._Group}>
-              <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
-				<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
-				</Text>
-              </View>
-              <View style = {stylesheet._Rectangle}>
-              </View>
-            </View>
-        </View>
-	  </ScrollView>
+	<SafeAreaView>
+		<ScrollView style = {{backgroundColor: "1E1E1E"}}>
+			<Image sytle = {styles.logo} bg="light.300" source={require("../../assets/exp_logo.png")}/>
+			<Image bg="light.300" source={require("../../assets/exp_data.png")}/>
+		</ScrollView>
+	</SafeAreaView>
+	
+	// <NativeBaseProvider>
+	//   <ScrollView contentContainerStyle={styles.container} w="100%">
+	// 	<Container>
+	// 		<Image sytle = {styles.logo} bg="light.300" source={require("../../assets/exp_logo.png")}/>
+	// 		{/* <Heading h="250" w="415" bg="light.300" /> */}
+	// 	</Container>
+    //     <View style = {stylesheet._Profile_Information}>
+	// 		{/* Organization Name Section */}
+    //         <View style = {[stylesheet._Title_of_Organization, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+	// 			<Text style = {[stylesheet._Title_of_Organization, {width: "100%", position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+	// 			Title of Organization
+	// 			</Text>
+    //         </View>
+	// 		{/* Organization's Events Section */}
+    //         <View style = {[stylesheet._Events, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+	// 			<Text style = {[stylesheet._Events, {position: "absolute", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+	// 			Events
+	// 			</Text>
+    //         </View>
+    //         <View style = {[stylesheet.description, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+	// 			<Text style = {[stylesheet.description, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+	// 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
+	// 			</Text>
+    //         </View>
+    //         <View style = {stylesheet._Group}>
+    //           <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+	// 			<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+	// 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
+	// 			</Text>
+    //           </View>
+    //           <View style = {stylesheet._Rectangle}>
+    //           </View>
+    //         </View>
+    //         <View style = {stylesheet._Group}>
+    //           <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+	// 			<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+	// 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus. 
+	// 			</Text>
+    //           </View>
+    //           <View style = {stylesheet._Rectangle}>
+    //           </View>
+    //         </View>
+    //         <View style = {stylesheet._Group}>
+    //           <View style = {[stylesheet._Rectangle, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+	// 			<Text style = {[stylesheet.text_content, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto"}]}>
+	// 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis dui magna at commodo in urna. In eget viverra id diam posuere diam cursus sodales lectus.
+	// 			</Text>
+    //           </View>
+    //           <View style = {stylesheet._Rectangle}>
+    //           </View>
+    //         </View>
+    //     </View>
+	//   </ScrollView>
+	// </NativeBaseProvider>
   );
 
 }
@@ -197,6 +209,11 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     // fontFamily: "Graphik"
 
+  },
+  logo: {
+	width: 415,
+	justifyContent: 'center',
+	alignItems: 'center',
   },
   button: {
     height: 300,
