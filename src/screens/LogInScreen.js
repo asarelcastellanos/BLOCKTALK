@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import React, { useState } from "react";
+
 
 // Components
 import ReturnButton from "../components/ReturnButton";
@@ -32,6 +33,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.logInScreen}>
+
       <ReturnButton navigation={navigation} returnName="AuthHome" />
       <Text style={styles.logInTitle}>Log In</Text>
       <View style={styles.logInFields}>
