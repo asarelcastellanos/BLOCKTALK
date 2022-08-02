@@ -1,30 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
-import { Video } from 'expo-av';
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { Video, playAsync } from 'expo-av';
+import { useIsFocused } from '@react-navigation/native';
 
-const WIDTH = Dimensions.get('window').width;
+export default function PostScreen({ navigation, route }) {
+  const { url, type } = route.params;
+  const videoRef = useRef(null);
+  const isFocused = useIsFocused();
+  // const [status, setStatus] = React.useState({});
 
-export default function PostScreen({ url, type, navigation }) {
-  console.log(type);
+  
   return (
     <View style={styles.container}>
-      {
-      (type === 'video/mp4')?
-        <Video
-          ref={videoRef}
-          style={styles.videoContainer}
-          // resizeMode={Video.RESIZE_MODE_COVER}
-          isMuted={false}
-          autoplay={true}
+      {isFocused? 
+        ((type === 'video/mp4')?
+          <Video
+            ref={videoRef}
+            style={styles.videoContainer}
+            isMuted={false}
+            // autoplay={true}
+            source={{uri: url}}
+            shouldPlay={true}
+          />
+        : <Image
+          style={styles.imageContainer}
           source={{uri: url}}
-        />
-      : <Image
-        style={styles.image}
-        source={{uri: url}}
-        />
-    }
-    <Text>postscreen</Text>
+          />
+        )
+      : null}
+
     </View>
   )
 }
@@ -32,11 +36,15 @@ export default function PostScreen({ url, type, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: WIDTH,
-    height: 16*WIDTH/9,
     backgroundColor: 'white',
+    alignItems: 'center',
   },
   videoContainer: {
     flex: 1,
+    width: '110%',
+  },
+  imageContainer: {
+    flex: 1,
+    width: '100%'
   }
 })

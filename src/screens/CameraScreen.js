@@ -16,6 +16,15 @@ export default function CameraScreen({ navigation, focused }) {
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
 
+  // React.useEffect(() => {
+  //   const unsubscribe = navigation.addListener('tabPress', (e) => {
+  //     // Prevent default behavior
+  //     console.log("SAVEPOSTSCREEN")
+  //     navigation.popToTop();
+  //   });
+  //   return unsubscribe;
+  // }, [navigation]);
+
   useEffect(() => {
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
