@@ -14,8 +14,9 @@ import db from "../../../../firebase";
 // Component
 import Post from "../../../components/SnapMini/Post";
 import PinnedPrompt from "../../../components/SnapMini/PinnedPrompt";
+import TopNav from "../../../components/SnapMini/TopNav";
 
-export default function FeedScreen() {
+export default function FeedScreen({ navigation }) {
   const [posts, setPosts] = useState([]);
 
   async function getPosts() {
@@ -27,11 +28,18 @@ export default function FeedScreen() {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [posts]);
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <TopNav
+        chevron={"ios-chevron-up-outline"}
+        navigation={navigation}
+        action={() => {
+          console.log("go back up to front page");
+        }}
+      />
+      <ScrollView style={styles.scrollableView}>
         <PinnedPrompt />
         {posts?.map((post, id) => {
           return <Post key={id} message={post.message} user={post.user} />;
@@ -43,9 +51,8 @@ export default function FeedScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#E2F0FF",
     height: "100%",
     width: "100%",
-    padding: 10,
-  },
+  }
 });

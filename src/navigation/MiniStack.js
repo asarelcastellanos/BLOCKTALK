@@ -42,10 +42,23 @@ export default function MiniStack({ navigation }) {
       <Stack.Screen
         name="Home"
         component={MiniScreen}
+        options={{ headerShown: false }}
       />
-      <Stack.Screen name="Feed" component={FeedScreen} />
-      <Stack.Screen name="Post" component={PostScreen} />
-      <Stack.Screen name="Resource" component={ResourceScreen} />
+      <Stack.Screen
+        name="Feed"
+        component={FeedScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Post"
+        component={PostScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Resource"
+        component={ResourceScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

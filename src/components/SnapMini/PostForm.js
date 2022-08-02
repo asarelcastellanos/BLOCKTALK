@@ -5,58 +5,26 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Image,
 } from "react-native";
-import * as ImagePicker from "expo-image-picker";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-// Components
-import PinnedPrompt from "./PinnedPrompt";
-
 import db from "../../../firebase";
 import { doc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
 import { useAuthentication } from "../../utils/hooks/useAuthentication";
 
 export default function PostForm() {
-
   const [text, onChangeText] = useState("Useless Text");
   const [posts, setPosts] = useState([]);
 
-  const [image, setImage] = useState(null);
-
   const { userData } = useAuthentication();
-
-  // const storage = getStorage();
-  // let mountainsRef = ref(storage, 'mountains.jpg');
 
   let messageTemplate = {
     message: "text",
     user: userData,
   };
 
-  let imageTemplate = {
-    message: "base64",
-    // user: userData,
-  };
-
   const postRef = doc(db, "Posts", "Global");
-
-  async function checkGallery() {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
-      return;
-    }
-
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(pickerResult);
-    setImage(pickerResult);
-    // mountainsRef = ref(storage, pickerResult.uri);
-  }
 
   useEffect(() => {
     let unsubscribeFromNewSnapshots = onSnapshot(postRef, (doc) => {
@@ -76,19 +44,8 @@ export default function PostForm() {
     });
   }
 
-  async function handleImageSubmit() {
-    // imageTemplate.message = `${image}`;
-    // console.log(imageTemplate);
-    // await updateDoc(postRef, {
-    //   posts: arrayUnion(imageTemplate),
-    // });
-    console.log("just uploaded!")
-    // await reference.putFile(pathToFile);
-  }
-
   return (
     <View style={styles.container}>
-      <PinnedPrompt />
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -96,18 +53,9 @@ export default function PostForm() {
         multiline={true}
         editable
       />
-      {/* <Image style={styles.image} source={{ uri: image.uri }} /> */}
       <TouchableOpacity style={styles.upload} onPress={handleSubmit}>
-        <Ionicons name="ios-cloud-upload" size={25} color="black" />
+        <Ionicons name="ios-arrow-up" size={25} color="black" />
         <Text style={styles.text}>Upload</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.upload} onPress={handleImageSubmit}>
-        <Ionicons name="ios-cloud-upload" size={25} color="black" />
-        <Text style={styles.text}>Image Upload</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.upload} onPress={checkGallery}>
-        <Ionicons name="ios-image" size={25} color="black" />
-        <Text style={styles.text}>Check Gallery</Text>
       </TouchableOpacity>
     </View>
   );
@@ -128,7 +76,7 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 12,
     borderWidth: 1,
-    padding: 10,
+    padding: 10
   },
   upload: {
     marginLeft: 10,

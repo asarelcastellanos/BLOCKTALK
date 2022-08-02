@@ -1,12 +1,19 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { View, Text } from "react-native";
 
-export default function ResourceScreen() {
+// Components
+import TopNav from "../../../components/SnapMini/TopNav";
+
+export default function ResourceScreen({ navigation }) {
   return (
     <View>
-        <Text>
-            ResourceScreen
-        </Text>
+      <TopNav
+        chevron={"ios-chevron-back-outline"}
+        navigation={navigation}
+        action={() => {
+          navigation.navigate("Feed");
+        }}
+      />
     </View>
-  )
+  );
 }

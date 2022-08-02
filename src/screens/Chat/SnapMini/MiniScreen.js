@@ -4,7 +4,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 export default function MiniScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sponsored by POPS The Club</Text>
+      <Text style={styles.title}>POPS in the Pocket</Text>
+      <Text style={styles.subtitle}>Sponsored by POPS the Club</Text>
       <TouchableOpacity style={styles.input}>
         <Text style={styles.inputText}>School</Text>
       </TouchableOpacity>
@@ -35,6 +36,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    fontSize: 32,
+    fontWeight: "500",
+    fontStyle: "normal",
+    marginBottom: 24,
+  },
+  subtitle: {
     fontSize: 15,
     fontWeight: "500",
     fontStyle: "normal",

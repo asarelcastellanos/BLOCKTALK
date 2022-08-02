@@ -1,9 +1,10 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useCallback, useMemo, useRef } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Button } from "react-native";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function ConversationScreen({ navigation, params }) {
+
   return (
     <View style={styles.container}>
       <View style={styles.bottomBar}>
@@ -27,9 +28,11 @@ export default function ConversationScreen({ navigation, params }) {
               color="grey"
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {
-            navigation.navigate("SnapMini")
-          }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("SnapMini");
+            }}
+          >
             <Ionicons name="ios-rocket-outline" size={30} color="grey" />
           </TouchableOpacity>
         </View>
@@ -53,25 +56,26 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   cameraIcon: {
-    marginRight: 10
+    marginLeft: 5,
+    marginRight: 10,
   },
   messageBar: {
-    width: 220,
+    width: 215,
     height: 40,
     borderRadius: 25,
     backgroundColor: "lightgrey",
-    flexDirection: 'row',
+    flexDirection: "row",
     marginRight: 10,
     alignItems: "center",
   },
   messageText: {
     fontSize: 18,
     fontWeight: "300",
-    marginLeft: 15
+    marginLeft: 15,
   },
   micIcon: {
     position: "absolute",
-    right: 10
+    right: 10,
   },
   threeIconEnd: {
     width: 100,
