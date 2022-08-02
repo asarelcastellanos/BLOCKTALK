@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "react-native";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
 
 import { getAuth, signOut } from "firebase/auth";
 // Stacks
@@ -48,11 +48,9 @@ export default function HomeStack() {
   };
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="HomeReadScreen" component={HomeReadScreen} />
-        <Stack.Screen name="PLEASE SHOW" component={UserStack} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="HomeReadScreen" component={HomeReadScreen} />
+      <Stack.Screen name="PLEASE SHOW" component={UserStack} />
+    </Stack.Navigator>
   );
 }

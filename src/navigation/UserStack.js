@@ -63,7 +63,7 @@ export default function UserStack({ navigation }) {
   // };
 
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Tab.Navigator
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
@@ -97,11 +97,11 @@ export default function UserStack({ navigation }) {
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
 
-        <Tab.Screen
+        {/* <Tab.Screen
           name="HomeReadScreen"
           component={HomeReadScreen}
           options={{ headerShown: false, tabBarShowLabel: false }}
-        />
+        /> */}
 
         <Tab.Screen
           name="StoriesStack"
