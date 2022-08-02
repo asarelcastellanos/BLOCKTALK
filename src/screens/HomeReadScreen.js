@@ -7,6 +7,8 @@ import { TouchableOpacity } from "react-native";
 import UserStack from "../navigation/UserStack";
 import CameraScreen from "./CameraScreen";
 
+import CameraStack from "../navigation/CameraStack";
+
 const Stack = createStackNavigator();
 
 function First({ navigation }) {
@@ -33,7 +35,7 @@ function Third({ navigation }) {
   return (
     <View>
       <Text>Third</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+      <TouchableOpacity onPress={() => navigation.navigate("CameraStack")}>
         <Text>Next</Text>
       </TouchableOpacity>
     </View>
