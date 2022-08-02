@@ -68,9 +68,8 @@ export default function UserStack({ navigation }) {
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: "#694fad" }}
-        // initialRouteName="CameraStack"
-        // initialRouteName="Test"
-        initialRouteName="HomeReadScreen"
+        initialRouteName="StoriesStack"
+        // initialRouteName="HomeReadScreen"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
@@ -97,6 +96,7 @@ export default function UserStack({ navigation }) {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
+
         <Tab.Screen
           name="HomeReadScreen"
           component={HomeReadScreen}

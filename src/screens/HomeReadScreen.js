@@ -8,6 +8,7 @@ import UserStack from "../navigation/UserStack";
 import CameraScreen from "./CameraScreen";
 
 import CameraStack from "../navigation/CameraStack";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 
@@ -35,7 +36,7 @@ function Third({ navigation }) {
   return (
     <View>
       <Text>Third</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("CameraStack")}>
+      <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
         <Text>Next</Text>
       </TouchableOpacity>
     </View>
@@ -44,11 +45,13 @@ function Third({ navigation }) {
 
 export default function HomeReadScreen({ navigation }) {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="First" component={First}></Stack.Screen>
-      <Stack.Screen name="Second" component={Second}></Stack.Screen>
-      <Stack.Screen name="Third" component={Third}></Stack.Screen>
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="First" component={First}></Stack.Screen>
+        <Stack.Screen name="Second" component={Second}></Stack.Screen>
+        <Stack.Screen name="Third" component={Third}></Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
     // <
     // <View style={styles.screenOne}>
     //   <Text style={styles.screenOneText}>Home Read Screen</Text>
