@@ -8,27 +8,27 @@ import {
   SafeAreaView,
 } from "react-native";
 
-import { collection, getDocs } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import db from "../../../../firebase";
 
 // Component
-import Post from "../../../components/SnapMini/Post";
+import TextPost from "../../../components/SnapMini/TextPost";
 import PinnedPrompt from "../../../components/SnapMini/PinnedPrompt";
 import TopNav from "../../../components/SnapMini/TopNav";
 
 export default function FeedScreen({ navigation }) {
   const [posts, setPosts] = useState([]);
 
-  async function getPosts() {
-    const querySnapshot = await getDocs(collection(db, "Posts"));
-    querySnapshot.forEach((doc) => {
-      setPosts(doc.data().posts);
-      console.log("i ran");
-    });
-  }
+  const postRef = doc(db, "Posts", "Global");
 
   useEffect(() => {
-    getPosts();
+    let unsubscribeFromNewSnapshots = onSnapshot(postRef, (doc) => {
+      setPosts(doc.data().posts);
+    });
+
+    return function cleanupBeforeUnmounting() {
+      unsubscribeFromNewSnapshots();
+    };
   }, []);
 
   return (
@@ -43,7 +43,7 @@ export default function FeedScreen({ navigation }) {
       <ScrollView style={styles.scrollableView}>
         <PinnedPrompt />
         {posts?.map((post, id) => {
-          return <Post key={id} message={post.message} user={post.user} />;
+          return <TextPost key={id} message={post.message} user={post.user} />;
         })}
       </ScrollView>
     </View>
@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   scrollableView: {
-    padding: 25
-  }
+    padding: 25,
+  },
 });
