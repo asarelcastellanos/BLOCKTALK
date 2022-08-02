@@ -17,7 +17,7 @@ import ChatStack from "../navigation/ChatStack";
 import { createStackNavigator } from "@react-navigation/stack";
 
 //Screens
-import HomeReadScreen from "../screens/HomeReadScreen";
+import IntroStack from "./IntroStack";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,7 +49,7 @@ export default function HomeStack() {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="HomeReadScreen" component={HomeReadScreen} />
+      <Stack.Screen name="IntroStack" component={IntroStack} />
       <Stack.Screen name="PLEASE SHOW" component={UserStack} />
     </Stack.Navigator>
   );

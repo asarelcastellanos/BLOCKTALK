@@ -17,7 +17,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Test from "../screens/Test";
 
 //Screens
-import HomeReadScreen from "../screens/HomeReadScreen";
+import IntroStack from "./IntroStack";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,7 +69,6 @@ export default function UserStack({ navigation }) {
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: "#694fad" }}
         initialRouteName="StoriesStack"
-        // initialRouteName="HomeReadScreen"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
@@ -96,12 +95,6 @@ export default function UserStack({ navigation }) {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
-
-        {/* <Tab.Screen
-          name="HomeReadScreen"
-          component={HomeReadScreen}
-          options={{ headerShown: false, tabBarShowLabel: false }}
-        /> */}
 
         <Tab.Screen
           name="StoriesStack"
