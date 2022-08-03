@@ -11,13 +11,10 @@ import { getAuth, signOut } from "firebase/auth";
 import CameraStack from "../navigation/CameraStack";
 import StoriesStack from "../navigation/StoriesStack";
 import ResourceStack from "../navigation/ResourceStack";
-import HomeStack from "./HomeStack";
-// import ChatStack from "../navigation/ChatStack";
 import { createStackNavigator } from "@react-navigation/stack";
-import Test from "../screens/Test";
 
 //Screens
-import HomeReadScreen from "../screens/HomeReadScreen";
+import IntroStack from "./IntroStack";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,30 +35,6 @@ const Tab = createBottomTabNavigator();
 // })
 
 export default function UserStack({ navigation }) {
-  // const auth = getAuth();
-  // const user = auth.currentUser;
-
-  // let screenOptions = {
-  //   headerShown: false,
-  //   tabBarShowLabel: false,
-  //   headerLeft: () => (
-  //     <Button
-  //       onPress={() => {
-  //         signOut(auth)
-  //           .then(() => {
-  //             // Sign-out successful.
-  //             user = null;
-  //           })
-  //           .catch((error) => {
-  //             // An error happened.
-  //             // should we do something with that error??
-  //           });
-  //       }}
-  //       title="Log Out"
-  //     />
-  //   ),
-  // };
-
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator
@@ -69,7 +42,6 @@ export default function UserStack({ navigation }) {
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: "#694fad" }}
         initialRouteName="StoriesStack"
-        // initialRouteName="HomeReadScreen"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
@@ -96,12 +68,6 @@ export default function UserStack({ navigation }) {
         })}
       >
         {/* <Tab.Screen name="Map" component={MapScreen} options={{...screenOptions, headerShown: false}} /> */}
-
-        {/* <Tab.Screen
-          name="HomeReadScreen"
-          component={HomeReadScreen}
-          options={{ headerShown: false, tabBarShowLabel: false }}
-        /> */}
 
         <Tab.Screen
           name="StoriesStack"

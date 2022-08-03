@@ -48,10 +48,6 @@ export default function StoriesScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.header}>
-        <Text style={{fontWeight: 'bold', fontSize: 30}}>Club</Text>
-        <Text style={{fontSize: 30}}>House</Text>
-      </View> */}
       {posts.length ? (
         <FlatList
           data={posts}
