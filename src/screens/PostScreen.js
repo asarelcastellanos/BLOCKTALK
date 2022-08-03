@@ -49,17 +49,13 @@ export default function PostScreen({ navigation, route }) {
           </View>
           <View style={styles.modalViewBottom}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={styles.buttonClose}
               onPress={() => setFilterVisible(!filterVisible)}
             >
               <Text style={styles.textStyle}>Done</Text>
             </Pressable>
           </View>
         </View>
-        
-
-
-
       </Modal>
 
     </View>
@@ -84,7 +80,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     top: 10,
-    paddingRight:5,
+    // paddingRight:0,
   },
   centeredView: {
     flex: 1,
@@ -140,6 +136,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center",
+    paddingVertical: 10,
+    paddingHorizontal: '40%',
   },
   modalText: {
     marginBottom: 15,

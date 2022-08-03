@@ -4,22 +4,25 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import StoriesScreen from "../screens/StoriesScreen";
 import PostScreen from "../screens/PostScreen";
-import FilterScreen from "../screens/FilterScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import IntroStack from "./IntroStack";
 import IntroScreensStack from "./IntroScreensStack";
 
 const Stack = createStackNavigator();
 
-export default function StoriesStack({ navigation }) {
+export default function StoriesStack({ navigation, route }) {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Stories"
         component={StoriesScreen}
+<<<<<<< HEAD
         options={{
           headerShown: false,
         }}
+=======
+        options={{ headerShown: false }}
+>>>>>>> beffcb632d7870764cb84a993c226b8c66e88e59
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
@@ -43,10 +46,7 @@ export default function StoriesStack({ navigation }) {
             //     style={{ paddingRight:10 }}/>
             // ),
           }}
-          // screenOptions={{presentation:'modal'}}
         />
-        {/* <Stack.Screen name="Filter" component={FilterScreen}
-        /> */}
       </Stack.Group>
     </Stack.Navigator>
   );

@@ -48,6 +48,17 @@ export default function StoriesScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        {/* <Ionicons
+          name={"chevron-back-outline"}
+          color={"black"}
+          size={25}
+          style={styles.exitButton}
+        /> */}
+        <View style={{flex:1}}></View>
+        <Text style={styles.headerTitle}>The Spot</Text>
+        <View style={{flex:1}}></View>
+      </View>
       {posts.length ? (
         <FlatList
           data={posts}
@@ -115,14 +126,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
-  // header: {
-  //   flexDirection: 'row',
-  //   alignSelf: 'center',
-  //   marginTop: 50,
-  //   paddingTop: 10,
-  //   textAlign: 'center',
-  //   fontFamily: 'Avenir Next',
-  // },
+  headerContainer: {
+    flexDirection: 'row',
+    marginTop: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerTitle: {
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+    paddingBottom: 5,
+  },
+  exitButton: {
+    flex: 1,
+    alignSelf: 'left',
+    
+  },
   list: {
     flex: 1,
     paddingHorizontal: 20,
