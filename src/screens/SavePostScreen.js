@@ -122,7 +122,7 @@ export default function SavePostScreen({ route }) {
       :<></>}
 
       <TouchableOpacity
-          onPress={() => {saveMediaToStorage(); navigation.popToTop(); navigation.navigate('Stories')}}
+          onPress={() => {/*saveMediaToStorage();*/ navigation.popToTop(); navigation.navigate('Stories')}}
           style={styles.postButton}
         >
           <Ionicons name="arrow-redo" color={'white'} size={23} style={{marginTop:4}}/>

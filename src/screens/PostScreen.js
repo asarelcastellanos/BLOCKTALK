@@ -40,8 +40,14 @@ export default function PostScreen({ navigation, route }) {
         }}
       >
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View style={{flex:1, width:'100%'}}>
+            <Pressable style={{flex: 1}} onPress={() => setFilterVisible(!filterVisible)}/>
+          </View>
+          <View style={styles.modalViewTop}>
             <Text style={styles.modalText}>Fill Out</Text>
+            <Pressable><Text>filter1</Text></Pressable>
+          </View>
+          <View style={styles.modalViewBottom}>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setFilterVisible(!filterVisible)}
@@ -50,6 +56,10 @@ export default function PostScreen({ navigation, route }) {
             </Pressable>
           </View>
         </View>
+        
+
+
+
       </Modal>
 
     </View>
@@ -74,21 +84,37 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     top: 10,
-    paddingRight:10,
+    paddingRight:5,
   },
   centeredView: {
     flex: 1,
-    flexDirection: 'column-reverse',
+    // flexDirection: 'column-reverse',
+    justifyContent: 'flex-end',
     alignItems: "center",
     bottom: 0,
   },
-  modalView: {
+  modalViewTop: {
     width: '98%',
-    margin: 20,
+    marginBottom: 8,
     backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
+    borderRadius: 10,
+    padding: 20,
     alignItems: "left",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalViewBottom: {
+    width: '98%',
+    marginBottom: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -107,15 +133,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: 'white',
   },
   textStyle: {
-    color: "white",
+    color: 'black',
     fontWeight: "bold",
-    textAlign: "center"
+    fontSize: 20,
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
+    textAlign: "center",
+    fontWeight: 'bold',
+    fontSize: 18,
   }
 })
