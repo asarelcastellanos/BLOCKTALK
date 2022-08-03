@@ -12,6 +12,7 @@ import CameraStack from "../navigation/CameraStack";
 import StoriesStack from "../navigation/StoriesStack";
 import ResourceStack from "../navigation/ResourceStack";
 import { createStackNavigator } from "@react-navigation/stack";
+import Test from "../screens/Test";
 
 //Screens
 import IntroStack from "./IntroStack";

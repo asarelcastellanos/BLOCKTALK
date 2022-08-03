@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Text, StyleSheet, Button, TextInput, TouchableOpacity, 
-         ScrollView, FlatList, SafeAreaView } from 'react-native';
+         ScrollView, FlatList } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useIsFocused } from '@react-navigation/native';
-import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, getMetadata } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import db from '../../firebase';
 import uuid from 'uuid-random';
@@ -24,8 +24,10 @@ export default function SavePostScreen({ route }) {
     const bytes = await img.blob();
 
     console.log('start uploading image...');
-    await uploadBytes(storageRef, bytes);
+    await uploadBytesResumable(storageRef, bytes);
+    console.log('start getting image metadata...');
     const metadata = await getMetadata(storageRef);
+    console.log('start getting downloadURL...');
     const downloadURL = await getDownloadURL(storageRef);
 
     await addDoc(collection(db, 'Stories'), {
