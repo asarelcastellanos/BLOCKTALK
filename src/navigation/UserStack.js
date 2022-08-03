@@ -16,8 +16,8 @@ import Test from "../screens/Test";
 
 // Stacks
 import ChatStack from "./ChatStack";
-import MiniStack from "../navigation/MiniStack";
 
+import MiniStack from "../navigation/MiniStack";
 const Tab = createBottomTabNavigator();
 
 export default function UserStack() {

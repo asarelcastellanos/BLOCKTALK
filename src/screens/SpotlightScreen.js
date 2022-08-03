@@ -3,8 +3,6 @@ import { View, Image, StyleSheet, Text } from "react-native";
 import { TouchableOpacity } from "react-native";
 
 export default function SpotlightScreen({ navigation }) {
-  // const Stack = createNativeStackNavigator();
-
   return (
     <View style={styles.container}>
       <View style={styles.textTitle}>
