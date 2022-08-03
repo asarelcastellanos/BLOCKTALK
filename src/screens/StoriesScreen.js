@@ -7,17 +7,27 @@ import {
   FlatList,
   TouchableOpacity,
   Button,
+  RefreshControl,
 } from "react-native";
 import { collection, getDocs, onSnapshot } from "firebase/firestore";
-import Feed from "../components/Feed";
 import db from "../../firebase";
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Video } from "expo-av";
 
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
+
 export default function StoriesScreen({ navigation, route }) {
   const videoRef = useRef(null);
   const [posts, setPosts] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefresh(true);
+    wait(2000).then(() => setRefresh(false));
+  }, []);
 
   async function getPosts() {
     const querySnapshot = await getDocs(collection(db, "Stories"));
@@ -34,7 +44,7 @@ export default function StoriesScreen({ navigation, route }) {
     return function cleanupBeforeUnmounting() {
       setPosts([]);
     };
-  }, []);
+  }, [refresh]);
 
   return (
     <View style={styles.container}>
@@ -45,9 +55,11 @@ export default function StoriesScreen({ navigation, route }) {
       {posts.length ? (
         <FlatList
           data={posts}
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+          }
           renderItem={(post, index) => {
             return (
-              // <Feed url={post.item.downloadURL} type={post.item.contentType} key={index} style={styles.feed}/>
               <TouchableOpacity
                 style={styles.feedContainer}
                 onPress={() =>
@@ -90,6 +102,13 @@ export default function StoriesScreen({ navigation, route }) {
       ) : (
         <></>
       )}
+
+      {/* <TouchableOpacity
+          onPress={() => {window.location.reload(false)}}
+          style={styles.refreshButton}
+      >
+        <Ionicons name="arrow-redo" color={'white'} size={23} style={{marginTop:4}}/>
+      </TouchableOpacity> */}
       <StatusBar />
     </View>
   );
@@ -145,5 +164,15 @@ const styles = StyleSheet.create({
   playButton: {
     alignSelf: "center",
     marginLeft: 5,
+  },
+  refreshButton: {
+    backgroundColor: "#5F86FF",
+    borderRadius: 20,
+    width: 35,
+    height: 35,
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    alignItems: "center",
   },
 });

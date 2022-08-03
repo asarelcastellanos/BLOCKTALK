@@ -50,7 +50,7 @@ export default function HomeReadScreen({ navigation }) {
         <Stack.Screen name="First" component={First}></Stack.Screen>
         <Stack.Screen name="Second" component={Second}></Stack.Screen>
         <Stack.Screen name="Third" component={Third}></Stack.Screen>
-        <Stack.Screen name="UserStack" component={UserStack}></Stack.Screen>
+        <Stack.Screen name="UserStack" component={UserStack} options={{ headerShown: false }}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
 
