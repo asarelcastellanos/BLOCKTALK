@@ -36,7 +36,6 @@ class FlatListItem extends Component {
           </View>
         </View>
       </TouchableOpacity>
-
     );
   }
 }
@@ -45,8 +44,7 @@ export default class ResourceScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.header}>Resources</Text> */}
-        {/* <Text style={styles.slogan}>Slogan or description</Text> */}
+        <Text style={styles.header}>Resources</Text>
         <FlatList
           style={styles.list}
           data={resourceData}
@@ -56,8 +54,7 @@ export default class ResourceScreen extends Component {
               </FlatListItem>
             );
           }}
-        >
-        </FlatList>
+        />
       </View>
     );
   }
@@ -73,15 +70,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 5,
     marginVertical: 6,
-    backgroundColor: 'pink',
-    borderRadius: 10,
-    height: 160,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
   },
   resourceImg: {
     flex: 1,
     width: '100%',
     resizeMode: 'cover',
-    borderRadius: 10,
+    borderRadius: 15,
     // aspectRatio: 1,
   },
   resourceInfo: {
@@ -94,6 +97,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir Next',
     fontWeight: 'bold',
     paddingBottom: 4,
+    color: '#EC6060',
   },
   description: {
     fontSize: 14,
@@ -104,20 +108,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   header: {
-    paddingTop: 10,
     marginTop: 50,
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold',
-    // fontFamily: 'Avenir Next',
-  },
-  slogan: {
-    paddingBottom: 10,
-    textAlign: 'center',
-    fontSize: 15,
-    fontFamily: 'Avenir Next',
+    paddingBottom: 5,
   },
   list: {
+    flex: 1,
     paddingHorizontal: 20,
   },
   categoryContainer: {
@@ -126,11 +124,12 @@ const styles = StyleSheet.create({
   },
   category: {
     borderRadius: 15,
-    backgroundColor: 'yellow',
+    backgroundColor: '#EC6060',
     marginRight: 5,
     padding: 5,
   },
   categoryText: {
     fontSize: 10,
+    color: 'white',
   }
 })

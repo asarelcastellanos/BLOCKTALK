@@ -33,17 +33,7 @@ export default function StoriesStack({navigation}) {
         nitialRouteName="Resources"
       >
         <Stack.Screen name="Resources" component={ResourceScreen}
-          options={{
-            headerTitle: () => (
-              <Text style={{ fontSize:30, fontWeight: 'bold',}}>Resources</Text>
-            ),
-            headerLeft: () => (
-              <Ionicons name={"chevron-back-outline"} size={25} color={'black'}
-                onPress={()=>navigation.navigate('Resources')}
-                style={{ paddingLeft:10 }}/>
-            ),
-            headerShadowVisible: false,
-          }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
   )

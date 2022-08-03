@@ -74,21 +74,21 @@ export default function IntroScreensStack({ navigation }) {
       <Stack.Screen
         name="UserStack"
         component={UserStack}
-        // options={{ headerShown: false }}
-        options={{
-          headerLeft: () => (
-            <Ionicons
-              name={"chevron-back-outline"}
-              size={25}
-              color={"black"}
-              onPress={() => {
-                navigation.popToTop();
-              }}
-              style={{ paddingLeft: 10 }}
-            />
-          ),
-          headerShadowVisible: false,
-        }}
+        options={{ headerShown: false }}
+        // options={{
+        //   headerLeft: () => (
+        //     <Ionicons
+        //       name={"chevron-back-outline"}
+        //       size={25}
+        //       color={"black"}
+        //       onPress={() => {
+        //         navigation.popToTop();
+        //       }}
+        //       style={{ paddingLeft: 10 }}
+        //     />
+        //   ),
+        //   headerShadowVisible: false,
+        // }}
       />
     </Stack.Navigator>
   );
