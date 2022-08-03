@@ -6,7 +6,7 @@ export default function RecipesScreen() {
     return(
         <View>
             <Text>
-                Hello Snack Facts Screen!!! 
+                Hello Recipes Screen!!! 
             </Text>
         </View>    
     )
