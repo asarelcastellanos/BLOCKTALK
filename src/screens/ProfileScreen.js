@@ -41,45 +41,53 @@ export default function ProfileScreen({ navigation }) {
             {/* Badges */}
             <Box
               style={{
-                // backgroundColor: "red",
                 flexDirection: "row",
                 width: "90%",
-                height: 10,
               }}
             >
-              <TouchableOpacity style={{ height: 25, width: "max-content%" }}>
-                <Box bg={"white"} shadow={2} borderRadius={20} marginBottom={5}>
-                  <Text>Hello</Text>
-                </Box>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={{ height: 25, width: "max-content%" }}>
-                <Box bg={"white"} shadow={2} borderRadius={20} marginBottom={5}>
-                  <Text>Hello</Text>
-                </Box>
-              </TouchableOpacity>
-            </Box>
-
-            {/* <TouchableOpacity style={{ width: "90%" }}>
               <Box
+                style={{ width: 50, height: 20 }}
                 bg={"white"}
                 height={50}
                 shadow={2}
                 borderRadius={10}
                 marginBottom={5}
-                padding={3}
+                justifyContent={"center"}
+                alignItems={"center"}
+                margin={1}
               >
-                <Text>Hwell</Text>
+                <Text>1092</Text>
               </Box>
-            </TouchableOpacity> */}
+              <Box                
+                style={{ width: 50, height: 20 }}
+                bg={"white"}
+                height={50}
+                shadow={2}
+                borderRadius={10}
+                marginBottom={5}
+                justifyContent={"center"}
+                alignItems={"center"}
+                margin={1}
+              >
+                <Text>Leo</Text>
+              </Box>
+              <Box
+                style={{ width: 50, height: 20 }}
+                bg={"white"}
+                height={50}
+                shadow={2}
+                borderRadius={10}
+                marginBottom={5}
+                justifyContent={"center"}
+                alignItems={"center"}
+                margin={1}
+              >
+                <Text>Leo</Text>
+              </Box>
+            </Box>
 
             {/* Minis Subheading */}
-            <Box
-              alignSelf="left"
-              flexDirection={"row"}
-              marginLeft={5}
-              marginBottom={2}
-            >
+            <Box flexDirection={"row"} marginLeft={5} marginBottom={2}>
               <Text style={{ fontSize: 14, fontWeight: "bold" }}>
                 Pinned Minis
               </Text>

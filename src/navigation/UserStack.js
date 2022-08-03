@@ -18,6 +18,8 @@ import Test from "../screens/Test";
 // Stacks
 import ChatStack from "./ChatStack";
 import MiniStack from "../navigation/MiniStack";
+import RecipesScreen from "../screens/RecipesScreen";
+import RecipeScreen from "../screens/RecipeScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -83,7 +85,7 @@ export default function UserStack() {
       >
         {/* <Tab.Screen
           name="Test"
-          component={Test}
+          component={RecipeScreen}
           options={{ ...screenOptions, headerShown: false }}
         /> */}
 
