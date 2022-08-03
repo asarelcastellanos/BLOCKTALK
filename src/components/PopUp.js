@@ -13,10 +13,6 @@ export default function PopUp ({ name, description, distance, imageUrl }) {
           <Text style={ styles.communityHeaderText }>{ name }</Text>
           <Text style={ styles.communityText }>{description} • {distance}</Text>
         </View>
-
-        <View style={ styles.featuredCommunityJoinContainer }>
-          <Text style={ styles.featuredCommunityJoinText }>Join</Text>
-        </View>
     </View>
     );
 };

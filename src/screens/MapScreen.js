@@ -16,13 +16,15 @@ import {
     SafeAreaView,
 } from "react-native";
 import * as Location from "expo-location";
-
+import PopUp from "../components/PopUp"
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome, {
     SolidIcons,
     RegularIcons,
     BrandIcons,
 } from "@expo/vector-icons/FontAwesome";
+
+import MapTopIcon from "../components/MapTopIcon";
 
 export default function MapScreen({ navigation }) {
     var custMap = [
@@ -530,18 +532,7 @@ export default function MapScreen({ navigation }) {
                                 >
                                     <CalloutSubview>
                                         <View width={200}>
-                                            <View
-                                                justifyContent="space-evenly"
-                                                flexDirection="row"
-                                            >
-                                                <Image
-                                                    style={styles.pinPoint}
-                                                    source={require("/Users/amanuelreda/Desktop/GreenView/GreenView/assets/ChillaLogo.png")}
-                                                />
-                                                <Text style={styles.eventText}>
-                                                    {item.name}
-                                                </Text>
-                                            </View>
+                                          <PopUp name = {item.name} description = {"Clean Up"}/>
                                         </View>
                                     </CalloutSubview>
                                     <CalloutSubview
@@ -650,6 +641,26 @@ export default function MapScreen({ navigation }) {
                     <Ionicons name="ios-navigate" size={15} color="black" />
                 </TouchableOpacity>
             </View>
+            <View style={styles.mapTopContainer}>
+        <View style={styles.mapTopContainerLeft}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              navigation.navigate("ProfileStack");
+            }}
+          >
+          <MapTopIcon style={ styles.mapTopComponent } imageUrl={ {uri: "https://sdk.bitmoji.com/render/panel/096dffe0-3934-41db-842c-34c180d0615c-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1"}} />
+          </TouchableOpacity>
+
+          <MapTopIcon style={ styles.mapTopComponent } imageUrl={require("../../assets/searchw.png")} small={true} />
+          {/* <MapDistrict imageUrl={require("../../assets/snapchat/MapStoriesImage.jpg")} district={currentDistrict} /> */}
+        </View>
+
+        <View style= {styles.mapTopContainerRight}>
+          <MapTopIcon imageUrl={require("../../assets/gearw.png")} smaller={true} />
+        </View>
+
+      </View>
             <View style={styles.bitmojiContainer}>
                 <View style={styles.myBitmoji}>
                     <TouchableOpacity  
@@ -856,5 +867,32 @@ const styles = StyleSheet.create({
         height: 200,
         justifyContent: "center",
         alignItems: "center",
+    },
+    mapBottomContainer: {
+      width: "100%",
+      height: 70,
+      position: "absolute",
+      bottom: 20,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingLeft: 15,
+      paddingRight: 15
+    },
+    mapTopContainer: {
+      width: "100%",
+      height: 70,
+      position: "absolute",
+      top: 50,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingLeft: 10,
+      paddingRight: 10
+    },
+    mapTopContainerLeft: {
+      flexDirection: "row",
+      width: "80%",
+    },
+    mapTopComponent: {
+      marginRight: 5,
     },
 });
