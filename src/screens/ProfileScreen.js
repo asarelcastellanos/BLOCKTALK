@@ -39,7 +39,28 @@ export default function ProfileScreen({ navigation }) {
             <Heading />
 
             {/* Badges */}
-            <TouchableOpacity style={{ width: "90%" }}>
+            <Box
+              style={{
+                // backgroundColor: "red",
+                flexDirection: "row",
+                width: "90%",
+                height: 10,
+              }}
+            >
+              <TouchableOpacity style={{ height: 25, width: "max-content%" }}>
+                <Box bg={"white"} shadow={2} borderRadius={20} marginBottom={5}>
+                  <Text>Hello</Text>
+                </Box>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{ height: 25, width: "max-content%" }}>
+                <Box bg={"white"} shadow={2} borderRadius={20} marginBottom={5}>
+                  <Text>Hello</Text>
+                </Box>
+              </TouchableOpacity>
+            </Box>
+
+            {/* <TouchableOpacity style={{ width: "90%" }}>
               <Box
                 bg={"white"}
                 height={50}
@@ -50,7 +71,7 @@ export default function ProfileScreen({ navigation }) {
               >
                 <Text>Hwell</Text>
               </Box>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             {/* Minis Subheading */}
             <Box
@@ -71,7 +92,9 @@ export default function ProfileScreen({ navigation }) {
                 shadow={2}
                 borderRadius={10}
                 marginBottom={5}
-              />
+              >
+                <Text style={{ color: "black" }}>Hello</Text>
+              </Box>
             </TouchableOpacity>
 
             <TouchableOpacity style={{ width: "90%" }}>
