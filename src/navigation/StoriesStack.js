@@ -18,22 +18,7 @@ export default function StoriesStack({ navigation }) {
         name="Stories"
         component={StoriesScreen}
         options={{
-          headerTitle: () => (
-            <View style={styles.header}>
-              <Text style={{ fontWeight: "bold", fontSize: 30 }}>Club</Text>
-              <Text style={{ fontSize: 30 }}>House</Text>
-            </View>
-          ),
-          headerLeft: () => (
-            <Ionicons
-              name={"chevron-back-outline"}
-              size={25}
-              color={"black"}
-              onPress={() => navigation.navigate("Stories")}
-              style={{ paddingLeft: 10 }}
-            />
-          ),
-          headerShadowVisible: false,
+          headerShown: false,
         }}
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>

@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 export default function RootNavigation() {
   const { user } = useAuthentication();
 
-  return user ? <IntroStack /> : <AuthStack />;
+  // return user ? <IntroStack /> : <AuthStack />;
 
-  // return user ? <UserStack /> : <AuthStack />;
+  return user ? <UserStack /> : <AuthStack />;
 }
