@@ -71,6 +71,9 @@ export default function UserStack() {
             } else if (route.name === "StoriesStack") {
               iconName = "ios-people-outline";
               iconColor = focused ? "purple" : "grey";
+            } else if (route.name === "SpotlightStack") {
+              iconName = "ios-play-outline";
+              iconColor = focused ? "red" : "grey";
             } else if (route.name === "MiniStack") {
               iconName = "ios-play-outline";
               iconColor = focused ? "red" : "grey";
@@ -110,6 +113,11 @@ export default function UserStack() {
           name="MiniStack"
           component={MiniStack}
           options={{ headerShown: false, tabBarShowLabel: false }}
+        />
+        <Tab.Screen
+          name="SpotlightStack"
+          component={SpotlightScreen}
+          options={{ ...screenOptions, headerShown: false }}
         />
       </Tab.Navigator>
     </NavigationContainer>

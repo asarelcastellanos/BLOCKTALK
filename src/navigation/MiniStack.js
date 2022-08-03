@@ -9,7 +9,7 @@ import SpotlightScreen from "../screens/SpotlightScreen";
 import CookingScreen from "../screens/CookingScreen";
 import SnackFacts from "../screens/SnackFacts";
 import RecipesStack from "./RecipesStack";
-
+import SnapChopScreen from "../screens/SnapChopScreen";
 const Stack = createStackNavigator();
 
 export default function MiniStack({ navigation }) {
@@ -20,7 +20,7 @@ export default function MiniStack({ navigation }) {
     <Stack.Navigator>
       <Stack.Screen
         name="Snap Chop"
-        component={SpotlightScreen}
+        component={SnapChopScreen}
         options={screenOptions}
       />
       <Stack.Screen name="Cooking" component={CookingScreen} />
