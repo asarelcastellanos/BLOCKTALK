@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import ResourceScreen from '../screens/ResourceScreen';
+import React, { useEffect } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import ResourceScreen from "../screens/ResourceScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Stack = createStackNavigator();
 
-export default function StoriesStack({navigation}) {
-
+export default function StoriesStack({ navigation }) {
   let screenOptions = {
     tabBarShowLabel: false,
     headerLeft: () => (
@@ -29,26 +28,28 @@ export default function StoriesStack({navigation}) {
   };
 
   return (
-      <Stack.Navigator
-        nitialRouteName="Resources"
-      >
-        <Stack.Screen name="Resources" component={ResourceScreen}
-          options={{
-            headerTitle: () => (
-              <Text style={{ fontSize:30, fontWeight: 'bold',}}>Resources</Text>
-            ),
-            headerLeft: () => (
-              <Ionicons name={"chevron-back-outline"} size={25} color={'black'}
-                onPress={()=>navigation.navigate('Resources')}
-                style={{ paddingLeft:10 }}/>
-            ),
-            headerShadowVisible: false,
-          }}
-        />
-      </Stack.Navigator>
-  )
+    <Stack.Navigator nitialRouteName="Resources">
+      <Stack.Screen
+        name="Resources"
+        component={ResourceScreen}
+        options={{
+          headerTitle: () => (
+            <Text style={{ fontSize: 30, fontWeight: "bold" }}>Resources</Text>
+          ),
+          headerLeft: () => (
+            <Ionicons
+              name={"chevron-back-outline"}
+              size={25}
+              color={"black"}
+              onPress={() => navigation.navigate("Resources")}
+              style={{ paddingLeft: 10 }}
+            />
+          ),
+          headerShadowVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
 }
 
-const styles = StyleSheet.create({
-  
-})
+const styles = StyleSheet.create({});
