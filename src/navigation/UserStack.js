@@ -3,19 +3,23 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Button } from "react-native";
+import { Button, TouchableOpacity } from "react-native";
 
 import { getAuth, signOut } from "firebase/auth";
 
 // Screens
-import MapScreen from "../screens/MapScreen";
-import CameraScreen from "../screens/CameraScreen";
+import MapStack from "../screens/MapStack";
+import CameraStack from "../screens/CameraStack";
 import StoriesScreen from "../screens/StoriesScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
+import ProfileStack from "../screens/ProfileScreen";
 import Test from "../screens/Test";
 
 // Stacks
 import ChatStack from "./ChatStack";
+import MiniStack from "../navigation/MiniStack";
+import RecipesScreen from "../screens/RecipesScreen";
+import RecipeScreen from "../screens/RecipeScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -50,27 +54,27 @@ export default function UserStack() {
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: "#694fad" }}
         // initialRouteName="Test"
-        initialRouteName="Camera"
+        initialRouteName="CameraStack"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, size }) => {
             let iconName;
             let iconColor;
 
-            if (route.name == "Map") {
+            if (route.name == "MapStack") {
               iconName = "ios-location-outline";
               iconColor = focused ? "green" : "grey";
             } else if (route.name === "ChatStack") {
               iconName = "ios-chatbox-outline";
               iconColor = focused ? "#2b83b3" : "grey";
-            } else if (route.name === "Camera") {
+            } else if (route.name === "CameraStack") {
               iconName = focused
                 ? "ios-scan-circle-outline"
                 : "ios-camera-outline";
               iconColor = focused ? "yellow" : "grey";
-            } else if (route.name === "Stories") {
+            } else if (route.name === "StoriesStack") {
               iconName = "ios-people-outline";
               iconColor = focused ? "purple" : "grey";
-            } else if (route.name === "Spotlight") {
+            } else if (route.name === "SpotlightStack") {
               iconName = "ios-play-outline";
               iconColor = focused ? "red" : "grey";
             }
@@ -81,13 +85,13 @@ export default function UserStack() {
       >
         {/* <Tab.Screen
           name="Test"
-          component={Test}
+          component={RecipeScreen}
           options={{ ...screenOptions, headerShown: false }}
         /> */}
 
         <Tab.Screen
-          name="Map"
-          component={MapScreen}
+          name="MapStack"
+          component={MapStack}
           options={{ ...screenOptions, headerShown: false }}
         />
         <Tab.Screen
@@ -96,17 +100,17 @@ export default function UserStack() {
           options={{ headerShown: false, tabBarShowLabel: false }}
         />
         <Tab.Screen
-          name="Camera"
-          component={CameraScreen}
+          name="CameraStack"
+          component={CameraStack}
           options={{ ...screenOptions, headerShown: false }}
         />
         <Tab.Screen
-          name="Stories"
+          name="StoriesStack"
           component={StoriesScreen}
           options={screenOptions}
         />
         <Tab.Screen
-          name="Spotlight"
+          name="SpotlightStack"
           component={SpotlightScreen}
           options={screenOptions}
         />
