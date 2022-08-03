@@ -11,6 +11,7 @@ import IntroThird from "../screens/IntroThird";
 
 //Stacks
 import UserStack from "./UserStack";
+import IntroScreensStack from "./IntroScreensStack";
 
 const Stack = createStackNavigator();
 
@@ -21,56 +22,15 @@ export default function IntroStack({ navigation }) {
       <Stack.Navigator>
         <Stack.Screen
           name="First"
-          component={IntroFirst}
+          component={IntroScreensStack}
           options={{
-            headerTitle: () => (
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-                ONE ONE ONE
-              </Text>
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="Second"
-          component={IntroSecond}
-          options={{
-            headerTitle: () => (
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-                TWO TWO TWO
-              </Text>
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="Third"
-          component={IntroThird}
-          options={{
-            headerTitle: () => (
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Third</Text>
-            ),
-            headerLeft: () => (
-              <Ionicons
-                name={"chevron-back-outline"}
-                size={25}
-                color={"black"}
-                // onPress={() => {
-                //   this.props.navigation.goBack();
-                // }}
-
-                onPress={() => {
-                  console.log("navigation icon");
-                  navigation.navigate("Second");
-                }}
-                style={{ paddingLeft: 10 }}
-              />
-            ),
-            headerShadowVisible: false,
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="UserStack"
           component={UserStack}
-          // options={{ headerShown: false }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
