@@ -29,7 +29,7 @@ export default function IntroStack({ navigation }) {
               </Text>
             ),
           }}
-        ></Stack.Screen>
+        />
         <Stack.Screen
           name="Second"
           component={IntroSecond}
@@ -40,7 +40,7 @@ export default function IntroStack({ navigation }) {
               </Text>
             ),
           }}
-        ></Stack.Screen>
+        />
         <Stack.Screen
           name="Third"
           component={IntroThird}
@@ -71,7 +71,7 @@ export default function IntroStack({ navigation }) {
           name="UserStack"
           component={UserStack}
           // options={{ headerShown: false }}
-        ></Stack.Screen>
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
