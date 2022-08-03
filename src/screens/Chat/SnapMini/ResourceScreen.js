@@ -1,19 +1,21 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 
-// Components
-import TopNav from "../../../components/SnapMini/TopNav";
+// Component
+import NavigationBar from "../../../components/SnapMini/NavigationBar";
 
 export default function ResourceScreen({ navigation }) {
   return (
-    <View>
-      <TopNav
-        chevron={"ios-chevron-back-outline"}
-        navigation={navigation}
-        action={() => {
-          navigation.navigate("Feed");
-        }}
-      />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <NavigationBar navigation={navigation} />
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#FFF",
+  },
+});
