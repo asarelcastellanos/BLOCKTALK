@@ -34,10 +34,20 @@ export default function IntroScreensStack({ navigation }) {
         component={IntroSecond}
         options={{
           headerTitle: () => (
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-              TWO TWO TWO
-            </Text>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Second</Text>
           ),
+          headerLeft: () => (
+            <Ionicons
+              name={"chevron-back-outline"}
+              size={25}
+              color={"black"}
+              onPress={() => {
+                navigation.navigate("First");
+              }}
+              style={{ paddingLeft: 10 }}
+            />
+          ),
+          headerShadowVisible: false,
         }}
       />
       <Stack.Screen
@@ -52,12 +62,7 @@ export default function IntroScreensStack({ navigation }) {
               name={"chevron-back-outline"}
               size={25}
               color={"black"}
-              // onPress={() => {
-              //   this.props.navigation.goBack();
-              // }}
-
               onPress={() => {
-                console.log("navigation icon");
                 navigation.navigate("Second");
               }}
               style={{ paddingLeft: 10 }}
@@ -70,6 +75,20 @@ export default function IntroScreensStack({ navigation }) {
         name="UserStack"
         component={UserStack}
         // options={{ headerShown: false }}
+        options={{
+          headerLeft: () => (
+            <Ionicons
+              name={"chevron-back-outline"}
+              size={25}
+              color={"black"}
+              onPress={() => {
+                navigation.popToTop();
+              }}
+              style={{ paddingLeft: 10 }}
+            />
+          ),
+          headerShadowVisible: false,
+        }}
       />
     </Stack.Navigator>
   );

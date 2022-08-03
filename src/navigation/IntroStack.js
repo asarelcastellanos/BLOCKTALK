@@ -21,7 +21,7 @@ export default function IntroStack({ navigation }) {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="First"
+          name="introstack"
           component={IntroScreensStack}
           options={{
             headerShown: false,

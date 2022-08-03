@@ -6,6 +6,7 @@ import StoriesScreen from "../screens/StoriesScreen";
 import PostScreen from "../screens/PostScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import IntroStack from "./IntroStack";
+import IntroScreensStack from "./IntroScreensStack";
 
 const Stack = createStackNavigator();
 
