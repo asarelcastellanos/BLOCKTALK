@@ -12,8 +12,11 @@ import {
 import * as Location from "expo-location";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export default function MapScreen({ navigation }) {
+const Stack = createStackNavigator();
+
+export function MapScreen({ navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -97,6 +100,14 @@ export default function MapScreen({ navigation }) {
         </View>
       </View>
     </View>
+  );
+}
+
+export default function MapStack({ navigation }) {
+  return (
+    <Stack.Navigator initialRouteName="Map">
+      <Stack.Screen name="Map" component={MapScreen} />
+    </Stack.Navigator>
   );
 }
 

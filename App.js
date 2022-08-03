@@ -7,7 +7,6 @@ import "./firebase";
 
 // Importing Root Component
 import RootNavigation from "./src/navigation/RootNavigation";
-
 import { NativeBaseProvider } from "native-base";
 
 const FONT_NAMES = {

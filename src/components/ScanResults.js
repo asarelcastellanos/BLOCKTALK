@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { TouchableOpacity } from "react-native";
+import { Touchable, TouchableOpacity } from "react-native";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
+import Ionicons from "react-native-vector-icons/Ionicons";
 // import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function ScanResults({ scanResultsRef }) {
@@ -42,7 +43,7 @@ export default function ScanResults({ scanResultsRef }) {
       >
         <SafeAreaView>
           <View style={{ paddingBottom: 40 }}>
-            <Heading />
+            <Heading scanResultsRef={scanResultsRef} />
             <View style={styles.divider} />
             <Results />
           </View>
@@ -53,7 +54,7 @@ export default function ScanResults({ scanResultsRef }) {
   );
 }
 
-function Heading() {
+function Heading({ scanResultsRef }) {
   return (
     <View
       style={{
@@ -83,14 +84,21 @@ function Heading() {
         </View>
       </View>
 
-      <View
-        style={{
-          height: 30,
-          aspectRatio: 1 / 1,
-          backgroundColor: "#2F2D2D",
-          borderRadius: "100%",
-        }}
-      />
+      {/* Close Button */}
+      <TouchableOpacity onPress={() => scanResultsRef.current.dismiss()}>
+        <View
+          style={{
+            height: 30,
+            aspectRatio: 1 / 1,
+            backgroundColor: "#2F2D2D",
+            borderRadius: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Ionicons size={20} name={"close-outline"} color={"white"} />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -98,7 +106,7 @@ function Heading() {
 function Results() {
   let data = [
     {
-      title: "Scan Results",
+      title: "Lenses",
       content: [
         {
           description: "Lens 1",
@@ -138,9 +146,10 @@ function Results() {
   });
 
   const renderItem = ({ item }) => {
-    if (item.id === data.length - 1) return <View style={{ height: 120 }} />;
+    if (item.id === data.length - 1)
+      return <View style={{ height: 120 }} key={item.id} />;
     return (
-      <View style={styles.item}>
+      <View style={styles.item} key={item.id}>
         <View
           style={{
             justifyContent: "center",

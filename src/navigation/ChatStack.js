@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Button } from "react-native";
 
 // Screens
-import ChatScreen from "../screens/ChatScreen";
+import ChatScreen from "../screens/ChatStack";
 import ConversationScreen from "../screens/ConversationScreen";
 
 import { getAuth, signOut } from "firebase/auth";

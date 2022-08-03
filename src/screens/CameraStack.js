@@ -17,8 +17,11 @@ import * as ImagePicker from "expo-image-picker";
 import CameraActions from "../components/CameraActions";
 import CameraOptions from "../components/CameraOptions";
 import ScanResults from "../components/ScanResults";
+import StatBar from "../components/StatBar";
+import { createStackNavigator } from "@react-navigation/stack";
+import ProfileScreen from "../screens/ProfileScreen";
 
-export default function CameraScreen({ navigation, focused }) {
+export function CameraScreen({ navigation, focused }) {
   let cameraRef = useRef();
   const scanResultsRef = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
@@ -112,6 +115,7 @@ export default function CameraScreen({ navigation, focused }) {
 
   return (
     <>
+      <StatBar screen="camera" navigation={navigation} />
       <Camera style={styles.camera} type={type} ref={cameraRef} />
       <Pressable
         style={styles.scanButton}
@@ -121,6 +125,24 @@ export default function CameraScreen({ navigation, focused }) {
       <CameraActions checkGallery={checkGallery} takePhoto={takePhoto} />
       <ScanResults scanResultsRef={scanResultsRef} />
     </>
+  );
+}
+
+const Stack = createStackNavigator();
+export default function CameraStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 }
 
