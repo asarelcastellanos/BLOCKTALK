@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,60 +6,54 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  Image,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Video } from "expo-av";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-// Components
+import { collection, doc, onSnapshot, getDocs } from "firebase/firestore";
+import db from "../../../../firebase";
 
-const DATA = [
-  {
-    title: "First Item",
-  },
-  {
-    title: "Second Item",
-  },
-  {
-    title: "Third Item",
-  },
-  {
-    title: "Third Item",
-  },
-  {
-    title: "Third Item",
-  },
-  {
-    title: "Third Item",
-  },
-  {
-    title: "Third Item",
-  },
-  {
-    title: "Third Item",
-  },
-  {
-    title: "Third Item",
-  },
-];
+export default function FeedScreen({ navigation, refresh }) {
+  const storyCollection = collection(db, "Stories");
 
-const Story = ({ navigation, title }) => (
-  <TouchableOpacity
-    style={styles.storyContainer}
-    onPress={() => {
-      navigation.navigate("Story");
-    }}
-  >
-    <Text>{title}</Text>
-  </TouchableOpacity>
-);
+  const [posts, setPosts] = useState([]);
 
-export default function FeedScreen({ navigation }) {
+  async function getPosts() {
+    const querySnapshot = await getDocs(collection(db, "Stories"));
+    querySnapshot.forEach((doc) => {
+      setPosts((post) => [...post, doc.data()]);
+    });
+  }
+
+  useEffect(() => {
+    getPosts();
+
+    return function cleanupBeforeUnmounting() {
+      setPosts([]);
+    };
+  }, [refresh]);
+
+  const Story = ({ navigation, image }) => (
+    <TouchableOpacity
+      style={styles.storyContainer}
+      onPress={() => {
+        navigation.navigate("Story");
+      }}
+    >
+      <Image style={styles.storyImage} source={{ uri: image }} />
+    </TouchableOpacity>
+  );
+
   const renderStory = ({ item }) => (
-    <Story title={item.title} navigation={navigation} />
+    <Story image={item.downloadURL} navigation={navigation} />
   );
 
   return (
     <View style={styles.container}>
+      <StatusBar style="dark" />
       <Text style={styles.title}>BLOCKTALK</Text>
       <View style={styles.navigation}>
         <TouchableOpacity
@@ -84,8 +78,25 @@ export default function FeedScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={DATA}
-        renderItem={renderStory}
+        data={posts}
+        renderItem={(post, index) => {
+          return (
+            <TouchableOpacity
+              style={styles.storyContainer}
+              onPress={() =>
+                navigation.push("Story", {
+                  url: post.item.downloadURL,
+                  type: post.item.contentType,
+                })
+              }
+            >
+              <Image
+                style={styles.storyImage}
+                source={{ uri: post.item.downloadURL }}
+              />
+            </TouchableOpacity>
+          );
+        }}
         style={styles.content}
         numColumns={2}
       />
@@ -111,7 +122,7 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10
+    marginBottom: 10,
   },
   prompt: {
     width: 220,
@@ -153,5 +164,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 40,
     marginBottom: 40,
+  },
+  storyImage: {
+    width: 123,
+    height: 123,
+    borderRadius: 60,
   },
 });
