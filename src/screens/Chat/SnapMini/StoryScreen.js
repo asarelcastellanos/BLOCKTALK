@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export default function ImageView() {
+export default function StoryScreen() {
   return (
     <View>
         <Text>
-            ImageView
+            StoryScreen
         </Text>
     </View>
   )
