@@ -14,7 +14,7 @@ export default function IntroFirst({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../assets/snapchat/IntroFirst.png")}
+        source={require("../../assets/snapchat/first.png")}
         // resizeMode="cover"
         style={styles.image}
       >
@@ -25,10 +25,12 @@ export default function IntroFirst({ navigation }) {
           />
           <Text style={styles.header}>The Spot</Text>
         </View>
+
         <Text style={styles.description}>
-          descriptiondescriptiondescription descriptiondescription description
-          description
+          Check out powerful stories from youth impacted by the foster care
+          system.
         </Text>
+
         <TouchableOpacity
           style={styles.nextButton}
           onPress={() => navigation.navigate("Second")}
@@ -48,11 +50,17 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height,
     width: Dimensions.get("window").width,
   },
+  row: {
+    marginTop: 330,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   header: {
-    marginTop: 320,
     fontWeight: "bold",
     fontSize: 40,
-    textAlign: "center",
     fontFamily: "Avenir Next",
   },
   description: {
@@ -64,8 +72,8 @@ const styles = StyleSheet.create({
     fontFamily: "Avenir Next",
   },
   tinyLogo: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
   },
   buttonContainer: {
     alignItems: "center",

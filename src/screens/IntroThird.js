@@ -14,17 +14,27 @@ export default function IntroThird({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../assets/snapchat/IntroFirst.png")}
+        source={require("../../assets/snapchat/third.png")}
         style={styles.image}
       >
+        <View style={styles.row}>
+          <Image
+            style={styles.tinyLogo}
+            source={require("../../assets/snapchat/vector.png")}
+          />
+          <Text style={styles.header}>Resources</Text>
+        </View>
+
         <Text style={styles.description}>
-          thirdthird third thirdthirdthird thirdthird third third
+          Educate yourself on accessing resources for foster youth and allies
+          that want to help with basic needs, including housing, mental health,
+          clothing, technology, and more.
         </Text>
         <TouchableOpacity
           style={styles.nextButton}
           onPress={() => navigation.navigate("UserStack")}
         >
-          <Text style={styles.nextButtonText}>Next</Text>
+          <Text style={styles.nextButtonText}>Start!</Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>
@@ -39,13 +49,30 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height,
     width: Dimensions.get("window").width,
   },
+  row: {
+    marginTop: 330,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  header: {
+    fontWeight: "bold",
+    fontSize: 40,
+    fontFamily: "Avenir Next",
+  },
   description: {
     padding: 20,
-    marginTop: 400,
+    marginTop: 10,
     fontWeight: "bold",
     fontSize: 15,
     textAlign: "center",
     fontFamily: "Avenir Next",
+  },
+  tinyLogo: {
+    width: 40,
+    height: 40,
   },
   buttonContainer: {
     alignItems: "center",
@@ -56,7 +83,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 10,
     elevation: 2,
-    backgroundColor: "#5F86FF",
+    backgroundColor: "#EC6060",
     width: 230,
   },
   nextButtonText: {

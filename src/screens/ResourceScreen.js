@@ -51,7 +51,7 @@ export default class ResourceScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text style={styles.header}>Resources</Text>
+        <Text style={styles.header}>Youth Resources</Text>
         <FlatList
           style={styles.list}
           data={resourceData}
@@ -60,7 +60,7 @@ export default class ResourceScreen extends Component {
           }}
         />
 
-        <Text style={styles.header}>Resources</Text>
+        <Text style={styles.header}>Allies</Text>
         <FlatList
           style={styles.list}
           data={resourceData2}
