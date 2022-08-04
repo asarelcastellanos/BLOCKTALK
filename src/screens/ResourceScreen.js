@@ -31,7 +31,6 @@ class FlatListItem extends Component {
             <Text style={styles.title}>{this.props.item.name}</Text>
             <Text style={styles.description} numberOfLines={4}>
               {this.props.item.description}
-              descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptionscriptiondescription
             </Text>
             <View style={styles.categoryContainer}>
               <View style={styles.category}>

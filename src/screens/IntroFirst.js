@@ -18,6 +18,13 @@ export default function IntroFirst({ navigation }) {
         // resizeMode="cover"
         style={styles.image}
       >
+        <View style={styles.row}>
+          <Image
+            style={styles.tinyLogo}
+            source={require("../../assets/snapchat/vector.png")}
+          />
+          <Text style={styles.header}>The Spot</Text>
+        </View>
         <Text style={styles.description}>
           descriptiondescriptiondescription descriptiondescription description
           description
@@ -41,13 +48,24 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height,
     width: Dimensions.get("window").width,
   },
+  header: {
+    marginTop: 320,
+    fontWeight: "bold",
+    fontSize: 40,
+    textAlign: "center",
+    fontFamily: "Avenir Next",
+  },
   description: {
     padding: 20,
-    marginTop: 400,
+    marginTop: 10,
     fontWeight: "bold",
     fontSize: 15,
     textAlign: "center",
     fontFamily: "Avenir Next",
+  },
+  tinyLogo: {
+    width: 50,
+    height: 50,
   },
   buttonContainer: {
     alignItems: "center",

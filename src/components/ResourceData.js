@@ -1,7 +1,7 @@
 var resourceData = [
   {
     key: "1",
-    name: "nonprofit1",
+    name: "Bill Of Rights",
     description: "description1",
     // "image": "https://place-hold.it/300x500",
     image: "../../assets/snapchat/personalBitmoji.png",
@@ -9,25 +9,28 @@ var resourceData = [
   },
   {
     key: "2",
-    name: "nonprofit2",
+    name: "Kids In The Spotlight",
     description: "description2",
     image: "https://place-hold.it/300x500",
-    link: "https://www.snapchat.com/",
+    link: "https://www.kitsinc.org/",
   },
   {
     key: "3",
-    name: "nonprofit3",
-    description: "description3",
+    name: "CASA",
+    description: "https://casala./",
+    link: "https://casala.org/",
   },
   {
     key: "4",
-    name: "nonprofit4",
-    description: "description4",
+    name: "iFoster",
+    description: "https://www.ifoster./",
+    link: "https://www.ifoster.org/",
   },
   {
     key: "5",
-    name: "nonprofit5",
-    description: "description5",
+    name: "FosterClub",
+    description: "https://www.fosterclub/",
+    link: "https://www.fosterclub.com/",
   },
 ];
 
