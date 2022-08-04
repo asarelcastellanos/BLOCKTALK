@@ -8,12 +8,13 @@ import {
 } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { Camera, CameraType } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
-import { shareAsync } from "expo-sharing";
 import * as ImagePicker from "expo-image-picker";
 
 import CameraActions from "../../../components/Camera/CameraActions";
 import CameraOptions from "../../../components/Camera/CameraOptions";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function CameraScreen({ navigation, focused }) {
   let cameraRef = useRef();
@@ -22,15 +23,10 @@ export default function CameraScreen({ navigation, focused }) {
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
 
-  const [image, setImage] = useState(null);
-
   useEffect(() => {
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      const mediaLibraryPermission =
-        await MediaLibrary.requestPermissionsAsync();
       setHasCameraPermission(cameraPermission.status === "granted");
-      setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
 
@@ -48,59 +44,50 @@ export default function CameraScreen({ navigation, focused }) {
     setType(type === CameraType.back ? CameraType.front : CameraType.back);
   }
 
-  function switchFlash() {
-    setType(type === FlashMode.off ? FlashMode.on : FlashMode.off);
-  }
-
   async function checkGallery() {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
-      return;
-    }
-
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
     console.log(pickerResult);
+    setPhoto(pickerResult.uri);
   }
 
   async function takePhoto() {
     console.log("Just took photo!");
-    let options = {
-      quality: 1,
-      base64: true,
-      exif: false,
-    };
-
-    let newPhoto = await cameraRef.current.takePictureAsync(options);
-    setPhoto(newPhoto);
-  }
-
-  function savePhoto() {
-    MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
-      setPhoto(undefined);
-    });
+    let newPhoto = await cameraRef.current.takePictureAsync();
+    setPhoto(newPhoto.uri);
   }
 
   if (photo) {
-    let sharePic = () => {
-      shareAsync(photo.uri).then(() => {
-        setPhoto(undefined);
-      });
-    };
-
     return (
-      <>
-        <Image
-          style={styles.preview}
-          source={{ uri: "data:image/jpg;base64," + photo.base64 }}
-        />
-        {hasMediaLibraryPermission ? (
-          <Button title="Save" onPress={savePhoto} />
-        ) : undefined}
-        <Button title="Discard" onPress={() => setPhoto(undefined)} />
-      </>
+      <View style={styles.preview}>
+        <Image style={styles.imagePreview} source={{ uri: photo }} />
+        <View style={styles.exit}>
+          <Button title="Discard" onPress={() => setPhoto(undefined)} />
+        </View>
+        <View style={styles.photoOptions}>
+          <TouchableOpacity>
+            <Ionicons name="ios-text-outline" size={30} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="ios-pencil-outline" size={30} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="ios-document-outline" size={30} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="ios-cut-outline" size={30} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="ios-musical-notes-outline" size={30} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="ios-search-outline" size={30} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="ios-attach-outline" size={30} color="white" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.shareOption}></View>
+      </View>
     );
   }
 
@@ -120,7 +107,34 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   preview: {
-    height: "80%",
+    height: "100%",
     width: "100%",
+  },
+  imagePreview: {
+    height: "95%",
+    width: "100%",
+    borderRadius: 20,
+  },
+  exit: {
+    position: "absolute",
+    left: 0,
+    top: 50,
+    backgroundColor: "black",
+  },
+  photoOptions: {
+    position: "absolute",
+    right: 0,
+    top: "5%",
+    height: "90%",
+    width: "15%",
+    backgroundColor: "blue",
+    padding: 15
+  },
+  shareOption: {
+    position: "absolute",
+    bottom: 0,
+    height: "5%",
+    width: "100%",
+    backgroundColor: "black",
   },
 });
