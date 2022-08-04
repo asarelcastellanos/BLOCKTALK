@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 // import { useIsFocused } from '@react-navigation/native';
 import React, { useState, useEffect, Component } from "react";
@@ -50,7 +51,7 @@ class FlatListItem extends Component {
 export default class ResourceScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.header}>Resources</Text>
         <FlatList
           style={styles.list}
@@ -60,6 +61,7 @@ export default class ResourceScreen extends Component {
           }}
         />
 
+        <Text style={styles.header}>Resources</Text>
         <FlatList
           style={styles.list}
           data={resourceData2}
@@ -71,7 +73,7 @@ export default class ResourceScreen extends Component {
             );
           }}
         />
-      </View>
+      </ScrollView>
     );
   }
 }

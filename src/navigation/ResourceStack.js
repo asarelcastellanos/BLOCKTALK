@@ -28,25 +28,16 @@ export default function StoriesStack({ navigation }) {
   };
 
   return (
-<<<<<<< HEAD
     <Stack.Navigator nitialRouteName="Resources">
       <Stack.Screen
         name="Resources"
         component={ResourceScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );
-=======
-      <Stack.Navigator
-        nitialRouteName="Resources"
-      >
-        <Stack.Screen name="Resources" component={ResourceScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-  )
->>>>>>> beffcb632d7870764cb84a993c226b8c66e88e59
 }
 
 const styles = StyleSheet.create({});

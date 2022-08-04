@@ -16,13 +16,7 @@ export default function StoriesStack({ navigation, route }) {
       <Stack.Screen
         name="Stories"
         component={StoriesScreen}
-<<<<<<< HEAD
-        options={{
-          headerShown: false,
-        }}
-=======
         options={{ headerShown: false }}
->>>>>>> beffcb632d7870764cb84a993c226b8c66e88e59
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
