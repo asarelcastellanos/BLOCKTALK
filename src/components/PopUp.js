@@ -1,8 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 
 
-export default function PopUp ({ name, description, distance, imageUrl }) {
+export default function PopUp ({ name, description, imageUrl }) {
     return (
       <View style={ styles.featuredCommunitiesCard }>
         <View style={ styles.featuredCommunityStoryContainer }>
@@ -11,7 +11,17 @@ export default function PopUp ({ name, description, distance, imageUrl }) {
 
         <View style= { styles.featuredCommunityTextContainer }>
           <Text style={ styles.communityHeaderText }>{ name }</Text>
-          <Text style={ styles.communityText }>{description} • {distance}</Text>
+          <Text style={ styles.communityText }>{description}</Text>
+        </View>
+        <View style= { styles.schedule }>
+          <Text style={ styles.eventText }>Event Date: Augest 13th, 5:00PM - 7:00PM</Text>
+        </View>
+        <View style= { styles.boldQuote }>
+          <Text style={ styles.eventText }>"Save trees, save nature. Plant a tree today;</Text>
+          <Text style = {{fontSize: 12}}>  it will help us breath tommorrow"</Text>
+        </View>
+        <View style= { styles.link }>
+          <Text style={ styles.eventOrg }>LA Neighborhood Land Trust</Text>
         </View>
     </View>
     );
@@ -19,20 +29,21 @@ export default function PopUp ({ name, description, distance, imageUrl }) {
 
 const styles = StyleSheet.create({
   featuredCommunitiesCard: {
+    alignContent: 'center',
     flexDirection: "row",
     backgroundColor: "#fff",
     borderColor: "eeeeee",
-    borderRadius: 10,
+    borderRadius: 20,
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 10,
     paddingRight: 10,
-    marginBottom: 15,
+    marginBottom: 5,
   },
   featuredCommunityStoryContainer: {
     width: 50,
     height: 50,
-    backgroundColor: "yellow",
+    backgroundColor: "green",
     borderRadius: 50,
     alignContent: "center",
     alignItems: "center",
@@ -52,8 +63,34 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
   },
+  eventText: {
+    fontWeight: "600",
+    fontSize: 11,
+    marginTop: 5,
+    marginBottom: 5,
+  },
   communityText: {
     fontSize: 13,
+  },
+  boldQuote:{
+    alignContent: 'center',
+    fontWeight: "600",
+    fontSize: 10,
+    marginTop: 80,
+    marginLeft: -248,
+    marginBottom: 5,
+  },
+  link:{
+    
+    marginTop: 140,
+    marginLeft: -110,
+    marginBottom: 5,
+  },
+  eventOrg:{
+    fontSize: 8,
+    textAlign: 'right',
+    fontWeight: "400",
+    color: 'blue'
   },
   featuredCommunityJoinContainer: {
     position: "absolute",
@@ -63,6 +100,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: 50,
     height: 30,
+  },
+  schedule: {
+    textAlign: "center",
+    fontWeight: "400",
+    marginTop: 55,
+    fontSize: 12,
+    marginLeft: -200,
   },
   featuredCommunityJoinText: {
     textAlign: "center",

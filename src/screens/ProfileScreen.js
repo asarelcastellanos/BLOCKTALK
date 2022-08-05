@@ -1,10 +1,16 @@
-import React from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import React from 'react';
+import { View, Text, ImageBackground, TouchableOpacity, StyleSheet, Button, ActivityIndicator } from 'react-native';
 import MapTopIcon from '../components/MapTopIcon';
+import { useState } from 'react';
 
 export default function ProfileScreen({ navigation }) {
+const [loading, setLoading] = useState(true)
   return (
-    <ImageBackground source={{uri: 'https://sdk.bitmoji.com/render/panel/30f9de1f-7eba-4d18-8214-e4dfc76b0bfe-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1'}} resizeMode="cover" style={styles.backgroundImage}>
+    <ImageBackground onLoadEnd={() => setLoading(false)} source={require('/Users/amanuelreda/Desktop/GreenView/GreenView/assets/profileReg.png')} resizeMode="cover" style={styles.backgroundImage}>
+       <ActivityIndicator
+          style={styles.activityIndicator}
+          animating={loading}
+        />
       <View style={ styles.container }>
         <View style={ styles.profileTopContainer}>
           <TouchableOpacity
@@ -24,7 +30,7 @@ export default function ProfileScreen({ navigation }) {
         </View>
       </View>
       <View style = {styles.reward}>
-        <Button  title='TouchHere'
+        <Button  title='        '
                  onPress={()=>navigation.navigate("ProfileReward")}
                  />
       </View>
@@ -74,6 +80,16 @@ const styles = StyleSheet.create({
   },
   reward:{
     position: 'absolute',
-    marginLeft: 200,
+    // backgroundColor: "red",
+    alignSelf: 'auto',
+    top: "42.8%",
+    left: "45%",
+  },
+  activityIndicator: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   }
   });

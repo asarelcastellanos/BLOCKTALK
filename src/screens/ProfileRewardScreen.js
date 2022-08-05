@@ -1,10 +1,15 @@
-import React from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import React, {useState} from 'react'
+import { View, Text, ImageBackground, TouchableOpacity, StyleSheet, Button, ActivityIndicator } from 'react-native';
 import MapTopIcon from '../components/MapTopIcon';
 
 export default function ProfileScreen({ navigation }) {
-  return (
-    <ImageBackground source={{uri: 'https://sdk.bitmoji.com/render/panel/b8c938c3-b953-4799-8b78-bb4f3ad77217-7388e222-0bc1-4d28-b3bc-f8e2afabffd1-v1.png?transparent=1&palette=1'}} resizeMode="cover" style={styles.backgroundImage}>
+    const [loading, setLoading] = useState(true)
+return (
+    <ImageBackground onLoadEnd={() => setLoading(false)} source={require('/Users/amanuelreda/Desktop/GreenView/GreenView/assets/RewardProfile.png')} resizeMode="cover" style={styles.backgroundImage}>
+      <ActivityIndicator
+          style={styles.activityIndicator}
+          animating={loading}
+        />
       <View style={ styles.container }>
         <View style={ styles.profileTopContainer}>
           <TouchableOpacity
@@ -70,5 +75,12 @@ const styles = StyleSheet.create({
   reward:{
     position: 'absolute',
     marginLeft: 200,
+  },
+  activityIndicator: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   }
   });
