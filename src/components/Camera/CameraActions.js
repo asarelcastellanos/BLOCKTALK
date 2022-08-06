@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function CameraActions({ checkGallery, takePhoto }) {
+export default function CameraActions({ checkGallery, recordVideo, stopMedia}) {
   return (
     <View style={styles.cameraActions}>
       <View style={styles.cameraButtons}>
@@ -15,7 +15,7 @@ export default function CameraActions({ checkGallery, takePhoto }) {
             color="white"
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={takePhoto}>
+        <TouchableOpacity onLongPress={recordVideo} onPressOut={stopMedia}>
           <Ionicons
             style={styles.pictureIcon}
             name="ellipse-outline"

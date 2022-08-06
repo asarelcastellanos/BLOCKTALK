@@ -6,15 +6,18 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { StatusBar } from "expo-status-bar";
 import { Camera, CameraType } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
+import { Video, AVPlaybackStatus } from "expo-av";
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
   getMetadata,
+  uploadBytes,
 } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import uuid from "uuid-random";
@@ -27,24 +30,40 @@ import CameraOptions from "../../../components/Camera/CameraOptions";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function CameraScreen({ navigation, focused }) {
-  const storageRef = ref(getStorage(), `posts/${uuid()}.jpg`);
-  let cameraRef = useRef();
+  const photoRef = ref(getStorage(), `posts/${uuid()}.jpg`);
+  const videoRef = ref(getStorage(), `posts/${uuid()}.mov`);
+  const [camera, setCamera] = useState(null);
+  const [video, setVideo] = useState(null);
+  const [recording, setRecording] = useState(false);
   const [hasCameraPermission, setHasCameraPermission] = useState();
+  const [hasAudioPermission, setHasAudioPermission] = useState();
   const [type, setType] = useState(CameraType.back);
-  const [photo, setPhoto] = useState();
-
+  const [mediaType, setMediaType] = useState();
+  const [media, setMedia] = useState();
   const { userData } = useAuthentication();
 
   useEffect(() => {
     (async () => {
-      const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermission(cameraPermission.status === "granted");
+      const cameraStatus = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermission(cameraStatus.status === "granted");
+      const audioStatus = await Camera.requestMicrophonePermissionsAsync();
+      setHasAudioPermission(audioStatus.status === "granted");
     })();
   }, []);
 
   if (hasCameraPermission === undefined) {
     return <Text>Requesting permissions...</Text>;
   } else if (!hasCameraPermission) {
+    return (
+      <Text>
+        Permission for camera not granted. Please change this in settings.
+      </Text>
+    );
+  }
+
+  if (hasAudioPermission === undefined) {
+    return <Text>Requesting permissions...</Text>;
+  } else if (!hasAudioPermission) {
     return (
       <Text>
         Permission for camera not granted. Please change this in settings.
@@ -59,42 +78,103 @@ export default function CameraScreen({ navigation, focused }) {
   async function checkGallery() {
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
     console.log(pickerResult);
-    setPhoto(pickerResult.uri);
+    setMedia(pickerResult.uri);
   }
 
   async function takePhoto() {
+    setRecording(false);
     console.log("Just took photo!");
-    let newPhoto = await cameraRef.current.takePictureAsync();
-    setPhoto(newPhoto.uri);
+    let newPhoto = await camera.takePictureAsync({
+      quality: 0.1,
+    });
+    console.log(newPhoto);
+    setMedia(newPhoto.uri);
+    setMediaType("photo");
+  }
+
+  async function recordVideo() {
+    setRecording(true);
+    setMediaType("video");
+    console.log("recording");
+    let newVideo = await camera.recordAsync();
+    console.log(newVideo);
+    setMedia(newVideo.uri);
+  }
+
+  async function stopMedia() {
+    if (recording) {
+      await camera.stopRecording();
+    } else {
+      takePhoto();
+    }
   }
 
   const saveMediaToStorage = async () => {
-    const img = await fetch(photo);
-    const bytes = await img.blob();
+    const file = await fetch(media);
+    const bytes = await file.blob();
 
-    console.log("start uploading image...");
-    await uploadBytesResumable(storageRef, bytes);
-    console.log("start getting image metadata...");
-    const metadata = await getMetadata(storageRef);
-    console.log("start getting downloadURL...");
-    const downloadURL = await getDownloadURL(storageRef);
+    if (mediaType == "photo") {
+      console.log("start uploading image...");
+      await uploadBytesResumable(photoRef, bytes);
+      console.log("start getting image metadata...");
+      const metadata = await getMetadata(photoRef);
+      console.log("start getting downloadURL...");
+      const downloadURL = await getDownloadURL(photoRef);
 
-    await addDoc(collection(db, "Stories"), {
-      user: userData,
-      downloadURL: downloadURL,
-      creationDate: serverTimestamp(),
-      contentType: metadata.contentType,
-      fileName: metadata.name,
-    });
+      await addDoc(collection(db, "Stories"), {
+        user: userData,
+        downloadURL: downloadURL,
+        creationDate: serverTimestamp(),
+        contentType: metadata.contentType,
+        fileName: metadata.name,
+      });
+    } else {
+      console.log("start uploading video...");
+      await uploadBytesResumable(videoRef, bytes);
+      console.log("start getting video metadata...");
+      const metadata = await getMetadata(videoRef);
+      console.log("start getting downloadURL...");
+      const downloadURL = await getDownloadURL(videoRef);
+
+      await addDoc(collection(db, "Stories"), {
+        user: userData,
+        downloadURL: downloadURL,
+        creationDate: serverTimestamp(),
+        contentType: metadata.contentType,
+        fileName: metadata.name,
+      });
+    }
     navigation.navigate("Feed");
   };
 
-  if (photo) {
+  if (media) {
     return (
       <SafeAreaView style={styles.preview}>
-        <Image style={styles.imagePreview} source={{ uri: photo }} />
+        <StatusBar style="light" />
+        {mediaType == "photo" ? (
+          <Image style={styles.imagePreview} source={{ uri: media }} />
+        ) : (
+          <Video
+            ref={(ref) => setVideo(ref)}
+            style={styles.videoPreview}
+            isLooping={true}
+            shouldPlay={true}
+            source={{ uri: media }}
+          />
+        )}
+        <View style={styles.prompt}>
+          <Text style={styles.promptsubTitle}>
+            What misconception does society have about you?
+          </Text>
+        </View>
         <View style={styles.exit}>
-          <TouchableOpacity onPress={() => setPhoto(undefined)}>
+          <TouchableOpacity
+            onPress={() => {
+              setMedia(undefined);
+              setMediaType(undefined);
+              setRecording(false);
+            }}
+          >
             <Ionicons name="ios-close-outline" size={40} color="white" />
           </TouchableOpacity>
         </View>
@@ -174,14 +254,24 @@ export default function CameraScreen({ navigation, focused }) {
 
   return (
     <>
-      <Camera style={styles.camera} type={type} ref={cameraRef} />
+      <StatusBar style="light" />
+      <Camera style={styles.camera} type={type} ref={(ref) => setCamera(ref)} />
+      <View style={styles.prompt}>
+        <Text style={styles.promptsubTitle}>
+          What misconception does society have about you?
+        </Text>
+      </View>
       <View style={styles.cameraExit}>
         <TouchableOpacity onPress={() => navigation.navigate("Feed")}>
           <Ionicons name="ios-close-outline" size={40} color="white" />
         </TouchableOpacity>
       </View>
       <CameraOptions flipCamera={flipCamera} />
-      <CameraActions checkGallery={checkGallery} takePhoto={takePhoto} />
+      <CameraActions
+        checkGallery={checkGallery}
+        recordVideo={recordVideo}
+        stopMedia={stopMedia}
+      />
     </>
   );
 }
@@ -192,12 +282,35 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  prompt: {
+    position: "absolute",
+    left: 90,
+    top: 60,
+    width: 185,
+    height: 100,
+    borderRadius: 25,
+    marginLeft: 12,
+    marginRight: 12,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  promptsubTitle: {
+    color: "#FFF",
+    fontWeight: "bold",
+    fontSize: 20,
+    paddingLeft: 10,
+    textAlign: "center",
+  },
   preview: {
-    height: "100%",
-    width: "100%",
+    flex: 1,
     backgroundColor: "black",
   },
   imagePreview: {
+    height: "92%",
+    width: "100%",
+    borderRadius: 20,
+  },
+  videoPreview: {
     height: "92%",
     width: "100%",
     borderRadius: 20,

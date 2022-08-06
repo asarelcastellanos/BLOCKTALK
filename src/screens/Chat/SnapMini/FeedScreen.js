@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { Video } from "expo-av";
+import { Video, AVPlaybackStatus } from "expo-av";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -30,31 +30,22 @@ export default function FeedScreen({ navigation, refresh }) {
 
   useEffect(() => {
     getPosts();
+    posts.forEach((post) => {
+      console.log(post.user);
+    });
 
     return function cleanupBeforeUnmounting() {
       setPosts([]);
     };
   }, [refresh]);
 
-  const Story = ({ navigation, image }) => (
-    <TouchableOpacity
-      style={styles.storyContainer}
-      onPress={() => {
-        navigation.navigate("Story");
-      }}
-    >
-      <Image style={styles.storyImage} source={{ uri: image }} />
-    </TouchableOpacity>
-  );
-
-  const renderStory = ({ item }) => (
-    <Story image={item.downloadURL} navigation={navigation} />
-  );
-
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
-      <Text style={styles.title}>BLOCKTALK</Text>
+      <Image
+        style={styles.logo}
+        source={require("../../../../assets/BLOCKTALKlogo.png")}
+      />
       <View style={styles.navigation}>
         <TouchableOpacity
           style={styles.archive}
@@ -65,8 +56,12 @@ export default function FeedScreen({ navigation, refresh }) {
           <Ionicons name="ios-documents-outline" size={25} color="#FFF" />
         </TouchableOpacity>
         <View style={styles.prompt}>
-          <Text>Prompt of the week:</Text>
-          <Text>Where are you from?</Text>
+          <View style={styles.promptContainer}>
+            <Text style={styles.promptTitle}>Prompt of the week:</Text>
+            <Text style={styles.promptsubTitle}>
+              What misconception does society have about you?
+            </Text>
+          </View>
         </View>
         <TouchableOpacity
           style={styles.camera}
@@ -79,60 +74,89 @@ export default function FeedScreen({ navigation, refresh }) {
       </View>
       <FlatList
         data={posts}
+        columnWrapperStyle={{ flex: 1, justifyContent: "space-around" }}
         renderItem={(post, index) => {
           return (
-            <TouchableOpacity
-              style={styles.storyContainer}
-              onPress={() =>
-                navigation.push("Story", {
-                  url: post.item.downloadURL,
-                  type: post.item.contentType,
-                })
-              }
-            >
-              <Image
-                style={styles.storyImage}
-                source={{ uri: post.item.downloadURL }}
-              />
-            </TouchableOpacity>
+            <View>
+              <TouchableOpacity
+                style={styles.storyContainer}
+                onPress={() =>
+                  navigation.push("Story", {
+                    url: post.item.downloadURL,
+                    type: post.item.contentType,
+                    name: post.item.user.name,
+                  })
+                }
+              >
+                {post.item.contentType == "image/jpeg" ? (
+                  <Image
+                    style={styles.storyImage}
+                    source={{ uri: post.item.downloadURL }}
+                  />
+                ) : (
+                  <Video
+                    style={styles.storyVideo}
+                    source={{ uri: post.item.downloadURL }}
+                  />
+                )}
+              </TouchableOpacity>
+              <Text style={styles.storyText}>{post.item.user.name}</Text>
+            </View>
           );
         }}
         style={styles.content}
         numColumns={2}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 30,
+    justifyContent: "center",
   },
-  title: {
-    fontSize: 40,
-    fontWeight: "500",
-    fontStyle: "italic",
+  logo: {
     alignSelf: "center",
     marginTop: 20,
-    marginBottom: 5,
+    marginBottom: 20,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   navigation: {
-    width: 330,
-    height: 50,
+    width: "100%",
+    height: 100,
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
+    justifyContent: "center",
   },
   prompt: {
     width: 220,
-    height: 50,
+    height: 75,
     borderRadius: 25,
     marginLeft: 12,
     marginRight: 12,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFF",
+    shadowColor: "#171717",
+    shadowOffset: { width: 3, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+  },
+  promptContainer: {
+    width: 180,
+    height: 75,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  promptTitle: {
+    fontWeight: "bold",
+    fontSize: 18,
+    alignItems: "center",
+  },
+  promptsubTitle: {
+    fontSize: 14,
   },
   archive: {
     width: 40,
@@ -153,21 +177,35 @@ const styles = StyleSheet.create({
   content: {
     width: "100%",
     height: "100%",
-    padding: 20,
+    paddingTop: 20,
+    flexDirection: "column",
+    margin: 1,
   },
   storyContainer: {
-    width: 123,
-    height: 123,
-    backgroundColor: "#FFF",
-    borderRadius: 60,
+    width: 160,
+    height: 160,
+    borderRadius: 80,
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 40,
-    marginBottom: 40,
+    borderColor: "#0EADFF",
+    borderWidth: 2,
   },
   storyImage: {
-    width: 123,
-    height: 123,
-    borderRadius: 60,
+    width: 150,
+    height: 150,
+    borderRadius: 80,
+  },
+  storyVideo: {
+    alignSelf: 'center',
+    width: 220,
+    height: 220,
+    borderRadius: 80,
+  },
+  storyText: {
+    alignSelf: "center",
+    marginTop: 10,
+    marginBottom: 40,
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
