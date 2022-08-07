@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Video, AVPlaybackStatus } from "expo-av";
+import { LinearGradient } from 'expo-linear-gradient';
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -31,7 +32,7 @@ export default function FeedScreen({ navigation, refresh }) {
   useEffect(() => {
     getPosts();
     posts.forEach((post) => {
-      console.log(post.user);
+      console.log(post);
     });
 
     return function cleanupBeforeUnmounting() {
@@ -41,6 +42,11 @@ export default function FeedScreen({ navigation, refresh }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <LinearGradient
+        // Background Linear Gradient
+        style={styles.background}
+        colors={["#F4F4AC", "transparent"]}
+      />
       <StatusBar style="dark" />
       <Image
         style={styles.logo}
@@ -95,6 +101,7 @@ export default function FeedScreen({ navigation, refresh }) {
                   />
                 ) : (
                   <Video
+                    usePoster={true}
                     style={styles.storyVideo}
                     source={{ uri: post.item.downloadURL }}
                   />
@@ -115,13 +122,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    backgroundColor: "#FFF"
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 1400,
   },
   logo: {
     alignSelf: "center",
     marginTop: 20,
     marginBottom: 20,
     marginLeft: "auto",
-    marginRight: "auto",
+    marginRight: "auto"
   },
   navigation: {
     width: "100%",
@@ -196,10 +211,11 @@ const styles = StyleSheet.create({
     borderRadius: 80,
   },
   storyVideo: {
-    alignSelf: 'center',
-    width: 220,
-    height: 220,
+    alignSelf: "center",
+    width: 150,
+    height: 150,
     borderRadius: 80,
+    backgroundColor: "black",
   },
   storyText: {
     alignSelf: "center",

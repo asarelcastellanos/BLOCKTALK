@@ -228,7 +228,7 @@ export default function CameraScreen({ navigation, focused }) {
             }}
           >
             <Ionicons
-              name="ios-person-circle-outline"
+              name="ios-duplicate-outline"
               size={30}
               color="white"
             />
@@ -394,6 +394,7 @@ const styles = StyleSheet.create({
   sendText: {
     marginLeft: 10,
     color: "#000",
+    fontSize: 18,
     fontWeight: "600",
   },
 });
