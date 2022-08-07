@@ -8,10 +8,10 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
-import db from "../../firebase";
+import db from "../../../firebase";
 
 // Components
-import ReturnButton from "../components/ReturnButton";
+import ReturnButton from "../../components/ReturnButton";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState();

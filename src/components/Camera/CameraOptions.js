@@ -64,25 +64,13 @@ const styles = StyleSheet.create({
   cameraOptions: {
     position: "absolute",
     right: 5,
-    paddingTop: 40,
+    top: "5%",
+    justifyContent: "space-between",
     height: 250,
     width: 40,
     padding: 5,
   },
   flipIcon: {
-    marginTop: 5,
     transform: [{ rotate: "90deg" }],
-  },
-  flashIcon: {
-    marginTop: 10,
-  },
-  videoIcon: {
-    marginTop: 10,
-  },
-  musicIcon: {
-    marginTop: 10,
-  },
-  nightModeIcon: {
-    marginTop: 10,
-  },
+  }
 });

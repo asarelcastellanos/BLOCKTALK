@@ -9,7 +9,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 
 // Components
-import ReturnButton from "../components/ReturnButton";
+import ReturnButton from "../../components/ReturnButton";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState();

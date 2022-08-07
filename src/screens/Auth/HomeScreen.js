@@ -7,7 +7,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.homeIcon}>
         <Image
           style={styles.ghostLogo}
-          source={require("../../assets/snapchat/ghostlogo.png")}
+          source={require("../../../assets/snapchat/ghostlogo.png")}
         />
       </View>
       <View style={styles.homeButtons}>

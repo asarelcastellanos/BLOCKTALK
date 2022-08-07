@@ -4,15 +4,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Button } from "react-native";
 
 // Screens
-import ChatScreen from "../screens/ChatScreen";
-import ConversationScreen from "../screens/ConversationScreen";
+import ChatScreen from "../screens/Chat/ChatScreen";
+import ConversationScreen from "../screens/Chat/ConversationScreen";
+
+// Snap Mini
+import MiniStack from "../navigation/MiniStack";
 
 import { getAuth, signOut } from "firebase/auth";
 
 const Stack = createStackNavigator();
 
 export default function ChatStack({ navigation }) {
-
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -42,8 +44,16 @@ export default function ChatStack({ navigation }) {
         name="Chat"
         component={ChatScreen}
         options={screenOptions}
+        
       />
       <Stack.Screen name="Conversation" component={ConversationScreen} />
+      <Stack.Screen
+        name="SnapMini"
+        component={MiniStack}
+        options={{
+          headerShown: false
+        }}
+      />
     </Stack.Navigator>
   );
 }
