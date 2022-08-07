@@ -103,6 +103,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 45,
+    shadowColor: "#171717",
+    shadowOffset: { width: 3, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   buttonTitle: {
     fontSize: 16,
