@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Camera, CameraType } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
+import * as MediaLibrary from 'expo-media-library';
 import { Video, AVPlaybackStatus } from "expo-av";
 import {
   getStorage,
@@ -37,6 +38,7 @@ export default function CameraScreen({ navigation, focused }) {
   const [recording, setRecording] = useState(false);
   const [hasCameraPermission, setHasCameraPermission] = useState();
   const [hasAudioPermission, setHasAudioPermission] = useState();
+  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [type, setType] = useState(CameraType.back);
   const [mediaType, setMediaType] = useState();
   const [media, setMedia] = useState();
@@ -48,6 +50,8 @@ export default function CameraScreen({ navigation, focused }) {
       setHasCameraPermission(cameraStatus.status === "granted");
       const audioStatus = await Camera.requestMicrophonePermissionsAsync();
       setHasAudioPermission(audioStatus.status === "granted");
+      const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
+      setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
 
@@ -76,7 +80,9 @@ export default function CameraScreen({ navigation, focused }) {
   }
 
   async function checkGallery() {
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+    });
     console.log(pickerResult);
     setMedia(pickerResult.uri);
   }
@@ -96,7 +102,9 @@ export default function CameraScreen({ navigation, focused }) {
     setRecording(true);
     setMediaType("video");
     console.log("recording");
-    let newVideo = await camera.recordAsync();
+    let newVideo = await camera.recordAsync({
+      duration: 9999
+    });
     console.log(newVideo);
     setMedia(newVideo.uri);
   }
@@ -227,11 +235,7 @@ export default function CameraScreen({ navigation, focused }) {
               console.log("upload to story!");
             }}
           >
-            <Ionicons
-              name="ios-duplicate-outline"
-              size={30}
-              color="white"
-            />
+            <Ionicons name="ios-duplicate-outline" size={30} color="white" />
             <Text style={styles.storyText}>Story</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -296,7 +300,7 @@ const styles = StyleSheet.create({
   },
   promptsubTitle: {
     color: "#FFF",
-    fontWeight: "bold",
+    fontFamily: "Graphik-Semibold",
     fontSize: 20,
     paddingLeft: 10,
     textAlign: "center",
@@ -362,7 +366,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginLeft: 2,
     color: "#FFF",
-    fontWeight: "600",
+    fontSize: 16,
+    fontFamily: "Graphik-Semibold",
   },
   storyButton: {
     position: "absolute",
@@ -376,9 +381,10 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   storyText: {
-    marginLeft: 2,
+    marginLeft: 6,
     color: "#FFF",
-    fontWeight: "600",
+    fontSize: 16,
+    fontFamily: "Graphik-Semibold",
   },
   sendButton: {
     position: "absolute",
@@ -395,6 +401,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: "#000",
     fontSize: 18,
-    fontWeight: "600",
+    fontFamily: "Graphik-Semibold",
   },
 });

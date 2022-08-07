@@ -166,12 +166,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   promptTitle: {
-    fontWeight: "bold",
+    fontFamily: "Graphik-Semibold",
     fontSize: 18,
     alignItems: "center",
   },
   promptsubTitle: {
     fontSize: 14,
+    marginTop: 6,
+    fontFamily: "Graphik-Regular",
   },
   archive: {
     width: 40,
@@ -222,6 +224,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 40,
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: "Graphik-Semibold",
   },
 });
