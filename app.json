@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "chatsnap",
-    "slug": "chatsnap",
+    "name": "blocktalk",
+    "owner": "asarelcastellanos",
+    "slug": "blocktalk",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,13 +19,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Chatsnap needs access to your Camera.",
+        "NSMicrophoneUsageDescription": "Chatsnap needs access to your Microphone."
+      },
+      "bundleIdentifier": "com.asarelcastellanos.blocktalk"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
