@@ -4,7 +4,7 @@
 
 <div align="center">
     <br>
-    <p>A Snap Mini that allows users to create and share stories answering prompts about incarceration.</p>
+    <p>A Snap Mini buiilt on React Native that allows users to create and share stories (by using the native camera to upload photos, take photos, or record videos) answering prompts about incarceration.</p>
 </div>
 
 ## Mobile Screenshots (Taken on iPhone 12 Pro)
