@@ -29,6 +29,10 @@
 
 **Server:** Firebase (FireStore & Storage)
 
+## Want the base this was built on?
+
+You can access the [base](https://github.com/asarelcastellanos/BLOCKTALK/tree/base) that this Snap Mini was built on top of.
+
 ## Additinal Files
  
 In order for this app to run you will need a `fireabse.js` file that should look something like this: 
@@ -93,5 +97,3 @@ Run on ANDRIOD
 ```bash
   expo start a
 ```
-
-
