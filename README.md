@@ -1,24 +1,58 @@
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-## Title
+<div align="center">
+  <img src="githubAssets/BLOCKTALK.png" alt="BLOCKTALK"/>
+</div>
 
-A descirption of what it is
-## Screenshots
+<div align="center">
+    <br>
+    <p>A Snap Mini that allows users to create and share stories answering prompts about incarceration.</p>
+</div>
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+## Mobile Screenshots (Taken on iPhone 12 Pro)
+[Screenshots](https://github.com/asarelcastellanos/BLOCKTALK/blob/main/SCREENSHOTS.md)
 
 ## Demo
-
-Insert gif or link to demo
-
+[Video of Prototype](https://youtu.be/ul8-pkm91-E)
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- Ability to view and interact with other user's stories
+- Create stories that respond to weekly prompt
+  - Through video recordings or taking pictures
+- Share stories with the feed
+- View past prompts
 
+## Tech Stack
+
+**Client:** React Native & Expo
+
+**Expo APIs:** App-loading, AV, Camera, Font, Image-Picker, Linear-Gradient, Location, Media-Library, Sharing, Status-Bar
+
+**Server:** Firebase (FireStore & Storage)
+
+## Additinal Files
+ 
+In order for this app to run you will need a `fireabse.js` file that should look something like this: 
+
+```javascript
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
+const firebaseConfig = {
+  apiKey: [your info here],
+  authDomain: [your info here],
+  projectId: [your info here],
+  storageBucket: [your info here],
+  messagingSenderId:[your info here],
+  appId: [your info here],
+  measurementId: [your info here]
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+export default db;
+
+```
 
 ## The Team
 
@@ -27,12 +61,6 @@ Insert gif or link to demo
 - Figma Manager - [@maddinielson](https://www.linkedin.com/in/maddison-nielsen-899914232/)
 - UI Designer - [@lauramelendez](https://www.linkedin.com/in/laura-melendez-a1a590213/)
 - Lead Developer - [@asarelcastellanos](https://www.github.com/asarelcastellanos)
-## Tech Stack
-
-**Client:** React Native & Expo
-
-**Server:** Firebase (FireStore & Storage)
-
 
 ## Run Locally
 
