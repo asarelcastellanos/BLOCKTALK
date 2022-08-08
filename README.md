@@ -31,7 +31,7 @@
 
 ## Want the base this was built on?
 
-You can access the [base](https://github.com/asarelcastellanos/BLOCKTALK/tree/base) that this Snap Mini was built on top of.
+You can access the [base](https://github.com/asarelcastellanos/chatsnap) that this Snap Mini was built on top of.
 
 ## Additinal Files
  
