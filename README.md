@@ -49,7 +49,8 @@ export default db;
 Clone the project
 
 ```bash
-  git clone https://github.com/asarelcastellanos/BLOCKTALK
+  ggit clone -b base https://github.com/asarelcastellanos/BLOCKTALK/
+
 ```
 
 Go to the project directory
