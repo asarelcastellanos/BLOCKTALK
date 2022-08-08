@@ -62,7 +62,7 @@ export default db;
 
 - Project Manager - [Kimbery Carrillo](https://www.linkedin.com/in/kimberly-carrillo-311bb5194/)
 - Lead Marketer - [Andrea Zaragoza](https://www.linkedin.com/in/andreazaragozaaa/)
-- Figma Manager - [Maddison Nielsen](https://www.linkedin.com/in/maddison-nielsen-899914232/)
+- Figma Manager - [Maddison Nielsen](http://planarally.github.io/)
 - UI Designer - [Laura Melendez](https://www.linkedin.com/in/laura-melendez-a1a590213/)
 - Lead Developer - [Asarel Casatellanos](https://www.github.com/asarelcastellanos)
 
