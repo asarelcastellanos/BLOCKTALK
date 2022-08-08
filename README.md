@@ -60,11 +60,11 @@ export default db;
 
 ## The Team
 
-- Project Manager - [@kimberlycarillo](https://www.linkedin.com/in/kimberly-carrillo-311bb5194/)
-- Lead Marketer - [@andreazaragoza](https://www.linkedin.com/in/andreazaragozaaa/)
-- Figma Manager - [@maddinielson](https://www.linkedin.com/in/maddison-nielsen-899914232/)
-- UI Designer - [@lauramelendez](https://www.linkedin.com/in/laura-melendez-a1a590213/)
-- Lead Developer - [@asarelcastellanos](https://www.github.com/asarelcastellanos)
+- Project Manager - [Kimbery Carrillo](https://www.linkedin.com/in/kimberly-carrillo-311bb5194/)
+- Lead Marketer - [Andrea Zaragoza](https://www.linkedin.com/in/andreazaragozaaa/)
+- Figma Manager - [Maddison Nielsen](https://www.linkedin.com/in/maddison-nielsen-899914232/)
+- UI Designer - [Laura Melendez](https://www.linkedin.com/in/laura-melendez-a1a590213/)
+- Lead Developer - [Asarel Casatellanos](https://www.github.com/asarelcastellanos)
 
 ## Run Locally
 
