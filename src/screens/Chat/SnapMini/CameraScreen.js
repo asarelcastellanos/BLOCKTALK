@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Camera, CameraType } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
-import * as MediaLibrary from 'expo-media-library';
+import * as MediaLibrary from "expo-media-library";
 import { Video, AVPlaybackStatus } from "expo-av";
 import {
   getStorage,
@@ -50,7 +50,8 @@ export default function CameraScreen({ navigation, focused }) {
       setHasCameraPermission(cameraStatus.status === "granted");
       const audioStatus = await Camera.requestMicrophonePermissionsAsync();
       setHasAudioPermission(audioStatus.status === "granted");
-      const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
+      const mediaLibraryPermission =
+        await MediaLibrary.requestPermissionsAsync();
       setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
@@ -103,7 +104,7 @@ export default function CameraScreen({ navigation, focused }) {
     setMediaType("video");
     console.log("recording");
     let newVideo = await camera.recordAsync({
-      duration: 9999
+      duration: 9999,
     });
     console.log(newVideo);
     setMedia(newVideo.uri);
