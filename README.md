@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="githubAssets/BLOCKTALK.png" alt="BLOCKTALK"/>
+  <img src="githubAssets/BLOCKTALK.png" width="300" height="300" alt="BLOCKTALK"/>
 </div>
 
 <div align="center">
